@@ -1,0 +1,277 @@
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(180deg, #f8f9fa 0%, #eef2ff 100%);
+    color: #222;
+    line-height: 1.6;
+}
+
+/* CONTAINER */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* HEADER */
+
+.header {
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: #2563eb;
+    letter-spacing: -0.5px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #2563eb;
+}
+
+/* HERO */
+
+.hero {
+    margin: 48px 0 32px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 42px;
+    margin-bottom: 10px;
+    color: #111827;
+    letter-spacing: -1px;
+}
+
+.hero p {
+    color: #5b6472;
+    font-size: 18px;
+}
+
+/* GRID */
+
+.generator-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* CARD */
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+}
+
+.card h3 {
+    margin-bottom: 18px;
+    color: #111827;
+    font-size: 18px;
+}
+
+.card label {
+    display: block;
+    margin-bottom: 18px;
+    font-size: 14px;
+    color: #374151;
+    font-weight: 600;
+}
+
+/* INPUTS */
+
+input[type="number"] {
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 16px;
+    background: #f9fafb;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+/* RESULTS */
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+.result-row span {
+    color: #4b5563;
+}
+
+.result-row strong {
+    color: #111827;
+}
+
+hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* BUTTON */
+
+.btn-primary {
+    width: 100%;
+    margin-top: 20px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.32);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* VIEWER */
+
+#viewer3d {
+    width: 100%;
+    height: 420px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    margin-top: 20px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+/* VALIDATION */
+
+.validation-message {
+    display: none;
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.validation-message.active {
+    display: block;
+}
+
+.validation-success {
+    color: #16a34a;
+}
+
+/* FAQ */
+
+.faq {
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 28px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+}
+
+.faq h2 {
+    margin-bottom: 20px;
+}
+
+.faq h3 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .generator-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        text-align: left;
+        margin: 32px 0 24px;
+    }
+
+    .hero h2 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .card {
+        padding: 22px;
+    }
+
+    #viewer3d {
+        height: 320px;
+    }
+
+}
