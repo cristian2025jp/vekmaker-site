@@ -10,36 +10,83 @@
     <div id="site-header"></div>
     <div id="site-menu"></div>
 
-    <main class="container">
-        <section class="hero">
-            <h2>Create STL Files Online</h2>
-            <p>Free browser-based generators for 3D printing.</p>
-            <a href="/en/box-generator/" class="button">Try Box Generator</a>
+    <main>
+        <section class="home-hero">
+            <div class="container home-hero-content">
+                <div>
+                    <span class="home-badge">Browser-based STL generators</span>
+                    <h2>Create custom STL files online</h2>
+                    <p>
+                        VEKMaker helps you create simple 3D printable models directly in your browser.
+                        No installation required.
+                    </p>
+                    <div class="home-actions">
+                        <a href="/en/box-generator/" class="button primary-button">Try Box Generator</a>
+                        <a href="#generators" class="button secondary-button">View Generators</a>
+                    </div>
+                </div>
+
+                <div class="home-preview-card">
+                    <div class="preview-box"></div>
+                    <p>Instant STL export for 3D printing</p>
+                </div>
+            </div>
         </section>
 
-        <section>
-            <h2>Generators</h2>
+        <section class="container home-section" id="generators">
+            <div class="section-title">
+                <h2>Featured Generators</h2>
+                <p>Start with ready-to-use tools and export your model as an STL file.</p>
+            </div>
 
             <div class="generator-grid">
-                <div class="generator-card">
+                <article class="generator-card featured">
+                    <span class="card-status available">Available</span>
                     <h3>Box Generator</h3>
-                    <p>Create custom storage boxes and export STL files.</p>
-                    <a href="/en/box-generator/">Open</a>
-                </div>
+                    <p>Create custom storage boxes with adjustable dimensions.</p>
+                    <a href="/en/box-generator/">Open Generator</a>
+                </article>
 
-                <div class="generator-card">
+                <article class="generator-card">
+                    <span class="card-status soon">Coming Soon</span>
                     <h3>Cylinder Generator</h3>
-                    <p>Coming soon.</p>
-                </div>
+                    <p>Create simple cylinders and round containers for 3D printing.</p>
+                </article>
 
-                <div class="generator-card">
+                <article class="generator-card">
+                    <span class="card-status soon">Coming Soon</span>
                     <h3>Token Generator</h3>
-                    <p>Coming soon.</p>
+                    <p>Create custom tokens, markers and small round pieces.</p>
+                </article>
+
+                <article class="generator-card">
+                    <span class="card-status soon">Coming Soon</span>
+                    <h3>Organizer Generator</h3>
+                    <p>Create simple organizers for desks, drawers and small objects.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="container home-section">
+            <div class="section-title">
+                <h2>Why VEKMaker?</h2>
+                <p>A simple workflow for makers, designers and 3D printing users.</p>
+            </div>
+
+            <div class="benefit-grid">
+                <div class="benefit-card">
+                    <h3>No installation</h3>
+                    <p>Use the generators directly from your browser.</p>
                 </div>
 
-                <div class="generator-card">
-                    <h3>Organizer Generator</h3>
-                    <p>Coming soon.</p>
+                <div class="benefit-card">
+                    <h3>STL export</h3>
+                    <p>Download files ready to open in your slicer.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>Simple controls</h3>
+                    <p>Adjust dimensions and generate models quickly.</p>
                 </div>
             </div>
         </section>
