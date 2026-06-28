@@ -10,9 +10,45 @@
     <div id="site-header"></div>
     <div id="site-menu"></div>
 
-    <main class="container">
-        <h2>Cylinder Generator</h2>
-        <p>This generator is coming soon.</p>
+    <main class="container generator-page">
+        <section class="generator-intro">
+            <h2>Cylinder Generator</h2>
+            <p>Create a simple solid cylinder and export it as an STL file.</p>
+        </section>
+
+        <section class="generator-layout">
+            <div class="generator-panel">
+                <h3>Dimensions</h3>
+
+                <label>
+                    Diameter (mm)
+                    <input type="number" id="cylinder-diameter" value="40" min="5" max="300">
+                </label>
+
+                <label>
+                    Height (mm)
+                    <input type="number" id="cylinder-height" value="40" min="5" max="300">
+                </label>
+
+                <label>
+                    Segments
+                    <input type="number" id="cylinder-segments" value="64" min="12" max="128">
+                </label>
+
+                <button id="generate-cylinder" class="button primary-button">
+                    Generate Cylinder
+                </button>
+
+                <button id="download-cylinder" class="button secondary-button">
+                    Download STL
+                </button>
+            </div>
+
+            <div class="generator-preview">
+                <h3>Preview</h3>
+                <div id="cylinder-preview" class="preview-area"></div>
+            </div>
+        </section>
     </main>
 
     <div id="site-footer"></div>
@@ -29,5 +65,6 @@
     <script src="/assets/js/core/config.js"></script>
     <script src="/assets/js/core/layout.js"></script>
     <script src="/assets/js/core/page.js"></script>
+    <script type="module" src="/assets/generators/cylinder/cylinder-generator.js"></script>
 </body>
 </html>
