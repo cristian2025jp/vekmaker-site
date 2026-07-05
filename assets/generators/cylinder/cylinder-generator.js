@@ -64,6 +64,86 @@ function initCylinderPreview() {
     animateCylinder();
 }
 
+function createHollowCylinderGeometry(
+    outerRadius,
+    height,
+    wallThickness,
+    bottomThickness,
+    segments
+) {
+    const innerRadius = outerRadius - wallThickness;
+
+    if (innerRadius <= 0) {
+        alert('Wall thickness is too large for this diameter.');
+        return null;
+    }
+
+    if (bottomThickness >= height) {
+        alert('Bottom thickness must be smaller than height.');
+        return null;
+    }
+
+    const shape = new THREE.Shape();
+
+    shape.absarc(
+        0,
+        0,
+        outerRadius,
+        0,
+        Math.PI * 2,
+        false
+    );
+
+    const hole = new THREE.Path();
+
+    hole.absarc(
+        0,
+        0,
+        innerRadius,
+        0,
+        Math.PI * 2,
+        true
+    );
+
+    shape.holes.push(hole);
+
+    const wallGeometry = new THREE.ExtrudeGeometry(
+        shape,
+        {
+            depth: height,
+            bevelEnabled: false,
+            curveSegments: segments
+        }
+    );
+
+    wallGeometry.rotateX(Math.PI / 2);
+    wallGeometry.translate(0, -height / 2, 0);
+
+    const bottomGeometry = new THREE.CylinderGeometry(
+        outerRadius,
+        outerRadius,
+        bottomThickness,
+        segments
+    );
+
+    bottomGeometry.translate(
+        0,
+        -height / 2 + bottomThickness / 2,
+        0
+    );
+
+    const mergedGeometry = THREE.BufferGeometryUtils
+        ? null
+        : null;
+
+    const group = new THREE.Group();
+
+    return {
+        wallGeometry,
+        bottomGeometry
+    };
+}
+
 function generateCylinder() {
     const diameter =
         parseFloat(document.getElementById('cylinder-diameter').value) || 40;
@@ -86,6 +166,77 @@ function generateCylinder() {
 
     const radius = diameter / 2;
 
+const material = new THREE.MeshStandardMaterial({
+    color: 0x3b82f6,
+    roughness: 0.75,
+    metalness: 0.05
+});
+
+const isHollow =
+    document.getElementById('cylinder-hollow').checked;
+
+const wallThickness =
+    parseFloat(document.getElementById('cylinder-wall-thickness').value) || 2;
+
+const bottomThickness =
+    parseFloat(document.getElementById('cylinder-bottom-thickness').value) || 2;
+
+if (isHollow) {
+    const innerRadius = radius - wallThickness;
+
+    if (innerRadius <= 0) {
+        alert('Wall thickness is too large for this diameter.');
+        return;
+    }
+
+    if (bottomThickness >= height) {
+        alert('Bottom thickness must be smaller than height.');
+        return;
+    }
+
+    const shape = new THREE.Shape();
+
+    shape.absarc(0, 0, radius, 0, Math.PI * 2, false);
+
+    const hole = new THREE.Path();
+
+    hole.absarc(0, 0, innerRadius, 0, Math.PI * 2, true);
+
+    shape.holes.push(hole);
+
+    const wallGeometry = new THREE.ExtrudeGeometry(
+        shape,
+        {
+            depth: height,
+            bevelEnabled: false,
+            curveSegments: segments
+        }
+    );
+
+wallGeometry.rotateX(Math.PI / 2);
+wallGeometry.translate(0, height / 2, 0);
+
+    const wallMesh = new THREE.Mesh(wallGeometry, material);
+
+    const bottomGeometry = new THREE.CylinderGeometry(
+        radius,
+        radius,
+        bottomThickness,
+        segments
+    );
+
+bottomGeometry.translate(
+    0,
+    -height / 2 + bottomThickness / 2,
+    0
+);
+
+    const bottomMesh = new THREE.Mesh(bottomGeometry, material);
+
+    cylinderMesh = new THREE.Group();
+    cylinderMesh.add(wallMesh);
+    cylinderMesh.add(bottomMesh);
+} else {
     const geometry = new THREE.CylinderGeometry(
         radius,
         radius,
@@ -93,20 +244,13 @@ function generateCylinder() {
         segments
     );
 
-    //geometry.rotateX(Math.PI / 2);
-
-    const material = new THREE.MeshStandardMaterial({
-        color: 0x3b82f6,
-        roughness: 0.75,
-        metalness: 0.05
-    });
-
     cylinderMesh = new THREE.Mesh(
         geometry,
         material
     );
+}
 
-    scene.add(cylinderMesh);
+scene.add(cylinderMesh);
 
     const grid = new THREE.GridHelper(
         Math.max(diameter, height) * 2,
@@ -155,15 +299,16 @@ function downloadCylinderSTL() {
         return;
     }
 
-    // Cria uma cópia da geometria apenas para exportação
-    const exportGeometry = cylinderMesh.geometry.clone();
+const exportObject = cylinderMesh.clone(true);
 
-    // Rotaciona para o padrão esperado pelos slicers
-    exportGeometry.rotateX(Math.PI / 2);
+exportObject.traverse((child) => {
+    if (child.isMesh) {
+        child.geometry = child.geometry.clone();
+        child.geometry.rotateX(Math.PI / 2);
+    }
+});
 
-    const exportMesh = new THREE.Mesh(exportGeometry);
-
-    const stlString = exporter.parse(exportMesh);
+const stlString = exporter.parse(exportObject);
 
     const blob = new Blob(
         [stlString],
