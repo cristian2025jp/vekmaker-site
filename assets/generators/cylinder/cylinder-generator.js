@@ -144,6 +144,51 @@ function createHollowCylinderGeometry(
     };
 }
 
+function updateCylinderResults(
+    radius,
+    height,
+    isHollow,
+    wallThickness,
+    bottomThickness
+) {
+    const plaDensity = 1.24;
+
+    let materialVolumeMm3;
+
+    if (isHollow) {
+        const innerRadius = radius - wallThickness;
+
+        const outerVolume =
+            Math.PI *
+            radius *
+            radius *
+            height;
+
+        const innerVolume =
+            Math.PI *
+            innerRadius *
+            innerRadius *
+            (height - bottomThickness);
+
+        materialVolumeMm3 = outerVolume - innerVolume;
+    } else {
+        materialVolumeMm3 =
+            Math.PI *
+            radius *
+            radius *
+            height;
+    }
+
+    const volumeCm3 = materialVolumeMm3 / 1000;
+    const weightG = volumeCm3 * plaDensity;
+
+    document.getElementById('cylinder-volume').textContent =
+        volumeCm3.toFixed(1);
+
+    document.getElementById('cylinder-weight').textContent =
+        weightG.toFixed(1);
+}
+
 function generateCylinder() {
     const diameter =
         parseFloat(document.getElementById('cylinder-diameter').value) || 40;
@@ -166,13 +211,7 @@ function generateCylinder() {
 
     const radius = diameter / 2;
 
-const material = new THREE.MeshStandardMaterial({
-    color: 0x3b82f6,
-    roughness: 0.75,
-    metalness: 0.05
-});
-
-const isHollow =
+    const isHollow =
     document.getElementById('cylinder-hollow').checked;
 
 const wallThickness =
@@ -180,6 +219,13 @@ const wallThickness =
 
 const bottomThickness =
     parseFloat(document.getElementById('cylinder-bottom-thickness').value) || 2;
+
+const material = new THREE.MeshStandardMaterial({
+    color: 0x3b82f6,
+    roughness: 0.75,
+    metalness: 0.05
+});
+
 
 if (isHollow) {
     const innerRadius = radius - wallThickness;
@@ -249,6 +295,14 @@ bottomGeometry.translate(
         material
     );
 }
+
+updateCylinderResults(
+    radius,
+    height,
+    isHollow,
+    wallThickness,
+    bottomThickness
+);
 
 scene.add(cylinderMesh);
 
