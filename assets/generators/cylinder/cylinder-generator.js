@@ -398,3 +398,20 @@ document.addEventListener('DOMContentLoaded', () => {
         .getElementById('download-cylinder')
         .addEventListener('click', downloadCylinderSTL);
 });
+
+[
+    'cylinder-diameter',
+    'cylinder-height',
+    'cylinder-segments',
+    'cylinder-hollow',
+    'cylinder-wall-thickness',
+    'cylinder-bottom-thickness'
+].forEach(id => {
+
+    const element = document.getElementById(id);
+
+    element.addEventListener('input', generateCylinder);
+
+    element.addEventListener('change', generateCylinder);
+
+});
