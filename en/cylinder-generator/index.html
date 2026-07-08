@@ -35,10 +35,12 @@
                     <input type="number" id="cylinder-segments" value="64" min="12" max="128">
                 </label>
 
-                <label>
-                    <input type="checkbox" id="cylinder-hollow">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="cylinder-hollow" checked>
                     Hollow Cylinder
-                </label>
+                    </label>
+
+                
 
                 <label>
                     Wall Thickness (mm)
@@ -50,27 +52,48 @@
                     <input type="number" id="cylinder-bottom-thickness" value="2" min="1" max="50">
                 </label>
 
+                <label><hr></label>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="cylinder-lid" checked>
+                    Generate Lid
+                    </label>
+
+                <label>
+                    Lid Thickness (mm)
+                    <input type="number"
+                        id="cylinder-lid-thickness"
+                        value="2"
+                        min="1">
+                </label>
+
+                <label>
+                    Lid Lip Height (mm)
+                    <input type="number"
+                        id="cylinder-lid-lip-height"
+                        value="5"
+                        min="1">
+                </label>
+
+                <label>
+                    Lid Clearance (mm)
+                    <input type="number"
+                        id="cylinder-lid-clearance"
+                        value="0.4"
+                        step="0.1"
+                        min="0">
+                </label>
+
+                
+
                 <button id="generate-cylinder" class="button primary-button">
                     Generate Cylinder
                 </button>
 
-                <button id="download-cylinder" class="button secondary-button">
-                    Download STL
-                </button>
+                <button id="download-cylinder" class="btn-primary">Download Cylinder STL</button>
+                <button id="download-lid" class="btn-primary">Download Lid STL</button>
 
-<div class="generator-results">
-    <h2>Results</h2>
 
-    <p>
-        <strong>Material Volume:</strong>
-        <span id="cylinder-volume">0</span> cm³
-    </p>
-
-    <p>
-        <strong>Estimated PLA Weight:</strong>
-        <span id="cylinder-weight">0</span> g
-    </p>
-</div>
 
             </div>
 

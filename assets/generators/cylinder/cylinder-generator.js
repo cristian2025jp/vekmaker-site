@@ -2,11 +2,9 @@ import * as THREE from '../../libs/three/three.module.js';
 import { OrbitControls } from '../../libs/three/OrbitControls.js';
 import { STLExporter } from '../../libs/three/STLExporter.js';
 
-let scene;
-let camera;
-let renderer;
-let controls;
-let cylinderMesh;
+let scene, camera, renderer, controls;
+let cylinderMesh = null;
+let lidMesh = null;
 let exporter;
 
 function initCylinderPreview() {
@@ -144,7 +142,7 @@ function createHollowCylinderGeometry(
     };
 }
 
-function updateCylinderResults(
+/*function updateCylinderResults(
     radius,
     height,
     isHollow,
@@ -188,6 +186,7 @@ function updateCylinderResults(
     document.getElementById('cylinder-weight').textContent =
         weightG.toFixed(1);
 }
+*/
 
 function generateCylinder() {
     const diameter =
@@ -199,9 +198,15 @@ function generateCylinder() {
     const segments =
         parseInt(document.getElementById('cylinder-segments').value) || 64;
 
-    if (cylinderMesh) {
-        scene.remove(cylinderMesh);
+if (cylinderMesh) {
+    scene.remove(cylinderMesh);
+    cylinderMesh = null;
     }
+
+if (lidMesh) {
+    scene.remove(lidMesh);
+    lidMesh = null;
+}
 
     const oldGrid = scene.getObjectByName('cylinderGrid');
 
@@ -224,7 +229,28 @@ const material = new THREE.MeshStandardMaterial({
     color: 0x3b82f6,
     roughness: 0.75,
     metalness: 0.05
-});
+})
+
+const generateLid =
+    document.getElementById('cylinder-lid').checked;
+
+const lidThickness =
+    parseFloat(
+        document.getElementById('cylinder-lid-thickness').value
+    ) || 2;
+
+const lidLipHeight =
+    parseFloat(
+        document.getElementById('cylinder-lid-lip-height').value
+    ) || 5;
+
+const lidClearance =
+    parseFloat(
+        document.getElementById('cylinder-lid-clearance').value
+    ) || 0.4;
+
+
+;
 
 
 if (isHollow) {
@@ -296,15 +322,71 @@ bottomGeometry.translate(
     );
 }
 
-updateCylinderResults(
-    radius,
-    height,
-    isHollow,
-    wallThickness,
-    bottomThickness
-);
+//updateCylinderResults(
+//    radius,
+//    height,
+//    isHollow,
+//    wallThickness,
+//    bottomThickness
+//);
+
+//let lidMesh = null;
 
 scene.add(cylinderMesh);
+
+if (generateLid && isHollow) {
+
+    const lidGroup = new THREE.Group();
+
+    const lidTopGeometry =
+        new THREE.CylinderGeometry(
+            radius,
+            radius,
+            lidThickness,
+            segments
+        );
+
+    const lidTop =
+        new THREE.Mesh(
+            lidTopGeometry,
+            material
+        );
+
+    const lipRadius =
+        radius - wallThickness - lidClearance;
+
+    if (lipRadius > 0) {
+
+        const lipGeometry =
+            new THREE.CylinderGeometry(
+                lipRadius,
+                lipRadius,
+                lidLipHeight,
+                segments
+            );
+
+        const lip =
+            new THREE.Mesh(
+                lipGeometry,
+                material
+            );
+
+        lip.position.y =
+            (lidThickness / 2)
+            + (lidLipHeight / 2);
+
+        lidGroup.add(lip);
+    }
+
+    lidGroup.add(lidTop);
+
+    lidGroup.position.x = diameter + radius + 10;
+    lidGroup.position.y = -height / 2 + lidThickness / 2;
+
+    lidMesh = lidGroup;
+
+    scene.add(lidMesh);
+}
 
     const grid = new THREE.GridHelper(
         Math.max(diameter, height) * 2,
@@ -314,7 +396,7 @@ scene.add(cylinderMesh);
     );
 
     grid.name = 'cylinderGrid';
-    scene.add(grid);
+    //scene.add(grid);
 
     const maxDimension = Math.max(
         diameter,
@@ -347,41 +429,121 @@ function animateCylinder() {
     renderer.render(scene, camera);
 }
 
-function downloadCylinderSTL() {
-    if (!cylinderMesh) {
-        alert('No cylinder generated.');
+function downloadLidSTL() {
+    const generateLid =
+        document.getElementById('cylinder-lid').checked;
+
+    if (!generateLid) {
+        alert('Please enable Generate Lid first.');
         return;
     }
 
-const exportObject = cylinderMesh.clone(true);
+    const diameter =
+        parseFloat(document.getElementById('cylinder-diameter').value) || 80;
 
-exportObject.traverse((child) => {
-    if (child.isMesh) {
-        child.geometry = child.geometry.clone();
-        child.geometry.rotateX(Math.PI / 2);
+    const segments =
+        parseInt(document.getElementById('cylinder-segments').value) || 64;
+
+    const wallThickness =
+        parseFloat(document.getElementById('cylinder-wall-thickness').value) || 2;
+
+    const lidThickness =
+        parseFloat(document.getElementById('cylinder-lid-thickness').value) || 2;
+
+    const lidLipHeight =
+        parseFloat(document.getElementById('cylinder-lid-lip-height').value) || 5;
+
+    const lidClearance =
+        parseFloat(document.getElementById('cylinder-lid-clearance').value) || 0.4;
+
+    const radius = diameter / 2;
+    const lipRadius = radius - wallThickness - lidClearance;
+
+    if (lipRadius <= 0) {
+        alert('Invalid lid dimensions.');
+        return;
     }
-});
 
-const stlString = exporter.parse(exportObject);
+    const material = new THREE.MeshStandardMaterial();
 
-    const blob = new Blob(
-        [stlString],
-        {
-            type: 'application/sla'
-        }
+    const lidGroup = new THREE.Group();
+
+    // Disco maior da tampa
+    const topGeometry = new THREE.CylinderGeometry(
+        radius,
+        radius,
+        lidThickness,
+        segments
     );
 
+    // Já deixa o disco deitado para impressão
+    topGeometry.rotateX(Math.PI / 2);
+
+    const topMesh = new THREE.Mesh(topGeometry, material);
+
+    // Aba menor da tampa
+    const lipGeometry = new THREE.CylinderGeometry(
+        lipRadius,
+        lipRadius,
+        lidLipHeight,
+        segments
+    );
+
+    // Já deixa a aba deitada para impressão
+    lipGeometry.rotateX(Math.PI / 2);
+
+lipGeometry.translate(
+    0,
+    0,
+    lidThickness / 2 + lidLipHeight / 2
+);
+
+const lipMesh = new THREE.Mesh(lipGeometry, material);
+
+    lidGroup.add(topMesh);
+    lidGroup.add(lipMesh);
+
+    const exporter = new STLExporter();
+    const stlString = exporter.parse(lidGroup);
+
+    const blob = new Blob([stlString], {
+        type: 'text/plain'
+    });
+
     const link = document.createElement('a');
-
-    const diameter =
-        document.getElementById('cylinder-diameter').value;
-
-    const height =
-        document.getElementById('cylinder-height').value;
-
     link.href = URL.createObjectURL(blob);
-    link.download = `vekmaker-cylinder-${diameter}x${height}.stl`;
+    link.download = 'vekmaker-cylinder-lid.stl';
+    link.click();
 
+    URL.revokeObjectURL(link.href);
+}
+
+function downloadCylinderSTL() {
+    if (!cylinderMesh) {
+        alert('Please generate a cylinder first.');
+        return;
+    }
+
+    const exporter = new STLExporter();
+
+    const exportObject = cylinderMesh.clone(true);
+
+    exportObject.traverse((child) => {
+        if (child.isMesh) {
+            child.geometry = child.geometry.clone();
+            child.geometry.rotateX(Math.PI / 2);
+        }
+    });
+
+    const stlString = exporter.parse(exportObject);
+
+    const blob = new Blob([stlString], {
+        type: 'text/plain'
+    });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'vekmaker-cylinder.stl';
     link.click();
 
     URL.revokeObjectURL(link.href);
@@ -389,6 +551,10 @@ const stlString = exporter.parse(exportObject);
 
 document.addEventListener('DOMContentLoaded', () => {
     initCylinderPreview();
+
+    document
+        .getElementById('download-lid')
+        .addEventListener('click', downloadLidSTL);
 
     document
         .getElementById('generate-cylinder')
@@ -405,7 +571,11 @@ document.addEventListener('DOMContentLoaded', () => {
     'cylinder-segments',
     'cylinder-hollow',
     'cylinder-wall-thickness',
-    'cylinder-bottom-thickness'
+    'cylinder-bottom-thickness',
+    'cylinder-lid',
+    'cylinder-lid-thickness',
+    'cylinder-lid-lip-height',
+    'cylinder-lid-clearance'
 ].forEach(id => {
 
     const element = document.getElementById(id);
