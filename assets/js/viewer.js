@@ -1,6 +1,6 @@
 import * as THREE from '../libs/three/three.module.js';
 import { OrbitControls } from '../libs/three/OrbitControls.js';
-import { STLExporter } from '../libs/three/STLExporter.js';
+import { exportSTL } from './core/stl-exporter.js';
 
 let scene;
 let camera;
@@ -9,7 +9,6 @@ let controls;
 
 let currentBox;
 let grid;
-let exporter;
 
 function initViewer() {
 
@@ -17,8 +16,6 @@ function initViewer() {
         document.getElementById('viewer3d');
 
     scene = new THREE.Scene();
-
-    exporter = new STLExporter();
 
     scene.background = new THREE.Color(0xf8f9fa);
 
@@ -122,54 +119,22 @@ function animate() {
 }
 
 function downloadSTL() {
-
     if (!currentBox) {
-        alert('Nenhuma caixa gerada.');
+        alert('Please generate a box first.');
         return;
     }
 
-    const exportBox =
-        currentBox.clone();
+    const width = document.getElementById('width').value;
+    const depth = document.getElementById('depth').value;
+    const height = document.getElementById('height').value;
 
-    exportBox.rotation.x =
-        Math.PI / 2;
-
-    exportBox.updateMatrix();
-    exportBox.updateMatrixWorld(true);
-
-    const stlString =
-        exporter.parse(exportBox);
-
-    const blob =
-        new Blob(
-            [stlString],
-            {
-                type: 'application/sla'
-            }
-        );
-
-    const link =
-        document.createElement('a');
-
-    link.href =
-        URL.createObjectURL(blob);
-
-    const width =
-    document.getElementById('width').value;
-
-    const depth =
-    document.getElementById('depth').value;
-
-    const height =
-    document.getElementById('height').value;
-
-    link.download =
-        `vekmaker-box-${width}x${depth}x${height}.stl`;
-
-    link.click();
-
-    URL.revokeObjectURL(
-        link.href
+    exportSTL(
+        currentBox,
+        `vekmaker-box-${width}x${depth}x${height}.stl`,
+        {
+            rotateForPrint: true,
+            rotation: { x: Math.PI / 2, y: 0, z: 0 }
+        }
     );
 }
 

@@ -1,19 +1,16 @@
 import * as THREE from '../../libs/three/three.module.js';
 import { OrbitControls } from '../../libs/three/OrbitControls.js';
-import { STLExporter } from '../../libs/three/STLExporter.js';
+import { exportSTL } from '../../js/core/stl-exporter.js';
 
 let scene, camera, renderer, controls;
 let cylinderMesh = null;
 let lidMesh = null;
-let exporter;
 
 function initCylinderPreview() {
     const preview = document.getElementById('cylinder-preview');
 
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xf8f9fa);
-
-    exporter = new STLExporter();
 
     camera = new THREE.PerspectiveCamera(
         45,
@@ -430,92 +427,25 @@ function animateCylinder() {
 }
 
 function downloadLidSTL() {
-    const generateLid =
-        document.getElementById('cylinder-lid').checked;
+    const generateLid = document.getElementById('cylinder-lid').checked;
 
-    if (!generateLid) {
+    if (!generateLid || !lidMesh) {
         alert('Please enable Generate Lid first.');
         return;
     }
 
-    const diameter =
-        parseFloat(document.getElementById('cylinder-diameter').value) || 80;
-
-    const segments =
-        parseInt(document.getElementById('cylinder-segments').value) || 64;
-
-    const wallThickness =
-        parseFloat(document.getElementById('cylinder-wall-thickness').value) || 2;
-
-    const lidThickness =
-        parseFloat(document.getElementById('cylinder-lid-thickness').value) || 2;
-
-    const lidLipHeight =
-        parseFloat(document.getElementById('cylinder-lid-lip-height').value) || 5;
-
-    const lidClearance =
-        parseFloat(document.getElementById('cylinder-lid-clearance').value) || 0.4;
-
-    const radius = diameter / 2;
-    const lipRadius = radius - wallThickness - lidClearance;
-
-    if (lipRadius <= 0) {
-        alert('Invalid lid dimensions.');
-        return;
-    }
-
-    const material = new THREE.MeshStandardMaterial();
-
-    const lidGroup = new THREE.Group();
-
-    // Disco maior da tampa
-    const topGeometry = new THREE.CylinderGeometry(
-        radius,
-        radius,
-        lidThickness,
-        segments
+    const diameter = formatFilenameNumber(
+        parseFloat(document.getElementById('cylinder-diameter').value) || 40
     );
 
-    // Já deixa o disco deitado para impressão
-    topGeometry.rotateX(Math.PI / 2);
-
-    const topMesh = new THREE.Mesh(topGeometry, material);
-
-    // Aba menor da tampa
-    const lipGeometry = new THREE.CylinderGeometry(
-        lipRadius,
-        lipRadius,
-        lidLipHeight,
-        segments
+    exportSTL(
+        lidMesh,
+        `vekmaker-cylinder-lid-${diameter}mm.stl`,
+        {
+            rotateForPrint: true,
+            rotation: { x: Math.PI / 2, y: 0, z: 0 }
+        }
     );
-
-    // Já deixa a aba deitada para impressão
-    lipGeometry.rotateX(Math.PI / 2);
-
-lipGeometry.translate(
-    0,
-    0,
-    lidThickness / 2 + lidLipHeight / 2
-);
-
-const lipMesh = new THREE.Mesh(lipGeometry, material);
-
-    lidGroup.add(topMesh);
-    lidGroup.add(lipMesh);
-
-    const exporter = new STLExporter();
-    const stlString = exporter.parse(lidGroup);
-
-    const blob = new Blob([stlString], {
-        type: 'text/plain'
-    });
-
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'vekmaker-cylinder-lid.stl';
-    link.click();
-
-    URL.revokeObjectURL(link.href);
 }
 
 function downloadCylinderSTL() {
@@ -524,29 +454,28 @@ function downloadCylinderSTL() {
         return;
     }
 
-    const exporter = new STLExporter();
+    const diameter = formatFilenameNumber(
+        parseFloat(document.getElementById('cylinder-diameter').value) || 40
+    );
+    const height = formatFilenameNumber(
+        parseFloat(document.getElementById('cylinder-height').value) || 40
+    );
 
-    const exportObject = cylinderMesh.clone(true);
-
-    exportObject.traverse((child) => {
-        if (child.isMesh) {
-            child.geometry = child.geometry.clone();
-            child.geometry.rotateX(Math.PI / 2);
+    exportSTL(
+        cylinderMesh,
+        `vekmaker-cylinder-${diameter}x${height}mm.stl`,
+        {
+            rotateForPrint: true,
+            rotation: { x: Math.PI / 2, y: 0, z: 0 }
         }
-    });
+    );
+}
 
-    const stlString = exporter.parse(exportObject);
-
-    const blob = new Blob([stlString], {
-        type: 'text/plain'
-    });
-
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'vekmaker-cylinder.stl';
-    link.click();
-
-    URL.revokeObjectURL(link.href);
+function formatFilenameNumber(value) {
+    return Number(value)
+        .toFixed(2)
+        .replace(/\.00$/, '')
+        .replace(/(\.\d)0$/, '$1');
 }
 
 document.addEventListener('DOMContentLoaded', () => {

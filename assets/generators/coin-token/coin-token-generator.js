@@ -1,12 +1,11 @@
 import * as THREE from '../../libs/three/three.module.js';
 import { OrbitControls } from '../../libs/three/OrbitControls.js';
-import { STLExporter } from '../../libs/three/STLExporter.js';
+import { exportSTL } from '../../js/core/stl-exporter.js';
 
 let scene;
 let camera;
 let renderer;
 let controls;
-let exporter;
 let tokenMesh = null;
 let resizeObserver = null;
 
@@ -45,8 +44,6 @@ function cacheElements() {
 function initTokenPreview() {
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xf8f9fa);
-
-    exporter = new STLExporter();
 
     camera = new THREE.PerspectiveCamera(
         45,
@@ -273,33 +270,19 @@ function downloadTokenSTL() {
         return;
     }
 
-    /*
-     * The export geometry is rebuilt instead of exporting the preview mesh.
-     * Its thickness already follows the STL Z axis, so it is flat and ready
-     * for printing without changing the preview object.
-     */
-    const exportGeometry = createTokenGeometry(params);
-    exportGeometry.translate(0, 0, params.thickness / 2);
+    if (!tokenMesh) {
+        setValidationMessage('Generate the token before downloading.', 'error');
+        setDownloadEnabled(false);
+        return;
+    }
 
-    const exportMesh = new THREE.Mesh(
-        exportGeometry,
-        new THREE.MeshBasicMaterial()
+    exportSTL(
+        tokenMesh,
+        buildTokenFilename(params),
+        {
+            rotateForPrint: false
+        }
     );
-
-    exportMesh.updateMatrixWorld(true);
-
-    const stlData = exporter.parse(exportMesh, {
-        binary: false
-    });
-
-    const blob = new Blob([stlData], {
-        type: 'model/stl'
-    });
-
-    downloadBlob(blob, buildTokenFilename(params));
-
-    exportGeometry.dispose();
-    exportMesh.material.dispose();
 
     setValidationMessage('STL downloaded successfully.', 'success');
 }
@@ -323,19 +306,6 @@ function formatFilenameNumber(value) {
         .toFixed(2)
         .replace(/\.00$/, '')
         .replace(/(\.\d)0$/, '$1');
-}
-
-function downloadBlob(blob, filename) {
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-
-    URL.revokeObjectURL(url);
 }
 
 function setValidationMessage(message, type = '') {
