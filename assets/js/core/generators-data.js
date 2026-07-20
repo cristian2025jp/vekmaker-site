@@ -24,20 +24,28 @@ const GENERATORS = [
         status: "available"
     },
     {
+        id: "washer-ring-generator",
+        name: "Washer / Ring Generator",
+        icon: "coin",
+        description: "Create custom washers and flat rings with adjustable inner and outer diameters.",
+        url: "/en/washer-ring-generator/",
+        status: "available"
+    },
+    {
         id: "name-plate-generator",
         name: "Name Plate Generator",
         icon: "nameplate",
-        description: "Create customizable name plates and simple text-based signs.",
-        url: "",
-        status: "soon"
+        description: "Create custom name plates with raised Latin, Portuguese, hiragana or katakana text.",
+        url: "/en/name-plate-generator/",
+        status: "available"
     },
     {
         id: "frame-generator",
         name: "Frame Generator",
         icon: "frame",
-        description: "Create simple display frames with customizable dimensions.",
-        url: "",
-        status: "soon"
+        description: "Create rectangular display frames with adjustable borders, thickness and rear rebate.",
+        url: "/en/frame-generator/",
+        status: "available"
     },
     {
         id: "organizer-generator",

@@ -1,0 +1,14 @@
+Font files included in this package are subsets of Noto Sans and Noto Sans CJK JP.
+
+The Noto fonts are licensed under the SIL Open Font License, Version 1.1.
+Project information:
+https://github.com/notofonts
+https://scripts.sil.org/OFL
+
+The subset files are included only to provide the characters required by the
+VEKMaker Name Plate Generator:
+- Latin characters used in English and Portuguese
+- Hiragana and katakana
+- Basic punctuation and numbers
+
+Kanji is intentionally not included.

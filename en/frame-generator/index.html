@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create a custom 3D printable rectangular frame with adjustable size, border, thickness and rear rebate, then download the STL file.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://vekmaker.com/en/frame-generator/">
+    <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+    <title>Frame Generator | VEKMaker</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <style>
+        .generator-preview {
+            min-width: 0;
+        }
+
+        #frame-preview {
+            width: 100%;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        #frame-preview canvas {
+            display: block;
+            width: 100% !important;
+            max-width: 100%;
+        }
+
+        .result-list {
+            margin: 1rem 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .result-list li {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.35rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .field-note {
+            display: block;
+            margin-top: 0.35rem;
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div id="site-header"></div>
+    <div id="site-menu"></div>
+
+    <main class="container generator-page">
+        <section class="generator-intro">
+            <h1>Frame STL Generator</h1>
+            <p>Create a rectangular display frame with a rear rebate and download a printable STL file.</p>
+        </section>
+
+        <section class="generator-layout">
+            <div class="generator-panel">
+                <h2>Frame Dimensions</h2>
+
+                <label>
+                    Outer Width (mm)
+                    <input type="number" id="frame-outer-width" value="170" min="30" max="500" step="1">
+                </label>
+
+                <label>
+                    Outer Height (mm)
+                    <input type="number" id="frame-outer-height" value="120" min="30" max="500" step="1">
+                </label>
+
+                <label>
+                    Border Width (mm)
+                    <input type="number" id="frame-border-width" value="12" min="3" max="100" step="0.5">
+                </label>
+
+                <label>
+                    Total Thickness (mm)
+                    <input type="number" id="frame-thickness" value="8" min="2" max="50" step="0.5">
+                </label>
+
+                <label>
+                    Rear Rebate Depth (mm)
+                    <input type="number" id="frame-rebate-depth" value="3" min="0" max="40" step="0.5">
+                    <span class="field-note">
+                        The rebate is the rear step that provides space for the displayed item and backing.
+                    </span>
+                </label>
+
+                <label>
+                    Rear Rebate Margin (mm)
+                    <input type="number" id="frame-rebate-margin" value="3" min="0" max="30" step="0.5">
+                </label>
+
+                <label>
+                    Corner Radius (mm)
+                    <input type="number" id="frame-corner-radius" value="5" min="0" max="100" step="0.5">
+                </label>
+
+                <h2>Optional Back Panel</h2>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="frame-generate-back-panel" checked>
+                    Generate Back Panel
+                </label>
+
+                <label>
+                    Back Panel Thickness (mm)
+                    <input type="number" id="frame-back-panel-thickness" value="2" min="0.8" max="10" step="0.1">
+                </label>
+
+                <label>
+                    Back Panel Clearance (mm)
+                    <input type="number" id="frame-back-panel-clearance" value="0.4" min="0" max="5" step="0.1">
+                    <span class="field-note">
+                        Clearance is removed from each side so the panel can fit inside the rear opening.
+                    </span>
+                </label>
+
+                <h2>Calculated Openings</h2>
+                <ul class="result-list">
+                    <li>
+                        <span>Front Opening</span>
+                        <strong id="frame-front-opening">—</strong>
+                    </li>
+                    <li>
+                        <span>Rear Opening</span>
+                        <strong id="frame-rear-opening">—</strong>
+                    </li>
+                    <li>
+                        <span>Back Panel Size</span>
+                        <strong id="frame-back-panel-size">—</strong>
+                    </li>
+                </ul>
+
+                <p
+                    id="frame-validation-message"
+                    class="validation-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+                <button id="generate-frame" class="button primary-button" type="button">
+                    Generate Frame
+                </button>
+
+                <button id="download-frame" class="btn-primary" type="button">
+                    Download Frame STL
+                </button>
+
+                <button id="download-back-panel" class="btn-primary" type="button">
+                    Download Back Panel STL
+                </button>
+            </div>
+
+            <div class="generator-preview">
+                <h2>Preview</h2>
+                <div id="frame-preview" class="preview-area"></div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2>FAQ</h2>
+
+            <h3>What is the front opening?</h3>
+            <p>
+                The front opening is calculated from the outer dimensions minus the border width on all sides.
+            </p>
+
+            <h3>What is the rear rebate?</h3>
+            <p>
+                The rear rebate creates a wider stepped opening on the back of the frame for a photo,
+                artwork, transparent sheet or backing panel.
+            </p>
+
+            <h3>What is the optional back panel?</h3>
+            <p>
+                The back panel is a separate flat STL sized to fit inside the rear opening.
+                Its thickness and fitting clearance can be adjusted independently.
+            </p>
+
+            <h3>How should the frame be printed?</h3>
+            <p>
+                The STL is exported with the front face on the print bed. This orientation keeps the rear
+                rebate facing upward and avoids unnecessary support material.
+            </p>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script>
+        const PAGE = {
+            title: "Frame Generator",
+            heading: "Frame STL Generator",
+            canonical: "https://vekmaker.com/en/frame-generator/",
+            description: "Create a custom 3D printable rectangular frame with adjustable size, border, thickness and rear rebate, then download the STL file.",
+            keywords: "frame STL generator, picture frame, display frame, rear rebate, 3D printing",
+            generator: "frame-generator"
+        };
+    </script>
+
+    <script src="/assets/js/core/config.js"></script>
+    <script src="/assets/js/core/layout.js"></script>
+    <script src="/assets/js/core/page.js"></script>
+    <script type="module" src="/assets/generators/frame/frame-generator.js"></script>
+</body>
+</html>
