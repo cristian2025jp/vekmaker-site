@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create a custom 3D printable divider box with adjustable internal dimensions, rows, columns and divider thickness.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://vekmaker.com/en/divider-box-generator/">
+    <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+    <title>Divider Box Generator | VEKMaker</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <style>
+        .generator-preview {
+            min-width: 0;
+        }
+
+        #divider-box-preview {
+            width: 100%;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        #divider-box-preview canvas {
+            display: block;
+            width: 100% !important;
+            max-width: 100%;
+        }
+
+        .result-list {
+            margin: 1rem 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .result-list li {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.35rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .field-note {
+            display: block;
+            margin-top: 0.35rem;
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div id="site-header"></div>
+    <div id="site-menu"></div>
+
+    <main class="container generator-page">
+        <section class="generator-intro">
+            <h1>Divider Box STL Generator</h1>
+            <p>Create an open storage box with an adjustable grid of integrated compartments.</p>
+        </section>
+
+        <section class="generator-layout">
+            <div class="generator-panel">
+                <h2>Internal Dimensions</h2>
+
+                <label>
+                    Internal Width (mm)
+                    <input type="number" id="divider-box-internal-width" value="150" min="20" max="450" step="1">
+                </label>
+
+                <label>
+                    Internal Depth (mm)
+                    <input type="number" id="divider-box-internal-depth" value="100" min="20" max="450" step="1">
+                </label>
+
+                <label>
+                    Internal Height (mm)
+                    <input type="number" id="divider-box-internal-height" value="35" min="5" max="200" step="1">
+                </label>
+
+                <h2>Box Construction</h2>
+
+                <label>
+                    Wall Thickness (mm)
+                    <input type="number" id="divider-box-wall-thickness" value="2" min="0.8" max="20" step="0.1">
+                </label>
+
+                <label>
+                    Bottom Thickness (mm)
+                    <input type="number" id="divider-box-bottom-thickness" value="2" min="0.8" max="20" step="0.1">
+                </label>
+
+                <label>
+                    Outer Corner Radius (mm)
+                    <input type="number" id="divider-box-corner-radius" value="6" min="0" max="100" step="0.5">
+                </label>
+
+                <h2>Compartments</h2>
+
+                <label>
+                    Columns Across Width
+                    <input type="number" id="divider-box-columns" value="3" min="1" max="12" step="1">
+                </label>
+
+                <label>
+                    Rows Across Depth
+                    <input type="number" id="divider-box-rows" value="2" min="1" max="12" step="1">
+                </label>
+
+                <label>
+                    Divider Thickness (mm)
+                    <input type="number" id="divider-box-divider-thickness" value="1.6" min="0.8" max="10" step="0.1">
+                </label>
+
+                <label>
+                    Divider Height (mm)
+                    <input type="number" id="divider-box-divider-height" value="30" min="1" max="200" step="1">
+                    <span class="field-note">
+                        Divider height is measured from the inside bottom of the box.
+                    </span>
+                </label>
+
+                <h2>Calculated Results</h2>
+                <ul class="result-list">
+                    <li>
+                        <span>External Size</span>
+                        <strong id="divider-box-external-size">—</strong>
+                    </li>
+                    <li>
+                        <span>Compartments</span>
+                        <strong id="divider-box-compartment-count">—</strong>
+                    </li>
+                    <li>
+                        <span>Approx. Compartment Size</span>
+                        <strong id="divider-box-compartment-size">—</strong>
+                    </li>
+                </ul>
+
+                <p
+                    id="divider-box-validation-message"
+                    class="validation-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+                <button id="generate-divider-box" class="button primary-button" type="button">
+                    Generate Divider Box
+                </button>
+
+                <button id="download-divider-box" class="btn-primary" type="button">
+                    Download STL
+                </button>
+            </div>
+
+            <div class="generator-preview">
+                <h2>Preview</h2>
+                <div id="divider-box-preview" class="preview-area"></div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2>FAQ</h2>
+
+            <h3>What do columns and rows mean?</h3>
+            <p>
+                Columns divide the internal width. Rows divide the internal depth.
+                For example, 3 columns and 2 rows create 6 compartments.
+            </p>
+
+            <h3>Are the dividers part of the box?</h3>
+            <p>
+                Yes. The walls, bottom and dividers are exported together as one STL file.
+            </p>
+
+            <h3>How should the divider box be printed?</h3>
+            <p>
+                The STL is exported with the bottom on the print bed and the open side facing upward,
+                normally allowing support-free printing.
+            </p>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script>
+        const PAGE = {
+            title: "Divider Box Generator",
+            heading: "Divider Box STL Generator",
+            canonical: "https://vekmaker.com/en/divider-box-generator/",
+            description: "Create a custom 3D printable divider box with adjustable internal dimensions, rows, columns and divider thickness.",
+            keywords: "divider box STL generator, compartment box, organizer box, divided tray, 3D printing",
+            generator: "divider-box-generator"
+        };
+    </script>
+
+    <script src="/assets/js/core/config.js"></script>
+    <script src="/assets/js/core/layout.js"></script>
+    <script src="/assets/js/core/page.js"></script>
+    <script type="module" src="/assets/generators/divider-box/divider-box-generator.js"></script>
+</body>
+</html>

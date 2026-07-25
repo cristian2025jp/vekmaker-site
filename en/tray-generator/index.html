@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create a custom 3D printable tray with adjustable internal dimensions, wall thickness, bottom thickness and rounded corners.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/en/tray-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Tray Generator | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}#tray-preview{width:100%;min-width:0;overflow:hidden}#tray-preview canvas{display:block;width:100%!important;max-width:100%}.result-list{margin:1rem 0;padding:0;list-style:none}.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+</style>
+</head>
+<body>
+<div id="site-header"></div><div id="site-menu"></div>
+<main class="container generator-page">
+<section class="generator-intro"><h1>Tray STL Generator</h1><p>Create a shallow open tray for organizing small objects and download a printable STL file.</p></section>
+<section class="generator-layout">
+<div class="generator-panel">
+<h2>Internal Dimensions</h2>
+<label>Internal Width (mm)<input type="number" id="tray-internal-width" value="150" min="10" max="450" step="1"></label>
+<label>Internal Depth (mm)<input type="number" id="tray-internal-depth" value="100" min="10" max="450" step="1"></label>
+<label>Internal Height (mm)<input type="number" id="tray-internal-height" value="20" min="3" max="100" step="1"></label>
+<h2>Construction</h2>
+<label>Wall Thickness (mm)<input type="number" id="tray-wall-thickness" value="2" min="0.8" max="20" step="0.1"></label>
+<label>Bottom Thickness (mm)<input type="number" id="tray-bottom-thickness" value="2" min="0.8" max="20" step="0.1"></label>
+<label>Outer Corner Radius (mm)<input type="number" id="tray-corner-radius" value="8" min="0" max="100" step="0.5"><span class="field-note">The inner corner radius is calculated automatically from the wall thickness.</span></label>
+<h2>Calculated Size</h2>
+<ul class="result-list"><li><span>External Width</span><strong id="tray-external-width">—</strong></li><li><span>External Depth</span><strong id="tray-external-depth">—</strong></li><li><span>Total Height</span><strong id="tray-total-height">—</strong></li></ul>
+<p id="tray-validation-message" class="validation-message" role="status" aria-live="polite"></p>
+<button id="generate-tray" class="button primary-button" type="button">Generate Tray</button>
+<button id="download-tray" class="btn-primary" type="button">Download STL</button>
+</div>
+<div class="generator-preview"><h2>Preview</h2><div id="tray-preview" class="preview-area"></div></div>
+</section>
+<section class="faq"><h2>FAQ</h2><h3>Are the entered dimensions internal?</h3><p>Yes. Width, depth and height describe the usable internal area. External dimensions are calculated from the selected wall and bottom thicknesses.</p><h3>How are the rounded corners calculated?</h3><p>You select the outer corner radius. The generator automatically reduces that radius on the inside so the wall thickness remains consistent around the corners.</p><h3>How should the tray be printed?</h3><p>The STL is exported with the bottom on the print bed and the open side facing upward, normally allowing support-free printing.</p></section>
+</main>
+<div id="site-footer"></div>
+<script>const PAGE={title:"Tray Generator",heading:"Tray STL Generator",canonical:"https://vekmaker.com/en/tray-generator/",description:"Create a custom 3D printable tray with adjustable internal dimensions, wall thickness, bottom thickness and rounded corners.",keywords:"tray STL generator, organizer tray, custom tray, rounded tray, 3D printing",generator:"tray-generator"};</script>
+<script src="/assets/js/core/config.js"></script><script src="/assets/js/core/layout.js"></script><script src="/assets/js/core/page.js"></script><script type="module" src="/assets/generators/tray/tray-generator.js"></script>
+</body></html>

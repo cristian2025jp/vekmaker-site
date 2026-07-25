@@ -48,6 +48,22 @@ const GENERATORS = [
         status: "available"
     },
     {
+        id: "tray-generator",
+        name: "Tray Generator",
+        icon: "organizer",
+        description: "Create shallow organizer trays with adjustable internal dimensions and rounded corners.",
+        url: "/en/tray-generator/",
+        status: "available"
+    },
+    {
+        id: "divider-box-generator",
+        name: "Divider Box Generator",
+        icon: "organizer",
+        description: "Create open storage boxes with integrated rows and columns of compartments.",
+        url: "/en/divider-box-generator/",
+        status: "available"
+    },
+    {
         id: "organizer-generator",
         name: "Organizer Generator",
         icon: "organizer",
