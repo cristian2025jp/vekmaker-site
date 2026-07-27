@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Create a custom 3D printable phone stand with adjustable dimensions, viewing angle and optional charging cable opening.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/en/phone-stand-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Phone Stand Generator | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}#phone-stand-preview{width:100%;min-width:0;overflow:hidden}
+#phone-stand-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+</style>
+</head>
+<body>
+<div id="site-header"></div><div id="site-menu"></div>
+<main class="container generator-page">
+<section class="generator-intro"><h1>Phone Stand STL Generator</h1><p>Create a customizable desktop phone stand and download a printable STL file.</p></section>
+<section class="generator-layout">
+<div class="generator-panel">
+<h2>Stand Dimensions</h2>
+<label>Stand Width (mm)<input type="number" id="ps-width" value="80" min="30" max="250" step="1"></label>
+<label>Base Depth (mm)<input type="number" id="ps-depth" value="95" min="40" max="250" step="1"></label>
+<label>Base Thickness (mm)<input type="number" id="ps-base-thickness" value="5" min="2" max="30" step="0.5"></label>
+<label>Back Height (mm)<input type="number" id="ps-back-height" value="105" min="40" max="250" step="1"></label>
+<label>Back Thickness (mm)<input type="number" id="ps-back-thickness" value="5" min="2" max="20" step="0.5"></label>
+<label>Back Angle (degrees)<input type="number" id="ps-angle" value="65" min="50" max="80" step="1"><span class="field-note">Angle is measured from the horizontal base.</span></label>
+<h2>Phone Support</h2>
+<label>Phone Slot Width (mm)<input type="number" id="ps-slot" value="14" min="6" max="40" step="0.5"><span class="field-note">Use the total thickness of the phone including its case.</span></label>
+<label>Front Lip Height (mm)<input type="number" id="ps-lip-height" value="12" min="3" max="40" step="0.5"></label>
+<label class="checkbox-label"><input type="checkbox" id="ps-cable" checked>Add Charging Cable Opening</label>
+<label>Cable Opening Width (mm)<input type="number" id="ps-cable-width" value="18" min="5" max="60" step="0.5"></label>
+<h2>Calculated Results</h2>
+<ul class="result-list"><li><span>Approx. Total Height</span><strong id="ps-total-height">—</strong></li><li><span>Back Horizontal Reach</span><strong id="ps-back-reach">—</strong></li></ul>
+<p id="ps-message" class="validation-message" role="status" aria-live="polite"></p>
+<button id="ps-generate" class="button primary-button" type="button">Generate Phone Stand</button>
+<button id="ps-download" class="btn-primary" type="button">Download STL</button>
+</div>
+<div class="generator-preview"><h2>Preview</h2><div id="phone-stand-preview" class="preview-area"></div></div>
+</section>
+<section class="faq"><h2>FAQ</h2>
+<h3>What is Phone Slot Width?</h3><p>It is the space reserved for the phone. Measure the total thickness of the phone and case, then add a small clearance if needed.</p>
+<h3>What does Back Angle control?</h3><p>A lower value creates a more reclined phone position, while a higher value makes the phone more upright.</p>
+<h3>How should the stand be printed?</h3><p>The STL is exported with the base on the print bed. Some dimensions may require support beneath the inclined back.</p>
+</section>
+</main>
+<div id="site-footer"></div>
+<script>const PAGE={title:"Phone Stand Generator",heading:"Phone Stand STL Generator",canonical:"https://vekmaker.com/en/phone-stand-generator/",description:"Create a custom 3D printable phone stand with adjustable dimensions, viewing angle and optional charging cable opening.",keywords:"phone stand STL generator, smartphone holder, charging stand, desktop phone stand, 3D printing",generator:"phone-stand-generator"};</script>
+<script src="/assets/js/core/config.js"></script><script src="/assets/js/core/layout.js"></script><script src="/assets/js/core/page.js"></script><script type="module" src="/assets/generators/phone-stand/phone-stand-generator.js"></script>
+</body></html>

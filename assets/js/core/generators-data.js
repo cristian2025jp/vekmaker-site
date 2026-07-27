@@ -64,6 +64,22 @@ const GENERATORS = [
         status: "available"
     },
     {
+        id: "cone-funnel-generator",
+        name: "Cone / Funnel Generator",
+        icon: "cylinder",
+        description: "Create solid cones, hollow conical adapters and funnels with adjustable dimensions.",
+        url: "/en/cone-funnel-generator/",
+        status: "available"
+    },
+    {
+        id: "phone-stand-generator",
+        name: "Phone Stand Generator",
+        icon: "organizer",
+        description: "Create customizable desktop phone stands with adjustable viewing angle and cable opening.",
+        url: "/en/phone-stand-generator/",
+        status: "available"
+    },
+    {
         id: "organizer-generator",
         name: "Organizer Generator",
         icon: "organizer",
