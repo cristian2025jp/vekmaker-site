@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Create custom 3D printable cable clips and multi-cable organizers with adjustable cable diameter, opening and mounting base.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/en/cable-clip-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Cable Clip Generator | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#cable-clip-preview{width:100%;min-width:0;overflow:hidden}
+#cable-clip-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.hidden-field{display:none}
+</style>
+</head>
+<body>
+<div id="site-header"></div><div id="site-menu"></div>
+<main class="container generator-page">
+<section class="generator-intro">
+<h1>Cable Clip STL Generator</h1>
+<p>Create individual cable clips, multi-cable organizers or clips with a screw-mounting base.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+<h2>Clip Type</h2>
+<label>
+Model Type
+<select id="cc-type">
+<option value="individual">Individual Clip</option>
+<option value="multi">Multi-Cable Organizer</option>
+<option value="screw">Clip with Screw Base</option>
+</select>
+</label>
+
+<h2>Cable and Clip</h2>
+<label>Cable Diameter (mm)<input type="number" id="cc-cable-diameter" value="6" min="2" max="40" step="0.1"></label>
+<label>Fit Clearance (mm)<input type="number" id="cc-clearance" value="0.5" min="0" max="3" step="0.1"><span class="field-note">Added to the cable diameter so the cable is not compressed inside the clip.</span></label>
+<label>Clip Wall Thickness (mm)<input type="number" id="cc-wall" value="1.6" min="0.8" max="6" step="0.1"></label>
+<label>Clip Width (mm)<input type="number" id="cc-width" value="10" min="3" max="40" step="0.5"><span class="field-note">This is the front-to-back thickness of the printed clip.</span></label>
+<label>Opening Width (mm)<input type="number" id="cc-opening" value="4.5" min="1" max="40" step="0.1"><span class="field-note">A smaller opening holds the cable more firmly but requires more material flexibility.</span></label>
+
+<div id="cc-multi-fields" class="hidden-field">
+<h2>Multiple Slots</h2>
+<label>Number of Cable Slots<input type="number" id="cc-count" value="4" min="2" max="12" step="1"></label>
+<label>Gap Between Clips (mm)<input type="number" id="cc-gap" value="4" min="0" max="30" step="0.5"></label>
+</div>
+
+<h2>Base</h2>
+<label>Base Thickness (mm)<input type="number" id="cc-base-thickness" value="2.4" min="1" max="10" step="0.1"></label>
+<label>Base Margin (mm)<input type="number" id="cc-base-margin" value="4" min="1" max="20" step="0.5"></label>
+
+<div id="cc-screw-fields" class="hidden-field">
+<label>Screw Hole Diameter (mm)<input type="number" id="cc-screw-hole" value="4" min="2" max="12" step="0.1"></label>
+<label>Screw Hole Spacing (mm)<input type="number" id="cc-screw-spacing" value="24" min="8" max="120" step="0.5"><span class="field-note">Distance between the centers of the two mounting holes.</span></label>
+</div>
+
+<label>
+Resolution
+<select id="cc-segments">
+<option value="32">Standard — 32 segments</option>
+<option value="64" selected>Smooth — 64 segments</option>
+<option value="96">High — 96 segments</option>
+</select>
+</label>
+
+<h2>Calculated Results</h2>
+<ul class="result-list">
+<li><span>Inner Diameter</span><strong id="cc-inner-result">—</strong></li>
+<li><span>Outer Diameter</span><strong id="cc-outer-result">—</strong></li>
+<li><span>Total Width</span><strong id="cc-total-result">—</strong></li>
+<li><span>Center Spacing</span><strong id="cc-spacing-result">—</strong></li>
+</ul>
+
+<p id="cc-message" class="validation-message" role="status" aria-live="polite"></p>
+<button id="cc-generate" class="button primary-button" type="button">Generate Cable Clip</button>
+<button id="cc-download" class="btn-primary" type="button">Download STL</button>
+</div>
+
+<div class="generator-preview">
+<h2>Preview</h2>
+<div id="cable-clip-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>FAQ</h2>
+<h3>Which material is best?</h3>
+<p>PETG is generally more suitable for clips that must flex repeatedly. PLA can work for gentle snap fits, but narrow openings and thick walls may cause it to crack.</p>
+<h3>What opening width should I use?</h3>
+<p>Start with an opening around 70% to 85% of the fitted cable diameter. Increase it for rigid materials or cables that should be removed frequently.</p>
+<h3>How should the clip be printed?</h3>
+<p>The STL is exported with the flat base on the print bed and the cable openings facing upward. This normally avoids support material.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+<script>
+const PAGE={
+title:"Cable Clip Generator",
+heading:"Cable Clip STL Generator",
+canonical:"https://vekmaker.com/en/cable-clip-generator/",
+description:"Create custom 3D printable cable clips and multi-cable organizers with adjustable cable diameter, opening and mounting base.",
+keywords:"cable clip STL generator, cable organizer, wire holder, screw mount cable clip, 3D printing",
+generator:"cable-clip-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/cable-clip/cable-clip-generator.js"></script>
+</body>
+</html>

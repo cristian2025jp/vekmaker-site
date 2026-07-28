@@ -80,6 +80,22 @@ const GENERATORS = [
         status: "available"
     },
     {
+        id: "cable-clip-generator",
+        name: "Cable Clip Generator",
+        icon: "organizer",
+        description: "Create individual cable clips, multi-cable organizers and screw-mounted holders.",
+        url: "/en/cable-clip-generator/",
+        status: "available"
+    },
+    {
+        id: "3d-print-price-calculator",
+        name: "3D Print Price Calculator",
+        icon: "organizer",
+        description: "Estimate a simple selling price using filament, energy, packaging, profit margin and platform fees.",
+        url: "/en/3d-print-price-calculator/",
+        status: "available"
+    },
+    {
         id: "organizer-generator",
         name: "Organizer Generator",
         icon: "organizer",
