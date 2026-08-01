@@ -1,6 +1,43 @@
 // Densidade média do PLA (g/cm³)
 const PLA_DENSITY = 1.24;
 
+const BOX_I18N = {
+    en: {
+        minWidth: 'Minimum width is 10 mm.',
+        minDepth: 'Minimum depth is 10 mm.',
+        minHeight: 'Minimum height is 10 mm.',
+        minWall: 'Minimum wall thickness is 1 mm.',
+        minBottom: 'Minimum bottom thickness is 1 mm.',
+        wallWidth: 'Wall thickness is too large for the selected width.',
+        wallDepth: 'Wall thickness is too large for the selected depth.'
+    },
+    pt: {
+        minWidth: 'A largura mínima é 10 mm.',
+        minDepth: 'A profundidade mínima é 10 mm.',
+        minHeight: 'A altura mínima é 10 mm.',
+        minWall: 'A espessura mínima da parede é 1 mm.',
+        minBottom: 'A espessura mínima do fundo é 1 mm.',
+        wallWidth: 'A espessura da parede é muito grande para a largura selecionada.',
+        wallDepth: 'A espessura da parede é muito grande para a profundidade selecionada.'
+    },
+    ja: {
+        minWidth: '幅は10 mm以上にしてください。',
+        minDepth: '奥行きは10 mm以上にしてください。',
+        minHeight: '高さは10 mm以上にしてください。',
+        minWall: '壁の厚さは1 mm以上にしてください。',
+        minBottom: '底の厚さは1 mm以上にしてください。',
+        wallWidth: '選択した幅に対して壁が厚すぎます。',
+        wallDepth: '選択した奥行きに対して壁が厚すぎます。'
+    }
+};
+
+const BOX_LANG = ['en', 'pt', 'ja'].includes(document.documentElement.lang)
+    ? document.documentElement.lang
+    : 'en';
+
+const BOX_TEXT = BOX_I18N[BOX_LANG];
+
+
 const validationMessage =
     document.getElementById(
         'validationMessage'
@@ -41,7 +78,7 @@ function calculate() {
 if (internalWidth < 10) {
 
     validationMessage.textContent =
-        'Minimum width is 10 mm.';
+        BOX_TEXT.minWidth;
     validationMessage.classList.add('active');
     return;
 
@@ -50,7 +87,7 @@ if (internalWidth < 10) {
 if (internalDepth < 10) {
 
     validationMessage.textContent =
-        'Minimum depth is 10 mm.';
+        BOX_TEXT.minDepth;
     validationMessage.classList.add('active');
         return;
 
@@ -59,7 +96,7 @@ if (internalDepth < 10) {
 if (internalHeight < 10) {
 
     validationMessage.textContent =
-        'Minimum height is 10 mm.';
+        BOX_TEXT.minHeight;
     validationMessage.classList.add('active');
     return;
 
@@ -68,7 +105,7 @@ if (internalHeight < 10) {
 if (wall < 1) {
 
     validationMessage.textContent =
-        'Minimum wall thickness is 1 mm.';
+        BOX_TEXT.minWall;
     validationMessage.classList.add('active');
     return;
 
@@ -77,7 +114,7 @@ if (wall < 1) {
 if (bottom < 1) {
 
     validationMessage.textContent =
-        'Minimum bottom thickness is 1 mm.';
+        BOX_TEXT.minBottom;
     validationMessage.classList.add('active');
     return;
 
@@ -88,7 +125,7 @@ if (
 ) {
 
     validationMessage.textContent =
-        'Wall thickness is too large for the selected width.';
+        BOX_TEXT.wallWidth;
     validationMessage.classList.add('active');
     return;
 
@@ -99,7 +136,7 @@ if (
 ) {
 
     validationMessage.textContent =
-        'Wall thickness is too large for the selected depth.';
+        BOX_TEXT.wallDepth;
     validationMessage.classList.add('active');
     return;
 

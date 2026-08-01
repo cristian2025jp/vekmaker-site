@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/box-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/box-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/box-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/box-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/box-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>ボックスSTLジェネレーター | VEKMaker</title>
+<meta name="description" content="3Dプリント用のオープンボックスを自由な寸法で作成し、ブラウザからSTLをダウンロードできます。">
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+</style>
+<script>
+const PAGE={
+title:"ボックスジェネレーター",
+heading:"ボックスSTLジェネレーター",
+canonical:"https://vekmaker.com/ja/box-generator/",
+description:"3Dプリント用の収納ボックスをオンラインで作成し、ブラウザからSTLを書き出せます。",
+keywords:"STLジェネレーター, ボックスジェネレーター, 3Dプリント, 収納ボックス, STL作成",
+generator:"box-generator"
+};
+</script>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+<main class="container">
+<nav class="language-switcher" aria-label="言語選択">
+        <a href="/en/box-generator/" hreflang="en">EN</a>
+        <a href="/pt/box-generator/" hreflang="pt">PT</a>
+        <a href="/ja/box-generator/" hreflang="ja" aria-current="page">日本語</a>
+</nav>
+<section class="hero">
+<h1>ボックスSTLジェネレーター</h1>
+<p>3Dプリント用のオープンボックスを希望の寸法で作成できます。</p>
+</section>
+<section class="generator-grid">
+<div class="card">
+<h3>内寸</h3>
+<label>幅（mm）<input type="number" id="width" value="100" min="10"></label>
+<label>奥行き（mm）<input type="number" id="depth" value="80" min="10"></label>
+<label>高さ（mm）<input type="number" id="height" value="50" min="10"></label>
+<h3>構造</h3>
+<label>壁の厚さ（mm）<input type="number" id="wall" value="2" min="1" step="0.1"></label>
+<label>底の厚さ（mm）<input type="number" id="bottom" value="2" min="1" step="0.1"></label>
+</div>
+<div class="card">
+<p id="validationMessage" class="validation-message"></p>
+<h3>計算結果</h3>
+<div class="result-section"><h4>外寸</h4><div class="result-highlight"><span id="externalSize">104 × 84 × 52 mm</span></div></div>
+<div class="result-section"><h4>材料使用量</h4><div class="result-highlight"><span id="volume">0 cm³</span></div></div>
+<div class="result-section"><h4>PLA推定重量</h4><div class="result-highlight"><span id="weight">0 g</span></div></div>
+<p><br></p>
+<h3>3Dプレビュー</h3>
+<div id="viewer3d"></div>
+<button class="btn-primary" id="downloadStlBtn">STLをダウンロード</button>
+</div>
+</section>
+<section class="faq">
+<h2>よくある質問</h2>
+<h3>入力する寸法は内寸ですか、外寸ですか？</h3><p>入力するすべての寸法は内寸です。</p>
+<h3>PLAで印刷できますか？</h3><p>はい。生成されるモデルは一般的なPLA印刷に対応しています。</p>
+</section>
+</main>
+<script type="module" src="/assets/js/viewer.js"></script>
+<script src="/assets/generators/box/box-generator.js"></script>
+<div id="site-footer"></div>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+</body>
+</html>

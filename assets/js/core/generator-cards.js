@@ -39,41 +39,59 @@ const GENERATOR_ICONS = {
     `
 };
 
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
 function createGeneratorCard(generator) {
     const card = document.createElement("article");
-    card.className = `generator-card generator-card-${generator.status}`;
+    card.className = "generator-card generator-card-available";
 
-    const isAvailable = generator.status === "available";
-    const statusText = isAvailable ? "Available" : "Coming Soon";
     const icon = GENERATOR_ICONS[generator.icon] || GENERATOR_ICONS.box;
+    const name = escapeHtml(generator.name);
+    const description = escapeHtml(generator.description);
+    const url = escapeHtml(generator.url);
+    const image = escapeHtml(generator.image || "");
 
     card.innerHTML = `
-        <div class="generator-card-top">
-            <div class="generator-icon">${icon}</div>
-            <span class="card-status ${generator.status}">${statusText}</span>
-        </div>
+        <a href="${url}" class="generator-card-image-link" aria-label="Open ${name}">
+            <div class="generator-card-image-wrap">
+                <img class="generator-card-image" src="${image}" alt="${name}"
+                     width="1200" height="900" loading="lazy" decoding="async">
+                <div class="generator-card-image-fallback" aria-hidden="true">
+                    <div class="generator-icon">${icon}</div>
+                </div>
+            </div>
+        </a>
 
         <div class="generator-card-content">
-            <h3>${generator.name}</h3>
-            <p>${generator.description}</p>
+            <h3>${name}</h3>
+            <p>${description}</p>
         </div>
 
-        ${
-            isAvailable
-                ? `<a href="${generator.url}" class="generator-card-link" aria-label="Open ${generator.name}">
-                        Open Generator <span aria-hidden="true">→</span>
-                   </a>`
-                : `<span class="generator-card-disabled" aria-hidden="true">In development</span>`
-        }
+        <a href="${url}" class="generator-card-link" aria-label="Open ${name}">
+            Open Generator <span aria-hidden="true">→</span>
+        </a>
     `;
+
+    const imageElement = card.querySelector(".generator-card-image");
+    const imageWrap = card.querySelector(".generator-card-image-wrap");
+
+    imageElement?.addEventListener("error", () => {
+        imageWrap?.classList.add("image-error");
+        imageElement.hidden = true;
+    });
 
     return card;
 }
 
 function renderGeneratorCards() {
-    if (typeof GENERATORS === "undefined") {
-        return;
-    }
+    if (typeof GENERATORS === "undefined") return;
 
     document.querySelectorAll("[data-generator-grid]").forEach((grid) => {
         const requestedStatus = grid.dataset.generatorGrid;
@@ -82,12 +100,16 @@ function renderGeneratorCards() {
         );
 
         grid.innerHTML = "";
-        generators.forEach((generator) => grid.appendChild(createGeneratorCard(generator)));
+        generators.forEach((generator) => {
+            grid.appendChild(createGeneratorCard(generator));
+        });
     });
 
     const availableCount = document.querySelector("[data-available-count]");
     if (availableCount) {
-        const count = GENERATORS.filter((generator) => generator.status === "available").length;
+        const count = GENERATORS.filter(
+            (generator) => generator.status === "available"
+        ).length;
         availableCount.textContent = `${count} generators available`;
     }
 }
