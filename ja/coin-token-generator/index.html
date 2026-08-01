@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create custom 3D printable coins and tokens with an optional center hole and download the STL file directly in your browser.">
+    <meta name="description" content="中央穴を追加できる3Dプリント用コインやトークンを作成し、ブラウザからSTLファイルをダウンロードできます。">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://vekmaker.com/en/coin-token-generator/">
+    <link rel="canonical" href="https://vekmaker.com/ja/coin-token-generator/">
     <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/coin-token-generator/">
     <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/coin-token-generator/">
     <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/coin-token-generator/">
     <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/coin-token-generator/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <title>Coin / Token Generator | VEKMaker</title>
+    <title>コイン・トークンSTLジェネレーター | VEKMaker</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
@@ -83,23 +83,23 @@
     <div id="site-menu"></div>
 
     <main class="container generator-page">
-        <nav class="language-switcher" aria-label="Language selection">
-            <a href="/en/coin-token-generator/" hreflang="en" aria-current="page">EN</a>
+        <nav class="language-switcher" aria-label="言語選択">
+            <a href="/en/coin-token-generator/" hreflang="en">EN</a>
             <a href="/pt/coin-token-generator/" hreflang="pt">PT</a>
-            <a href="/ja/coin-token-generator/" hreflang="ja">日本語</a>
+            <a href="/ja/coin-token-generator/" hreflang="ja" aria-current="page">日本語</a>
         </nav>
 
         <section class="generator-intro">
-            <h1>Coin / Token STL Generator</h1>
-            <p>Create a simple 3D printable coin or token with an optional center hole and export it as an STL file.</p>
+            <h1>コイン・トークンSTLジェネレーター</h1>
+            <p>中央穴を追加できるシンプルな3Dプリント用コインやトークンを作成し、STLファイルとして書き出せます。</p>
         </section>
 
         <section class="generator-layout">
             <div class="generator-panel">
-                <h3>Dimensions</h3>
+                <h3>寸法</h3>
 
                 <label>
-                    Diameter (mm)
+                    直径（mm）
                     <input
                         type="number"
                         id="token-diameter"
@@ -111,7 +111,7 @@
                 </label>
 
                 <label>
-                    Thickness (mm)
+                    厚さ（mm）
                     <input
                         type="number"
                         id="token-thickness"
@@ -123,7 +123,7 @@
                 </label>
 
                 <label>
-                    Segments
+                    分割数
                     <input
                         type="number"
                         id="token-segments"
@@ -140,11 +140,11 @@
                         id="token-center-hole"
                         checked
                     >
-                    Center Hole
+                    中央穴
                 </label>
 
                 <label>
-                    Hole Diameter (mm)
+                    穴の直径（mm）
                     <input
                         type="number"
                         id="token-hole-diameter"
@@ -166,19 +166,19 @@
                     id="generate-token"
                     class="button primary-button"
                 >
-                    Generate Token
+                    トークンを生成
                 </button>
 
                 <button
                     id="download-token"
                     class="btn-primary"
                 >
-                    Download Token STL
+                    トークンSTLをダウンロード
                 </button>
             </div>
 
             <div class="generator-preview">
-                <h3>Preview</h3>
+                <h3>プレビュー</h3>
                 <div
                     id="token-preview"
                     class="preview-area"
@@ -186,13 +186,13 @@
             </div>
         </section>
         <section class="faq">
-            <h2>FAQ</h2>
-            <h3>Can I create a token without a center hole?</h3>
-            <p>Yes. Disable the Center Hole option to generate a solid coin or token.</p>
-            <h3>What does the Segments setting change?</h3>
-            <p>A higher number of segments creates a smoother circular edge, but also increases the STL file complexity.</p>
-            <h3>Can I print the token in PLA?</h3>
-            <p>Yes. The generated model is suitable for standard PLA printing.</p>
+            <h2>よくある質問</h2>
+            <h3>中央穴なしのトークンを作成できますか？</h3>
+            <p>はい。「中央穴」のチェックを外すと、穴のないコインまたはトークンを生成できます。</p>
+            <h3>分割数を変更すると何が変わりますか？</h3>
+            <p>分割数を増やすと円周が滑らかになりますが、STLファイルの形状データも複雑になります。</p>
+            <h3>PLAで印刷できますか？</h3>
+            <p>はい。生成されるモデルは一般的なPLA印刷に適しています。</p>
         </section>
 
     </main>
@@ -201,11 +201,11 @@
 
     <script>
         const PAGE = {
-            title: "Coin / Token Generator",
-            heading: "Coin / Token STL Generator",
-            canonical: "https://vekmaker.com/en/coin-token-generator/",
-            description: "Create custom 3D printable coins and tokens with an optional center hole and download the STL file directly in your browser.",
-            keywords: "STL generator, coin generator, token generator, 3D printing, browser STL generator",
+            title: "コイン・トークンジェネレーター",
+            heading: "コイン・トークンSTLジェネレーター",
+            canonical: "https://vekmaker.com/ja/coin-token-generator/",
+            description: "中央穴を追加できる3Dプリント用コインやトークンを作成し、ブラウザからSTLファイルをダウンロードできます。",
+            keywords: "STLジェネレーター, コインジェネレーター, トークンジェネレーター, 3Dプリント, STL作成",
             generator: "coin-token-generator"
         };
     </script>

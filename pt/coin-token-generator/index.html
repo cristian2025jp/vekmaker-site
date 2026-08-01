@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create custom 3D printable coins and tokens with an optional center hole and download the STL file directly in your browser.">
+    <meta name="description" content="Crie moedas e fichas personalizadas para impressão 3D, com furo central opcional, e baixe o arquivo STL diretamente no navegador.">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://vekmaker.com/en/coin-token-generator/">
+    <link rel="canonical" href="https://vekmaker.com/pt/coin-token-generator/">
     <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/coin-token-generator/">
     <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/coin-token-generator/">
     <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/coin-token-generator/">
     <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/coin-token-generator/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <title>Coin / Token Generator | VEKMaker</title>
+    <title>Gerador de Moeda / Ficha STL | VEKMaker</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
@@ -83,23 +83,23 @@
     <div id="site-menu"></div>
 
     <main class="container generator-page">
-        <nav class="language-switcher" aria-label="Language selection">
-            <a href="/en/coin-token-generator/" hreflang="en" aria-current="page">EN</a>
-            <a href="/pt/coin-token-generator/" hreflang="pt">PT</a>
+        <nav class="language-switcher" aria-label="Seleção de idioma">
+            <a href="/en/coin-token-generator/" hreflang="en">EN</a>
+            <a href="/pt/coin-token-generator/" hreflang="pt" aria-current="page">PT</a>
             <a href="/ja/coin-token-generator/" hreflang="ja">日本語</a>
         </nav>
 
         <section class="generator-intro">
-            <h1>Coin / Token STL Generator</h1>
-            <p>Create a simple 3D printable coin or token with an optional center hole and export it as an STL file.</p>
+            <h1>Gerador de Moeda / Ficha STL</h1>
+            <p>Crie uma moeda ou ficha simples para impressão 3D, com furo central opcional, e exporte o arquivo STL.</p>
         </section>
 
         <section class="generator-layout">
             <div class="generator-panel">
-                <h3>Dimensions</h3>
+                <h3>Dimensões</h3>
 
                 <label>
-                    Diameter (mm)
+                    Diâmetro (mm)
                     <input
                         type="number"
                         id="token-diameter"
@@ -111,7 +111,7 @@
                 </label>
 
                 <label>
-                    Thickness (mm)
+                    Espessura (mm)
                     <input
                         type="number"
                         id="token-thickness"
@@ -123,7 +123,7 @@
                 </label>
 
                 <label>
-                    Segments
+                    Segmentos
                     <input
                         type="number"
                         id="token-segments"
@@ -140,11 +140,11 @@
                         id="token-center-hole"
                         checked
                     >
-                    Center Hole
+                    Furo central
                 </label>
 
                 <label>
-                    Hole Diameter (mm)
+                    Diâmetro do furo (mm)
                     <input
                         type="number"
                         id="token-hole-diameter"
@@ -166,19 +166,19 @@
                     id="generate-token"
                     class="button primary-button"
                 >
-                    Generate Token
+                    Gerar ficha
                 </button>
 
                 <button
                     id="download-token"
                     class="btn-primary"
                 >
-                    Download Token STL
+                    Baixar STL da ficha
                 </button>
             </div>
 
             <div class="generator-preview">
-                <h3>Preview</h3>
+                <h3>Visualização</h3>
                 <div
                     id="token-preview"
                     class="preview-area"
@@ -186,13 +186,13 @@
             </div>
         </section>
         <section class="faq">
-            <h2>FAQ</h2>
-            <h3>Can I create a token without a center hole?</h3>
-            <p>Yes. Disable the Center Hole option to generate a solid coin or token.</p>
-            <h3>What does the Segments setting change?</h3>
-            <p>A higher number of segments creates a smoother circular edge, but also increases the STL file complexity.</p>
-            <h3>Can I print the token in PLA?</h3>
-            <p>Yes. The generated model is suitable for standard PLA printing.</p>
+            <h2>Perguntas frequentes</h2>
+            <h3>Posso criar uma ficha sem furo central?</h3>
+            <p>Sim. Desative a opção Furo central para gerar uma moeda ou ficha sólida.</p>
+            <h3>O que a configuração Segmentos altera?</h3>
+            <p>Uma quantidade maior de segmentos deixa a borda circular mais suave, mas também aumenta a complexidade do arquivo STL.</p>
+            <h3>Posso imprimir a ficha em PLA?</h3>
+            <p>Sim. O modelo gerado é adequado para impressão padrão em PLA.</p>
         </section>
 
     </main>
@@ -201,11 +201,11 @@
 
     <script>
         const PAGE = {
-            title: "Coin / Token Generator",
-            heading: "Coin / Token STL Generator",
-            canonical: "https://vekmaker.com/en/coin-token-generator/",
-            description: "Create custom 3D printable coins and tokens with an optional center hole and download the STL file directly in your browser.",
-            keywords: "STL generator, coin generator, token generator, 3D printing, browser STL generator",
+            title: "Gerador de Moeda / Ficha",
+            heading: "Gerador de Moeda / Ficha STL",
+            canonical: "https://vekmaker.com/pt/coin-token-generator/",
+            description: "Crie moedas e fichas personalizadas para impressão 3D, com furo central opcional, e baixe o arquivo STL diretamente no navegador.",
+            keywords: "gerador STL, gerador de moeda, gerador de ficha, impressão 3D, STL online",
             generator: "coin-token-generator"
         };
     </script>

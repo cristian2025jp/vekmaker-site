@@ -11,13 +11,70 @@ let resizeObserver = null;
 
 const TOKEN_COLOR = 0x3b82f6;
 
+const TOKEN_I18N = {
+    en: {
+        previewMissing: 'Token preview container was not found.',
+        validDiameter: 'Enter a valid diameter.',
+        diameterRange: 'Diameter must be between 5 mm and 300 mm.',
+        validThickness: 'Enter a valid thickness.',
+        thicknessRange: 'Thickness must be between 0.5 mm and 100 mm.',
+        wholeSegments: 'Segments must be a whole number.',
+        segmentsRange: 'Segments must be between 12 and 256.',
+        validHoleDiameter: 'Enter a valid hole diameter.',
+        minimumHoleDiameter: 'Hole diameter must be at least 1 mm.',
+        holeSmallerThanToken: 'Hole diameter must be smaller than the token diameter.',
+        minimumRadialWall: 'At least 0.5 mm of material must remain around the hole.',
+        generated: 'Token generated successfully.',
+        generateBeforeDownload: 'Generate the token before downloading.',
+        downloaded: 'STL downloaded successfully.'
+    },
+    pt: {
+        previewMissing: 'O contêiner de visualização da ficha não foi encontrado.',
+        validDiameter: 'Digite um diâmetro válido.',
+        diameterRange: 'O diâmetro deve estar entre 5 mm e 300 mm.',
+        validThickness: 'Digite uma espessura válida.',
+        thicknessRange: 'A espessura deve estar entre 0,5 mm e 100 mm.',
+        wholeSegments: 'O número de segmentos deve ser inteiro.',
+        segmentsRange: 'O número de segmentos deve estar entre 12 e 256.',
+        validHoleDiameter: 'Digite um diâmetro de furo válido.',
+        minimumHoleDiameter: 'O diâmetro do furo deve ser de pelo menos 1 mm.',
+        holeSmallerThanToken: 'O diâmetro do furo deve ser menor que o diâmetro da ficha.',
+        minimumRadialWall: 'Deve permanecer pelo menos 0,5 mm de material ao redor do furo.',
+        generated: 'Ficha gerada com sucesso.',
+        generateBeforeDownload: 'Gere a ficha antes de fazer o download.',
+        downloaded: 'STL baixado com sucesso.'
+    },
+    ja: {
+        previewMissing: 'トークンのプレビュー領域が見つかりません。',
+        validDiameter: '有効な直径を入力してください。',
+        diameterRange: '直径は5 mmから300 mmの範囲で指定してください。',
+        validThickness: '有効な厚さを入力してください。',
+        thicknessRange: '厚さは0.5 mmから100 mmの範囲で指定してください。',
+        wholeSegments: '分割数は整数で入力してください。',
+        segmentsRange: '分割数は12から256の範囲で指定してください。',
+        validHoleDiameter: '有効な穴の直径を入力してください。',
+        minimumHoleDiameter: '穴の直径は1 mm以上にしてください。',
+        holeSmallerThanToken: '穴の直径はトークンの直径より小さくしてください。',
+        minimumRadialWall: '穴の周囲に0.5 mm以上の材料を残してください。',
+        generated: 'トークンを生成しました。',
+        generateBeforeDownload: 'ダウンロードする前にトークンを生成してください。',
+        downloaded: 'STLをダウンロードしました。'
+    }
+};
+
+const TOKEN_LANG = ['en', 'pt', 'ja'].includes(document.documentElement.lang)
+    ? document.documentElement.lang
+    : 'en';
+
+const TOKEN_TEXT = TOKEN_I18N[TOKEN_LANG];
+
 const elements = {};
 
 document.addEventListener('DOMContentLoaded', () => {
     cacheElements();
 
     if (!elements.preview) {
-        console.error('Token preview container was not found.');
+        console.error(TOKEN_TEXT.previewMissing);
         return;
     }
 
@@ -132,46 +189,46 @@ function readTokenParameters() {
 
 function validateTokenParameters(params) {
     if (!Number.isFinite(params.diameter)) {
-        return 'Enter a valid diameter.';
+        return TOKEN_TEXT.validDiameter;
     }
 
     if (params.diameter < 5 || params.diameter > 300) {
-        return 'Diameter must be between 5 mm and 300 mm.';
+        return TOKEN_TEXT.diameterRange;
     }
 
     if (!Number.isFinite(params.thickness)) {
-        return 'Enter a valid thickness.';
+        return TOKEN_TEXT.validThickness;
     }
 
     if (params.thickness < 0.5 || params.thickness > 100) {
-        return 'Thickness must be between 0.5 mm and 100 mm.';
+        return TOKEN_TEXT.thicknessRange;
     }
 
     if (!Number.isInteger(params.segments)) {
-        return 'Segments must be a whole number.';
+        return TOKEN_TEXT.wholeSegments;
     }
 
     if (params.segments < 12 || params.segments > 256) {
-        return 'Segments must be between 12 and 256.';
+        return TOKEN_TEXT.segmentsRange;
     }
 
     if (params.hasCenterHole) {
         if (!Number.isFinite(params.holeDiameter)) {
-            return 'Enter a valid hole diameter.';
+            return TOKEN_TEXT.validHoleDiameter;
         }
 
         if (params.holeDiameter < 1) {
-            return 'Hole diameter must be at least 1 mm.';
+            return TOKEN_TEXT.minimumHoleDiameter;
         }
 
         if (params.holeDiameter >= params.diameter) {
-            return 'Hole diameter must be smaller than the token diameter.';
+            return TOKEN_TEXT.holeSmallerThanToken;
         }
 
         const radialWall = (params.diameter - params.holeDiameter) / 2;
 
         if (radialWall < 0.5) {
-            return 'At least 0.5 mm of material must remain around the hole.';
+            return TOKEN_TEXT.minimumRadialWall;
         }
     }
 
@@ -230,7 +287,7 @@ function generateToken() {
     scene.add(tokenMesh);
 
     fitCameraToToken(params);
-    setValidationMessage('Token generated successfully.', 'success');
+    setValidationMessage(TOKEN_TEXT.generated, 'success');
     setDownloadEnabled(true);
 
     return true;
@@ -271,7 +328,7 @@ function downloadTokenSTL() {
     }
 
     if (!tokenMesh) {
-        setValidationMessage('Generate the token before downloading.', 'error');
+        setValidationMessage(TOKEN_TEXT.generateBeforeDownload, 'error');
         setDownloadEnabled(false);
         return;
     }
@@ -284,7 +341,7 @@ function downloadTokenSTL() {
         }
     );
 
-    setValidationMessage('STL downloaded successfully.', 'success');
+    setValidationMessage(TOKEN_TEXT.downloaded, 'success');
 }
 
 function buildTokenFilename(params) {
