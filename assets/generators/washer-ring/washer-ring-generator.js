@@ -4,6 +4,14 @@ import { exportSTL } from '../../js/core/stl-exporter.js';
 
 const WASHER_COLOR = 0x3b82f6;
 
+const WASHER_I18N={
+en:{previewMissing:'Washer preview container was not found.',validOuter:'Enter a valid outer diameter.',outerRange:'Outer diameter must be between 3 mm and 500 mm.',validInner:'Enter a valid inner diameter.',innerMin:'Inner diameter must be at least 0.5 mm.',innerSmaller:'Inner diameter must be smaller than outer diameter.',materialMin:'At least 0.5 mm of material must remain around the hole.',validThickness:'Enter a valid thickness.',thicknessRange:'Thickness must be between 0.5 mm and 100 mm.',wholeSegments:'Segments must be a whole number.',segmentsRange:'Segments must be between 12 and 256.',generated:'Washer generated successfully.',generateFirst:'Generate the washer before downloading.',downloaded:'STL downloaded successfully.'},
+pt:{previewMissing:'A área de visualização da arruela não foi encontrada.',validOuter:'Digite um diâmetro externo válido.',outerRange:'O diâmetro externo deve estar entre 3 mm e 500 mm.',validInner:'Digite um diâmetro interno válido.',innerMin:'O diâmetro interno deve ser de pelo menos 0,5 mm.',innerSmaller:'O diâmetro interno deve ser menor que o diâmetro externo.',materialMin:'Deve permanecer pelo menos 0,5 mm de material ao redor do furo.',validThickness:'Digite uma espessura válida.',thicknessRange:'A espessura deve estar entre 0,5 mm e 100 mm.',wholeSegments:'O número de segmentos deve ser inteiro.',segmentsRange:'O número de segmentos deve estar entre 12 e 256.',generated:'Arruela gerada com sucesso.',generateFirst:'Gere a arruela antes de baixar.',downloaded:'STL baixado com sucesso.'},
+ja:{previewMissing:'ワッシャーのプレビュー領域が見つかりません。',validOuter:'有効な外径を入力してください。',outerRange:'外径は3 mmから500 mmの範囲で指定してください。',validInner:'有効な内径を入力してください。',innerMin:'内径は0.5 mm以上にしてください。',innerSmaller:'内径は外径より小さくしてください。',materialMin:'穴の周囲に0.5 mm以上の材料を残してください。',validThickness:'有効な厚さを入力してください。',thicknessRange:'厚さは0.5 mmから100 mmの範囲で指定してください。',wholeSegments:'分割数は整数で入力してください。',segmentsRange:'分割数は12から256の範囲で指定してください。',generated:'ワッシャーを生成しました。',generateFirst:'ダウンロードする前にワッシャーを生成してください。',downloaded:'STLをダウンロードしました。'}
+};
+const WASHER_LANG=['en','pt','ja'].includes(document.documentElement.lang)?document.documentElement.lang:'en';
+const WASHER_TEXT=WASHER_I18N[WASHER_LANG];
+
 let scene;
 let camera;
 let renderer;
@@ -17,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cacheElements();
 
     if (!elements.preview) {
-        console.error('Washer preview container was not found.');
+        console.error(WASHER_TEXT.previewMissing);
         return;
     }
 
@@ -113,46 +121,46 @@ function readParameters() {
 
 function validateParameters(params) {
     if (!Number.isFinite(params.outerDiameter)) {
-        return 'Enter a valid outer diameter.';
+        return WASHER_TEXT.validOuter;
     }
 
     if (params.outerDiameter < 3 || params.outerDiameter > 500) {
-        return 'Outer diameter must be between 3 mm and 500 mm.';
+        return WASHER_TEXT.outerRange;
     }
 
     if (!Number.isFinite(params.innerDiameter)) {
-        return 'Enter a valid inner diameter.';
+        return WASHER_TEXT.validInner;
     }
 
     if (params.innerDiameter < 0.5) {
-        return 'Inner diameter must be at least 0.5 mm.';
+        return WASHER_TEXT.innerMin;
     }
 
     if (params.innerDiameter >= params.outerDiameter) {
-        return 'Inner diameter must be smaller than outer diameter.';
+        return WASHER_TEXT.innerSmaller;
     }
 
     const radialWidth =
         (params.outerDiameter - params.innerDiameter) / 2;
 
     if (radialWidth < 0.5) {
-        return 'At least 0.5 mm of material must remain around the hole.';
+        return WASHER_TEXT.materialMin;
     }
 
     if (!Number.isFinite(params.thickness)) {
-        return 'Enter a valid thickness.';
+        return WASHER_TEXT.validThickness;
     }
 
     if (params.thickness < 0.5 || params.thickness > 100) {
-        return 'Thickness must be between 0.5 mm and 100 mm.';
+        return WASHER_TEXT.thicknessRange;
     }
 
     if (!Number.isInteger(params.segments)) {
-        return 'Segments must be a whole number.';
+        return WASHER_TEXT.wholeSegments;
     }
 
     if (params.segments < 12 || params.segments > 256) {
-        return 'Segments must be between 12 and 256.';
+        return WASHER_TEXT.segmentsRange;
     }
 
     return '';
@@ -206,7 +214,7 @@ function generateWasher() {
     scene.add(washerMesh);
 
     fitCamera(params);
-    setValidationMessage('Washer generated successfully.', 'success');
+    setValidationMessage(WASHER_TEXT.generated, 'success');
     setDownloadEnabled(true);
 
     return true;
@@ -252,7 +260,7 @@ function downloadWasherSTL() {
 
     if (!washerMesh) {
         setValidationMessage(
-            'Generate the washer before downloading.',
+            WASHER_TEXT.generateFirst,
             'error'
         );
         return;
@@ -266,7 +274,7 @@ function downloadWasherSTL() {
         }
     );
 
-    setValidationMessage('STL downloaded successfully.', 'success');
+    setValidationMessage(WASHER_TEXT.downloaded, 'success');
 }
 
 function buildFilename(params) {

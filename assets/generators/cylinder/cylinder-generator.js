@@ -6,6 +6,33 @@ let scene, camera, renderer, controls;
 let cylinderMesh = null;
 let lidMesh = null;
 
+const CYLINDER_I18N = {
+    en: {
+        wallTooLarge: 'Wall thickness is too large for this diameter.',
+        bottomTooLarge: 'Bottom thickness must be smaller than height.',
+        enableLid: 'Please enable Generate Lid first.',
+        generateFirst: 'Please generate a cylinder first.'
+    },
+    pt: {
+        wallTooLarge: 'A espessura da parede é muito grande para este diâmetro.',
+        bottomTooLarge: 'A espessura do fundo deve ser menor que a altura.',
+        enableLid: 'Ative primeiro a opção Gerar tampa.',
+        generateFirst: 'Gere primeiro um cilindro.'
+    },
+    ja: {
+        wallTooLarge: 'この直径に対して壁が厚すぎます。',
+        bottomTooLarge: '底の厚さは高さより小さくしてください。',
+        enableLid: '先に「ふたを生成」を有効にしてください。',
+        generateFirst: '先に円柱を生成してください。'
+    }
+};
+
+const CYLINDER_LANG = ['en', 'pt', 'ja'].includes(document.documentElement.lang)
+    ? document.documentElement.lang
+    : 'en';
+
+const CYLINDER_TEXT = CYLINDER_I18N[CYLINDER_LANG];
+
 function initCylinderPreview() {
     const preview = document.getElementById('cylinder-preview');
 
@@ -69,12 +96,12 @@ function createHollowCylinderGeometry(
     const innerRadius = outerRadius - wallThickness;
 
     if (innerRadius <= 0) {
-        alert('Wall thickness is too large for this diameter.');
+        alert(CYLINDER_TEXT.wallTooLarge);
         return null;
     }
 
     if (bottomThickness >= height) {
-        alert('Bottom thickness must be smaller than height.');
+        alert(CYLINDER_TEXT.bottomTooLarge);
         return null;
     }
 
@@ -254,12 +281,12 @@ if (isHollow) {
     const innerRadius = radius - wallThickness;
 
     if (innerRadius <= 0) {
-        alert('Wall thickness is too large for this diameter.');
+        alert(CYLINDER_TEXT.wallTooLarge);
         return;
     }
 
     if (bottomThickness >= height) {
-        alert('Bottom thickness must be smaller than height.');
+        alert(CYLINDER_TEXT.bottomTooLarge);
         return;
     }
 
@@ -430,7 +457,7 @@ function downloadLidSTL() {
     const generateLid = document.getElementById('cylinder-lid').checked;
 
     if (!generateLid || !lidMesh) {
-        alert('Please enable Generate Lid first.');
+        alert(CYLINDER_TEXT.enableLid);
         return;
     }
 
@@ -450,7 +477,7 @@ function downloadLidSTL() {
 
 function downloadCylinderSTL() {
     if (!cylinderMesh) {
-        alert('Please generate a cylinder first.');
+        alert(CYLINDER_TEXT.generateFirst);
         return;
     }
 

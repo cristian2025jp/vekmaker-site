@@ -6,6 +6,14 @@ import { TextGeometry } from '../../libs/three/TextGeometry.js';
 import { exportSTL } from '../../js/core/stl-exporter.js';
 
 const MODEL_COLOR = 0x3b82f6;
+
+const NAME_PLATE_I18N = {
+en:{previewMissing:'Name plate preview container was not found.',enterText:'Enter text for the name plate.',maxChars:'Text must contain no more than 24 characters.',kanaOnly:'Japanese mode supports hiragana and katakana only. Kanji is not supported.',latinOnly:'Latin mode supports English and Portuguese characters only.',widthRange:'Plate width must be between 30 mm and 300 mm.',heightRange:'Plate height must be between 15 mm and 150 mm.',baseRange:'Base thickness must be between 1 mm and 20 mm.',textHeightRange:'Text height must be between 0.4 mm and 10 mm.',fontSizeRange:'Font size must be between 5 mm and 80 mm.',cornerRadius:max=>`Corner radius must be between 0 mm and ${max} mm.`,holesValid:'Select a valid number of mounting holes.',holeRange:'Hole diameter must be between 1 mm and 20 mm.',holeTooLarge:'Hole diameter is too large for the plate height.',loading:'Loading font...',generated:'Name plate generated successfully.',fontError:'The selected font could not be loaded.',generateFirst:'Generate the name plate before downloading.',downloaded:'STL downloaded successfully.'},
+pt:{previewMissing:'A área de visualização da placa não foi encontrada.',enterText:'Digite um texto para a placa.',maxChars:'O texto deve ter no máximo 24 caracteres.',kanaOnly:'O modo Japonês aceita apenas hiragana e katakana. Kanji não é suportado.',latinOnly:'O modo Latino aceita apenas caracteres do inglês e do português.',widthRange:'A largura da placa deve estar entre 30 mm e 300 mm.',heightRange:'A altura da placa deve estar entre 15 mm e 150 mm.',baseRange:'A espessura da base deve estar entre 1 mm e 20 mm.',textHeightRange:'A altura do relevo do texto deve estar entre 0,4 mm e 10 mm.',fontSizeRange:'O tamanho da fonte deve estar entre 5 mm e 80 mm.',cornerRadius:max=>`O raio dos cantos deve estar entre 0 mm e ${max} mm.`,holesValid:'Selecione uma quantidade válida de furos de fixação.',holeRange:'O diâmetro do furo deve estar entre 1 mm e 20 mm.',holeTooLarge:'O diâmetro do furo é muito grande para a altura da placa.',loading:'Carregando fonte...',generated:'Placa gerada com sucesso.',fontError:'Não foi possível carregar a fonte selecionada.',generateFirst:'Gere a placa antes de baixar.',downloaded:'STL baixado com sucesso.'},
+ja:{previewMissing:'ネームプレートのプレビュー領域が見つかりません。',enterText:'ネームプレートの文字を入力してください。',maxChars:'文字数は24文字以内にしてください。',kanaOnly:'日本語モードはひらがなとカタカナのみに対応しています。漢字には対応していません。',latinOnly:'ラテン文字モードは英語とポルトガル語の文字のみに対応しています。',widthRange:'プレート幅は30 mmから300 mmの範囲で指定してください。',heightRange:'プレート高さは15 mmから150 mmの範囲で指定してください。',baseRange:'ベース厚さは1 mmから20 mmの範囲で指定してください。',textHeightRange:'文字の高さは0.4 mmから10 mmの範囲で指定してください。',fontSizeRange:'フォントサイズは5 mmから80 mmの範囲で指定してください。',cornerRadius:max=>`角の半径は0 mmから${max} mmの範囲で指定してください。`,holesValid:'有効な取付穴の数を選択してください。',holeRange:'穴の直径は1 mmから20 mmの範囲で指定してください。',holeTooLarge:'穴の直径がプレート高さに対して大きすぎます。',loading:'フォントを読み込んでいます...',generated:'ネームプレートを生成しました。',fontError:'選択したフォントを読み込めませんでした。',generateFirst:'ダウンロードする前にネームプレートを生成してください。',downloaded:'STLをダウンロードしました。'}
+};
+const NAME_PLATE_LANG=['en','pt','ja'].includes(document.documentElement.lang)?document.documentElement.lang:'en';
+const NAME_PLATE_TEXT=NAME_PLATE_I18N[NAME_PLATE_LANG];
 const LATIN_FONT_URL =
     '/assets/libs/three/fonts/noto-sans-latin-portuguese.ttf';
 const KANA_FONT_URL =
@@ -26,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cacheElements();
 
     if (!elements.preview) {
-        console.error('Name plate preview container was not found.');
+        console.error(NAME_PLATE_TEXT.previewMissing);
         return;
     }
 
@@ -169,37 +177,37 @@ function readParameters() {
 
 function validateParameters(params) {
     if (!params.text) {
-        return 'Enter text for the name plate.';
+        return NAME_PLATE_TEXT.enterText;
     }
 
     if (params.text.length > 24) {
-        return 'Text must contain no more than 24 characters.';
+        return NAME_PLATE_TEXT.maxChars;
     }
 
     if (containsUnsupportedScript(params.text, params.characterSet)) {
         return params.characterSet === 'kana'
-            ? 'Japanese mode supports hiragana and katakana only. Kanji is not supported.'
-            : 'Latin mode supports English and Portuguese characters only.';
+            ? NAME_PLATE_TEXT.kanaOnly
+            : NAME_PLATE_TEXT.latinOnly;
     }
 
     if (!isBetween(params.width, 30, 300)) {
-        return 'Plate width must be between 30 mm and 300 mm.';
+        return NAME_PLATE_TEXT.widthRange;
     }
 
     if (!isBetween(params.height, 15, 150)) {
-        return 'Plate height must be between 15 mm and 150 mm.';
+        return NAME_PLATE_TEXT.heightRange;
     }
 
     if (!isBetween(params.baseThickness, 1, 20)) {
-        return 'Base thickness must be between 1 mm and 20 mm.';
+        return NAME_PLATE_TEXT.baseRange;
     }
 
     if (!isBetween(params.textHeight, 0.4, 10)) {
-        return 'Text height must be between 0.4 mm and 10 mm.';
+        return NAME_PLATE_TEXT.textHeightRange;
     }
 
     if (!isBetween(params.fontSize, 5, 80)) {
-        return 'Font size must be between 5 mm and 80 mm.';
+        return NAME_PLATE_TEXT.fontSizeRange;
     }
 
     const maximumRadius = Math.min(params.width, params.height) / 2;
@@ -208,25 +216,25 @@ function validateParameters(params) {
         params.cornerRadius < 0 ||
         params.cornerRadius > maximumRadius
     ) {
-        return `Corner radius must be between 0 mm and ${formatNumber(maximumRadius)} mm.`;
+        return NAME_PLATE_TEXT.cornerRadius(formatNumber(maximumRadius));
     }
 
     if (![0, 1, 2].includes(params.holeCount)) {
-        return 'Select a valid number of mounting holes.';
+        return NAME_PLATE_TEXT.holesValid;
     }
 
     if (
         params.holeCount > 0 &&
         !isBetween(params.holeDiameter, 1, 20)
     ) {
-        return 'Hole diameter must be between 1 mm and 20 mm.';
+        return NAME_PLATE_TEXT.holeRange;
     }
 
     if (
         params.holeCount > 0 &&
         params.holeDiameter >= params.height - 4
     ) {
-        return 'Hole diameter is too large for the plate height.';
+        return NAME_PLATE_TEXT.holeTooLarge;
     }
 
     return '';
@@ -267,7 +275,7 @@ async function generateNamePlate() {
         return false;
     }
 
-    setValidationMessage('Loading font...', '');
+    setValidationMessage(NAME_PLATE_TEXT.loading, '');
     setDownloadEnabled(false);
 
     try {
@@ -299,7 +307,7 @@ async function generateNamePlate() {
 
         fitCamera(params);
         setValidationMessage(
-            'Name plate generated successfully.',
+            NAME_PLATE_TEXT.generated,
             'success'
         );
         setDownloadEnabled(true);
@@ -308,7 +316,7 @@ async function generateNamePlate() {
     } catch (fontError) {
         console.error(fontError);
         setValidationMessage(
-            'The selected font could not be loaded.',
+            NAME_PLATE_TEXT.fontError,
             'error'
         );
         setDownloadEnabled(false);
@@ -551,7 +559,7 @@ function downloadNamePlateSTL() {
 
     if (!modelGroup) {
         setValidationMessage(
-            'Generate the name plate before downloading.',
+            NAME_PLATE_TEXT.generateFirst,
             'error'
         );
         return;
@@ -565,7 +573,7 @@ function downloadNamePlateSTL() {
         }
     );
 
-    setValidationMessage('STL downloaded successfully.', 'success');
+    setValidationMessage(NAME_PLATE_TEXT.downloaded, 'success');
 }
 
 function buildFilename(params) {

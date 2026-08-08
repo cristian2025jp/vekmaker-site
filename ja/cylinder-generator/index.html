@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create custom solid or hollow cylinders with an optional fitted lid and download printable STL files directly in your browser.">
+    <meta name="description" content="中空または中実の円柱と、はめ込み式のふたを作成し、ブラウザから印刷用STLをダウンロードできます。">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://vekmaker.com/en/cylinder-generator/">
+    <link rel="canonical" href="https://vekmaker.com/ja/cylinder-generator/">
     <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/cylinder-generator/">
     <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/cylinder-generator/">
     <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/cylinder-generator/">
     <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/cylinder-generator/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <title>Cylinder STL Generator | VEKMaker</title>
+    <title>円柱STLジェネレーター | VEKMaker</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
@@ -79,48 +79,48 @@
     <div id="site-menu"></div>
 
     <main class="container generator-page">
-        <nav class="language-switcher" aria-label="Language selection">
-            <a href="/en/cylinder-generator/" hreflang="en" aria-current="page">EN</a>
+        <nav class="language-switcher" aria-label="言語選択">
+            <a href="/en/cylinder-generator/" hreflang="en">EN</a>
             <a href="/pt/cylinder-generator/" hreflang="pt">PT</a>
-            <a href="/ja/cylinder-generator/" hreflang="ja">日本語</a>
+            <a href="/ja/cylinder-generator/" hreflang="ja" aria-current="page">日本語</a>
         </nav>
 
         <section class="generator-intro">
-            <h1>Cylinder STL Generator</h1>
-            <p>Create solid or hollow cylinders with an optional fitted lid and export printable STL files.</p>
+            <h1>円柱STLジェネレーター</h1>
+            <p>中空または中実の円柱と、オプションのはめ込み式ふたを作成し、印刷用STLを書き出せます。</p>
         </section>
 
         <section class="generator-layout">
             <div class="generator-panel">
-                <h3>Dimensions</h3>
+                <h3>寸法</h3>
 
                 <label>
-                    Diameter (mm)
+                    直径（mm）
                     <input type="number" id="cylinder-diameter" value="40" min="5" max="300">
                 </label>
 
                 <label>
-                    Height (mm)
+                    高さ（mm）
                     <input type="number" id="cylinder-height" value="40" min="5" max="300">
                 </label>
 
                 <label>
-                    Segments
+                    分割数
                     <input type="number" id="cylinder-segments" value="64" min="12" max="128">
                 </label>
 
                 <label class="checkbox-label">
                     <input type="checkbox" id="cylinder-hollow" checked>
-                    Hollow Cylinder
+                    中空円柱
                 </label>
 
                 <label>
-                    Wall Thickness (mm)
+                    壁の厚さ（mm）
                     <input type="number" id="cylinder-wall-thickness" value="2" min="1" max="20">
                 </label>
 
                 <label>
-                    Bottom Thickness (mm)
+                    底の厚さ（mm）
                     <input type="number" id="cylinder-bottom-thickness" value="2" min="1" max="50">
                 </label>
 
@@ -128,60 +128,60 @@
 
                 <label class="checkbox-label">
                     <input type="checkbox" id="cylinder-lid" checked>
-                    Generate Lid
+                    ふたを生成
                 </label>
 
                 <label>
-                    Lid Thickness (mm)
+                    ふたの厚さ（mm）
                     <input type="number" id="cylinder-lid-thickness" value="2" min="1">
                 </label>
 
                 <label>
-                    Lid Lip Height (mm)
+                    ふた内側リップの高さ（mm）
                     <input type="number" id="cylinder-lid-lip-height" value="5" min="1">
                 </label>
 
                 <label>
-                    Lid Clearance (mm)
+                    ふたのクリアランス（mm）
                     <input type="number" id="cylinder-lid-clearance" value="0.4" step="0.1" min="0">
                 </label>
 
                 <button id="generate-cylinder" class="button primary-button">
-                    Generate Cylinder
+                    円柱を生成
                 </button>
 
                 <button id="download-cylinder" class="btn-primary">
-                    Download Cylinder STL
+                    円柱STLをダウンロード
                 </button>
 
                 <button id="download-lid" class="btn-primary">
-                    Download Lid STL
+                    ふたSTLをダウンロード
                 </button>
             </div>
 
             <div class="generator-preview">
-                <h3>Preview</h3>
+                <h3>プレビュー</h3>
                 <div id="cylinder-preview" class="preview-area"></div>
             </div>
         </section>
 
         <section class="faq">
-            <h2>FAQ</h2>
+            <h2>よくある質問</h2>
 
-            <h3>Can I create a solid cylinder?</h3>
-            <p>Yes. Disable the Hollow Cylinder option to generate a completely solid cylinder.</p>
+            <h3>中実の円柱を作成できますか？</h3>
+            <p>はい。「中空円柱」のチェックを外すと、完全な中実円柱を生成できます。</p>
 
-            <h3>When is the lid generated?</h3>
-            <p>The lid is generated only when both Hollow Cylinder and Generate Lid are enabled.</p>
+            <h3>ふたはいつ生成されますか？</h3>
+            <p>「中空円柱」と「ふたを生成」の両方が有効な場合にのみ、ふたが生成されます。</p>
 
-            <h3>What does Lid Clearance change?</h3>
-            <p>Lid Clearance reduces the diameter of the inner lip to help the lid fit. Printer calibration and material shrinkage may require testing different values.</p>
+            <h3>ふたのクリアランスは何を変えますか？</h3>
+            <p>内側リップの直径を小さくして、ふたをはめやすくします。プリンターの調整や材料の収縮に応じて、異なる値を試す必要があります。</p>
 
-            <h3>What does the Segments setting change?</h3>
-            <p>More segments create a smoother circular surface, but also increase the STL file complexity.</p>
+            <h3>分割数を変更すると何が変わりますか？</h3>
+            <p>分割数を増やすと円周が滑らかになりますが、STLファイルの形状データも複雑になります。</p>
 
-            <h3>Can I print the cylinder in PLA?</h3>
-            <p>Yes. The generated cylinder and lid are suitable for standard PLA printing.</p>
+            <h3>PLAで印刷できますか？</h3>
+            <p>はい。生成される円柱とふたは一般的なPLA印刷に適しています。</p>
         </section>
     </main>
 
@@ -189,11 +189,11 @@
 
     <script>
         const PAGE = {
-            title: "Cylinder Generator",
-            heading: "Cylinder STL Generator",
-            canonical: "https://vekmaker.com/en/cylinder-generator/",
-            description: "Create custom solid or hollow cylinders with an optional fitted lid and download printable STL files directly in your browser.",
-            keywords: "STL generator, cylinder generator, hollow cylinder, fitted lid, 3D printing, browser STL generator",
+            title: "円柱ジェネレーター",
+            heading: "円柱STLジェネレーター",
+            canonical: "https://vekmaker.com/ja/cylinder-generator/",
+            description: "中空または中実の円柱と、はめ込み式のふたを作成し、ブラウザから印刷用STLをダウンロードできます。",
+            keywords: "STLジェネレーター, 円柱ジェネレーター, 中空円柱, ふた, 3Dプリント, STL作成",
             generator: "cylinder-generator"
         };
     </script>

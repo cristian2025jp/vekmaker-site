@@ -4,6 +4,74 @@ import { exportSTL } from '../../js/core/stl-exporter.js';
 
 const MODEL_COLOR = 0x3b82f6;
 
+const FRAME_I18N = {
+    en: {
+        previewMissing:'Frame preview container was not found.',
+        outerWidth:'Outer width must be between 30 mm and 500 mm.',
+        outerHeight:'Outer height must be between 30 mm and 500 mm.',
+        borderWidth:'Border width must be between 3 mm and 100 mm.',
+        borderTooLarge:'Border width is too large for the selected outer dimensions.',
+        thickness:'Total thickness must be between 2 mm and 50 mm.',
+        rebateDepth:'Rear rebate depth must be zero or smaller than the total thickness.',
+        rebateMargin:'Rear rebate margin must be between 0 mm and 30 mm.',
+        rearBorder:'At least 1.5 mm of border must remain behind the rebate.',
+        rearOpening:'Rear opening must remain smaller than the outer frame dimensions.',
+        cornerRadius:max=>`Corner radius must be between 0 mm and ${max} mm.`,
+        backThickness:'Back panel thickness must be between 0.8 mm and 10 mm.',
+        backClearance:'Back panel clearance must be between 0 mm and 5 mm.',
+        backTooLarge:'Back panel clearance is too large for the rear opening.',
+        generated:'Frame generated successfully.',
+        generateFirst:'Generate the frame before downloading.',
+        downloaded:'STL downloaded successfully.',
+        enableBack:'Enable Generate Back Panel before downloading.',
+        backDownloaded:'Back panel STL downloaded successfully.'
+    },
+    pt: {
+        previewMissing:'A área de visualização da moldura não foi encontrada.',
+        outerWidth:'A largura externa deve estar entre 30 mm e 500 mm.',
+        outerHeight:'A altura externa deve estar entre 30 mm e 500 mm.',
+        borderWidth:'A largura da borda deve estar entre 3 mm e 100 mm.',
+        borderTooLarge:'A largura da borda é muito grande para as dimensões externas selecionadas.',
+        thickness:'A espessura total deve estar entre 2 mm e 50 mm.',
+        rebateDepth:'A profundidade do rebaixo traseiro deve ser zero ou menor que a espessura total.',
+        rebateMargin:'A margem do rebaixo traseiro deve estar entre 0 mm e 30 mm.',
+        rearBorder:'Deve permanecer pelo menos 1,5 mm de borda atrás do rebaixo.',
+        rearOpening:'A abertura traseira deve permanecer menor que as dimensões externas da moldura.',
+        cornerRadius:max=>`O raio dos cantos deve estar entre 0 mm e ${max} mm.`,
+        backThickness:'A espessura do painel traseiro deve estar entre 0,8 mm e 10 mm.',
+        backClearance:'A folga do painel traseiro deve estar entre 0 mm e 5 mm.',
+        backTooLarge:'A folga do painel traseiro é muito grande para a abertura traseira.',
+        generated:'Moldura gerada com sucesso.',
+        generateFirst:'Gere a moldura antes de baixar.',
+        downloaded:'STL baixado com sucesso.',
+        enableBack:'Ative Gerar painel traseiro antes de baixar.',
+        backDownloaded:'STL do painel traseiro baixado com sucesso.'
+    },
+    ja: {
+        previewMissing:'フレームのプレビュー領域が見つかりません。',
+        outerWidth:'外幅は30 mmから500 mmの範囲で指定してください。',
+        outerHeight:'外高さは30 mmから500 mmの範囲で指定してください。',
+        borderWidth:'枠幅は3 mmから100 mmの範囲で指定してください。',
+        borderTooLarge:'選択した外形寸法に対して枠幅が大きすぎます。',
+        thickness:'全体の厚さは2 mmから50 mmの範囲で指定してください。',
+        rebateDepth:'背面段差の深さは0以上で、全体の厚さより小さくしてください。',
+        rebateMargin:'背面段差の余白は0 mmから30 mmの範囲で指定してください。',
+        rearBorder:'背面段差の外側には1.5 mm以上の枠を残してください。',
+        rearOpening:'背面開口部はフレームの外形寸法より小さくしてください。',
+        cornerRadius:max=>`角の半径は0 mmから${max} mmの範囲で指定してください。`,
+        backThickness:'背面パネルの厚さは0.8 mmから10 mmの範囲で指定してください。',
+        backClearance:'背面パネルのクリアランスは0 mmから5 mmの範囲で指定してください。',
+        backTooLarge:'背面パネルのクリアランスが背面開口部に対して大きすぎます。',
+        generated:'フレームを生成しました。',
+        generateFirst:'ダウンロードする前にフレームを生成してください。',
+        downloaded:'STLをダウンロードしました。',
+        enableBack:'ダウンロードする前に「背面パネルを生成」を有効にしてください。',
+        backDownloaded:'背面パネルSTLをダウンロードしました。'
+    }
+};
+const FRAME_LANG=['en','pt','ja'].includes(document.documentElement.lang)?document.documentElement.lang:'en';
+const FRAME_TEXT=FRAME_I18N[FRAME_LANG];
+
 const elements = {};
 let scene;
 let camera;
@@ -17,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cacheElements();
 
     if (!elements.preview) {
-        console.error('Frame preview container was not found.');
+        console.error(FRAME_TEXT.previewMissing);
         return;
     }
 
@@ -155,26 +223,26 @@ function calculateDimensions(params) {
 
 function validateParameters(params, dimensions) {
     if (!isBetween(params.outerWidth, 30, 500)) {
-        return 'Outer width must be between 30 mm and 500 mm.';
+        return FRAME_TEXT.outerWidth;
     }
 
     if (!isBetween(params.outerHeight, 30, 500)) {
-        return 'Outer height must be between 30 mm and 500 mm.';
+        return FRAME_TEXT.outerHeight;
     }
 
     if (!isBetween(params.borderWidth, 3, 100)) {
-        return 'Border width must be between 3 mm and 100 mm.';
+        return FRAME_TEXT.borderWidth;
     }
 
     if (
         dimensions.frontOpeningWidth < 5 ||
         dimensions.frontOpeningHeight < 5
     ) {
-        return 'Border width is too large for the selected outer dimensions.';
+        return FRAME_TEXT.borderTooLarge;
     }
 
     if (!isBetween(params.thickness, 2, 50)) {
-        return 'Total thickness must be between 2 mm and 50 mm.';
+        return FRAME_TEXT.thickness;
     }
 
     if (
@@ -182,7 +250,7 @@ function validateParameters(params, dimensions) {
         params.rebateDepth < 0 ||
         params.rebateDepth >= params.thickness
     ) {
-        return 'Rear rebate depth must be zero or smaller than the total thickness.';
+        return FRAME_TEXT.rebateDepth;
     }
 
     if (
@@ -190,21 +258,21 @@ function validateParameters(params, dimensions) {
         params.rebateMargin < 0 ||
         params.rebateMargin > 30
     ) {
-        return 'Rear rebate margin must be between 0 mm and 30 mm.';
+        return FRAME_TEXT.rebateMargin;
     }
 
     const minimumRearBorder =
         params.borderWidth - params.rebateMargin;
 
     if (minimumRearBorder < 1.5) {
-        return 'At least 1.5 mm of border must remain behind the rebate.';
+        return FRAME_TEXT.rearBorder;
     }
 
     if (
         dimensions.rearOpeningWidth >= params.outerWidth ||
         dimensions.rearOpeningHeight >= params.outerHeight
     ) {
-        return 'Rear opening must remain smaller than the outer frame dimensions.';
+        return FRAME_TEXT.rearOpening;
     }
 
     const maximumRadius =
@@ -215,12 +283,12 @@ function validateParameters(params, dimensions) {
         params.cornerRadius < 0 ||
         params.cornerRadius > maximumRadius
     ) {
-        return `Corner radius must be between 0 mm and ${formatNumber(maximumRadius)} mm.`;
+        return FRAME_TEXT.cornerRadius(formatNumber(maximumRadius));
     }
 
     if (params.generateBackPanel) {
         if (!isBetween(params.backPanelThickness, 0.8, 10)) {
-            return 'Back panel thickness must be between 0.8 mm and 10 mm.';
+            return FRAME_TEXT.backThickness;
         }
 
         if (
@@ -228,14 +296,14 @@ function validateParameters(params, dimensions) {
             params.backPanelClearance < 0 ||
             params.backPanelClearance > 5
         ) {
-            return 'Back panel clearance must be between 0 mm and 5 mm.';
+            return FRAME_TEXT.backClearance;
         }
 
         if (
             dimensions.backPanelWidth < 5 ||
             dimensions.backPanelHeight < 5
         ) {
-            return 'Back panel clearance is too large for the rear opening.';
+            return FRAME_TEXT.backTooLarge;
         }
     }
 
@@ -328,7 +396,7 @@ function generateFrame() {
     }
 
     fitCamera(params, dimensions);
-    setValidationMessage('Frame generated successfully.', 'success');
+    setValidationMessage(FRAME_TEXT.generated, 'success');
     setDownloadEnabled(true);
     setBackPanelDownloadEnabled(params.generateBackPanel);
 
@@ -552,7 +620,7 @@ function downloadFrameSTL() {
 
     if (!frameGroup) {
         setValidationMessage(
-            'Generate the frame before downloading.',
+            FRAME_TEXT.generateFirst,
             'error'
         );
         return;
@@ -566,7 +634,7 @@ function downloadFrameSTL() {
         }
     );
 
-    setValidationMessage('STL downloaded successfully.', 'success');
+    setValidationMessage(FRAME_TEXT.downloaded, 'success');
 }
 
 
@@ -582,7 +650,7 @@ function downloadBackPanelSTL() {
 
     if (!params.generateBackPanel || !backPanelMesh) {
         setValidationMessage(
-            'Enable Generate Back Panel before downloading.',
+            FRAME_TEXT.enableBack,
             'error'
         );
         return;
@@ -597,7 +665,7 @@ function downloadBackPanelSTL() {
     );
 
     setValidationMessage(
-        'Back panel STL downloaded successfully.',
+        FRAME_TEXT.backDownloaded,
         'success'
     );
 }

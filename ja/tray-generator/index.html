@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="内寸、壁厚、底厚、角丸を調整して3Dプリント用のカスタムトレイを作成できます。">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/tray-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/tray-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/tray-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/tray-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/tray-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>トレイSTLジェネレーター | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}#tray-preview{width:100%;min-width:0;overflow:hidden}#tray-preview canvas{display:block;width:100%!important;max-width:100%}.result-list{margin:1rem 0;padding:0;list-style:none}.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+</style>
+</head>
+<body>
+<div id="site-header"></div><div id="site-menu"></div>
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="言語選択"><a href="/en/tray-generator/" hreflang="en">EN</a><a href="/pt/tray-generator/" hreflang="pt">PT</a><a href="/ja/tray-generator/" hreflang="ja" aria-current="page">日本語</a></nav>
+<section class="generator-intro"><h1>トレイSTLジェネレーター</h1><p>小物整理用の浅いオープントレイを作成し、印刷用STLをダウンロードできます。</p></section>
+<section class="generator-layout">
+<div class="generator-panel">
+<h2>内寸</h2>
+<label>内幅（mm）<input type="number" id="tray-internal-width" value="150" min="10" max="450" step="1"></label>
+<label>内奥行き（mm）<input type="number" id="tray-internal-depth" value="100" min="10" max="450" step="1"></label>
+<label>内高さ（mm）<input type="number" id="tray-internal-height" value="20" min="3" max="100" step="1"></label>
+<h2>構造</h2>
+<label>壁の厚さ（mm）<input type="number" id="tray-wall-thickness" value="2" min="0.8" max="20" step="0.1"></label>
+<label>底の厚さ（mm）<input type="number" id="tray-bottom-thickness" value="2" min="0.8" max="20" step="0.1"></label>
+<label>外側の角半径（mm）<input type="number" id="tray-corner-radius" value="8" min="0" max="100" step="0.5"><span class="field-note">内側の角半径は壁の厚さから自動的に計算されます。</span></label>
+<h2>計算されたサイズ</h2>
+<ul class="result-list"><li><span>外幅</span><strong id="tray-external-width">—</strong></li><li><span>外奥行き</span><strong id="tray-external-depth">—</strong></li><li><span>全高</span><strong id="tray-total-height">—</strong></li></ul>
+<p id="tray-validation-message" class="validation-message" role="status" aria-live="polite"></p>
+<button id="generate-tray" class="button primary-button" type="button">トレイを生成</button>
+<button id="download-tray" class="btn-primary" type="button">STLをダウンロード</button>
+</div>
+<div class="generator-preview"><h2>プレビュー</h2><div id="tray-preview" class="preview-area"></div></div>
+</section>
+<section class="faq"><h2>よくある質問</h2><h3>入力する寸法は内寸ですか？</h3><p>はい。幅、奥行き、高さは使用可能な内側の寸法です。外寸は選択した壁厚と底厚から計算されます。</p><h3>角丸はどのように計算されますか？</h3><p>外側の角半径を指定すると、壁厚が角でも一定になるように内側の半径が自動的に小さく計算されます。</p><h3>トレイはどの向きで印刷しますか？</h3><p>STLは底面をプリントベッドに置き、開口部を上に向けた状態で書き出されるため、通常はサポートなしで印刷できます。</p></section>
+</main>
+<div id="site-footer"></div>
+<script>const PAGE={title:"トレイジェネレーター",heading:"トレイSTLジェネレーター",canonical:"https://vekmaker.com/ja/tray-generator/",description:"内寸、壁厚、底厚、角丸を調整して3Dプリント用のカスタムトレイを作成できます。",keywords:"トレイ STL ジェネレーター, 収納トレイ, カスタムトレイ, 角丸, 3Dプリント",generator:"tray-generator"};</script>
+<script src="/assets/js/core/config.js"></script><script src="/assets/js/core/layout.js"></script><script src="/assets/js/core/page.js"></script><script type="module" src="/assets/generators/tray/tray-generator.js"></script>
+</body></html>

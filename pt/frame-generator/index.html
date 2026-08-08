@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create a custom 3D printable rectangular frame with adjustable size, border, thickness and rear rebate, then download the STL file.">
+    <meta name="description" content="Crie uma moldura retangular personalizada para impressão 3D com tamanho, borda, espessura, rebaixo traseiro e painel traseiro opcional.">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://vekmaker.com/en/frame-generator/">
+    <link rel="canonical" href="https://vekmaker.com/pt/frame-generator/">
     <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/frame-generator/">
     <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/frame-generator/">
     <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/frame-generator/">
     <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/frame-generator/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <title>Frame Generator | VEKMaker</title>
+    <title>Gerador de Moldura STL | VEKMaker</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
@@ -65,90 +65,90 @@
 
     <main class="container generator-page">
         <nav class="language-switcher" aria-label="Language selection">
-            <a href="/en/frame-generator/" hreflang="en" aria-current="page">EN</a>
-            <a href="/pt/frame-generator/" hreflang="pt">PT</a>
+            <a href="/en/frame-generator/" hreflang="en">EN</a>
+            <a href="/pt/frame-generator/" hreflang="pt" aria-current="page">PT</a>
             <a href="/ja/frame-generator/" hreflang="ja">日本語</a>
         </nav>
 
         <section class="generator-intro">
-            <h1>Frame STL Generator</h1>
-            <p>Create a rectangular display frame with a rear rebate and download a printable STL file.</p>
+            <h1>Gerador de Moldura STL</h1>
+            <p>Crie uma moldura retangular com rebaixo traseiro e painel traseiro opcional e baixe arquivos STL para impressão.</p>
         </section>
 
         <section class="generator-layout">
             <div class="generator-panel">
-                <h2>Frame Dimensions</h2>
+                <h2>Dimensões da moldura</h2>
 
                 <label>
-                    Outer Width (mm)
+                    Largura externa (mm)
                     <input type="number" id="frame-outer-width" value="170" min="30" max="500" step="1">
                 </label>
 
                 <label>
-                    Outer Height (mm)
+                    Altura externa (mm)
                     <input type="number" id="frame-outer-height" value="120" min="30" max="500" step="1">
                 </label>
 
                 <label>
-                    Border Width (mm)
+                    Largura da borda (mm)
                     <input type="number" id="frame-border-width" value="12" min="3" max="100" step="0.5">
                 </label>
 
                 <label>
-                    Total Thickness (mm)
+                    Espessura total (mm)
                     <input type="number" id="frame-thickness" value="8" min="2" max="50" step="0.5">
                 </label>
 
                 <label>
-                    Rear Rebate Depth (mm)
+                    Profundidade do rebaixo traseiro (mm)
                     <input type="number" id="frame-rebate-depth" value="3" min="0" max="40" step="0.5">
                     <span class="field-note">
-                        The rebate is the rear step that provides space for the displayed item and backing.
+                        O rebaixo é o degrau traseiro que cria espaço para o item exibido e o painel de fundo.
                     </span>
                 </label>
 
                 <label>
-                    Rear Rebate Margin (mm)
+                    Margem do rebaixo traseiro (mm)
                     <input type="number" id="frame-rebate-margin" value="3" min="0" max="30" step="0.5">
                 </label>
 
                 <label>
-                    Corner Radius (mm)
+                    Raio dos cantos (mm)
                     <input type="number" id="frame-corner-radius" value="5" min="0" max="100" step="0.5">
                 </label>
 
-                <h2>Optional Back Panel</h2>
+                <h2>Painel traseiro opcional</h2>
 
                 <label class="checkbox-label">
                     <input type="checkbox" id="frame-generate-back-panel" checked>
-                    Generate Back Panel
+                    Gerar painel traseiro
                 </label>
 
                 <label>
-                    Back Panel Thickness (mm)
+                    Espessura do painel traseiro (mm)
                     <input type="number" id="frame-back-panel-thickness" value="2" min="0.8" max="10" step="0.1">
                 </label>
 
                 <label>
-                    Back Panel Clearance (mm)
+                    Folga do painel traseiro (mm)
                     <input type="number" id="frame-back-panel-clearance" value="0.4" min="0" max="5" step="0.1">
                     <span class="field-note">
-                        Clearance is removed from each side so the panel can fit inside the rear opening.
+                        A folga é descontada de cada lado para que o painel encaixe na abertura traseira.
                     </span>
                 </label>
 
-                <h2>Calculated Openings</h2>
+                <h2>Aberturas calculadas</h2>
                 <ul class="result-list">
                     <li>
-                        <span>Front Opening</span>
+                        <span>Abertura frontal</span>
                         <strong id="frame-front-opening">—</strong>
                     </li>
                     <li>
-                        <span>Rear Opening</span>
+                        <span>Abertura traseira</span>
                         <strong id="frame-rear-opening">—</strong>
                     </li>
                     <li>
-                        <span>Back Panel Size</span>
+                        <span>Tamanho do painel traseiro</span>
                         <strong id="frame-back-panel-size">—</strong>
                     </li>
                 </ul>
@@ -161,48 +161,48 @@
                 ></p>
 
                 <button id="generate-frame" class="button primary-button" type="button">
-                    Generate Frame
+                    Gerar moldura
                 </button>
 
                 <button id="download-frame" class="btn-primary" type="button">
-                    Download Frame STL
+                    Baixar STL da moldura
                 </button>
 
                 <button id="download-back-panel" class="btn-primary" type="button">
-                    Download Back Panel STL
+                    Baixar STL do painel traseiro
                 </button>
             </div>
 
             <div class="generator-preview">
-                <h2>Preview</h2>
+                <h2>Visualização</h2>
                 <div id="frame-preview" class="preview-area"></div>
             </div>
         </section>
 
         <section class="faq">
-            <h2>FAQ</h2>
+            <h2>Perguntas frequentes</h2>
 
-            <h3>What is the front opening?</h3>
+            <h3>O que é a abertura frontal?</h3>
             <p>
-                The front opening is calculated from the outer dimensions minus the border width on all sides.
+                A abertura frontal é calculada a partir das dimensões externas menos a largura da borda em todos os lados.
             </p>
 
-            <h3>What is the rear rebate?</h3>
+            <h3>O que é o rebaixo traseiro?</h3>
             <p>
-                The rear rebate creates a wider stepped opening on the back of the frame for a photo,
-                artwork, transparent sheet or backing panel.
+                O rebaixo traseiro cria uma abertura em degrau mais larga na parte de trás da moldura para foto,
+                arte, folha transparente ou painel de fundo.
             </p>
 
-            <h3>What is the optional back panel?</h3>
+            <h3>O que é o painel traseiro opcional?</h3>
             <p>
-                The back panel is a separate flat STL sized to fit inside the rear opening.
-                Its thickness and fitting clearance can be adjusted independently.
+                O painel traseiro é um STL plano separado, dimensionado para encaixar na abertura traseira.
+                A espessura e a folga de encaixe podem ser ajustadas separadamente.
             </p>
 
-            <h3>How should the frame be printed?</h3>
+            <h3>Como a moldura deve ser impressa?</h3>
             <p>
-                The STL is exported with the front face on the print bed. This orientation keeps the rear
-                rebate facing upward and avoids unnecessary support material.
+                O STL é exportado com a face frontal apoiada na mesa. Essa orientação mantém o rebaixo traseiro
+                voltado para cima e evita suportes desnecessários.
             </p>
         </section>
     </main>
@@ -211,11 +211,11 @@
 
     <script>
         const PAGE = {
-            title: "Frame Generator",
-            heading: "Frame STL Generator",
-            canonical: "https://vekmaker.com/en/frame-generator/",
-            description: "Create a custom 3D printable rectangular frame with adjustable size, border, thickness and rear rebate, then download the STL file.",
-            keywords: "frame STL generator, picture frame, display frame, rear rebate, 3D printing",
+            title: "Gerador de Moldura",
+            heading: "Gerador de Moldura STL",
+            canonical: "https://vekmaker.com/pt/frame-generator/",
+            description: "Crie uma moldura retangular personalizada para impressão 3D com tamanho, borda, espessura, rebaixo traseiro e painel traseiro opcional.",
+            keywords: "gerador STL de moldura, porta-retrato, moldura, rebaixo traseiro, painel traseiro, impressão 3D",
             generator: "frame-generator"
         };
     </script>

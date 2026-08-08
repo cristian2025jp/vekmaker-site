@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Create custom 3D printable name plates with raised Latin, Portuguese, hiragana or katakana text and download the STL file.">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://vekmaker.com/en/name-plate-generator/">
+    <link rel="canonical" href="https://vekmaker.com/pt/name-plate-generator/">
     <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/name-plate-generator/">
     <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/name-plate-generator/">
     <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/name-plate-generator/">
     <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/name-plate-generator/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <title>Name Plate Generator | VEKMaker</title>
+    <title>Gerador de Placa com Nome STL | VEKMaker</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
@@ -54,23 +54,23 @@
     <div id="site-menu"></div>
 
     <main class="container generator-page">
-        <nav class="language-switcher" aria-label="Language selection">
-            <a href="/en/name-plate-generator/" hreflang="en" aria-current="page">EN</a>
-            <a href="/pt/name-plate-generator/" hreflang="pt">PT</a>
+        <nav class="language-switcher" aria-label="Seleção de idioma">
+            <a href="/en/name-plate-generator/" hreflang="en">EN</a>
+            <a href="/pt/name-plate-generator/" hreflang="pt" aria-current="page">PT</a>
             <a href="/ja/name-plate-generator/" hreflang="ja">日本語</a>
         </nav>
 
         <section class="generator-intro">
-            <h1>Name Plate STL Generator</h1>
-            <p>Create a custom name plate with raised text and download a printable STL file.</p>
+            <h1>Gerador de Placa com Nome STL</h1>
+            <p>Crie uma placa personalizada com texto em relevo e baixe um arquivo STL pronto para impressão.</p>
         </section>
 
         <section class="generator-layout">
             <div class="generator-panel">
-                <h2>Plate and Text</h2>
+                <h2>Placa e texto</h2>
 
                 <label>
-                    Text
+                    Texto
                     <input
                         type="text"
                         id="name-plate-text"
@@ -79,62 +79,62 @@
                         autocomplete="off"
                     >
                     <span class="field-note">
-                        Latin supports English and Portuguese. Japanese supports hiragana and katakana. Kanji is not supported.
+                        Latino aceita inglês e português. Japonês aceita hiragana e katakana. Kanji não é suportado.
                     </span>
                 </label>
 
                 <div class="character-set-card">
                     <label for="name-plate-character-set">
-                        <span class="character-set-title">Character Set</span>
-                        <span class="character-set-help">Choose the character set before entering your text.</span>
+                        <span class="character-set-title">Conjunto de caracteres</span>
+                        <span class="character-set-help">Escolha o conjunto de caracteres antes de digitar o texto.</span>
                     </label>
                     <select id="name-plate-character-set">
-                        <option value="latin">Latin / Portuguese</option>
-                        <option value="kana">Japanese Kana</option>
+                        <option value="latin">Latino / Português</option>
+                        <option value="kana">Japonês Kana</option>
                     </select>
                 </div>
 
                 <label>
-                    Plate Width (mm)
+                    Largura da placa (mm)
                     <input type="number" id="name-plate-width" value="100" min="30" max="300" step="1">
                 </label>
 
                 <label>
-                    Plate Height (mm)
+                    Altura da placa (mm)
                     <input type="number" id="name-plate-height" value="35" min="15" max="150" step="1">
                 </label>
 
                 <label>
-                    Base Thickness (mm)
+                    Espessura da base (mm)
                     <input type="number" id="name-plate-base-thickness" value="3" min="1" max="20" step="0.1">
                 </label>
 
                 <label>
-                    Text Height (mm)
+                    Altura do relevo do texto (mm)
                     <input type="number" id="name-plate-text-height" value="5" min="0.4" max="10" step="0.1">
                 </label>
 
                 <label>
-                    Font Size (mm)
+                    Tamanho da fonte (mm)
                     <input type="number" id="name-plate-font-size" value="18" min="5" max="80" step="0.5">
                 </label>
 
                 <label>
-                    Corner Radius (mm)
+                    Raio dos cantos (mm)
                     <input type="number" id="name-plate-corner-radius" value="4" min="0" max="30" step="0.5">
                 </label>
 
                 <label>
-                    Mounting Holes
+                    Furos de fixação
                     <select id="name-plate-hole-count">
-                        <option value="0">No holes</option>
-                        <option value="1">One hole</option>
-                        <option value="2">Two holes</option>
+                        <option value="0">Sem furos</option>
+                        <option value="1">Um furo</option>
+                        <option value="2">Dois furos</option>
                     </select>
                 </label>
 
                 <label>
-                    Hole Diameter (mm)
+                    Diâmetro do furo (mm)
                     <input type="number" id="name-plate-hole-diameter" value="4" min="1" max="20" step="0.1">
                 </label>
 
@@ -146,39 +146,39 @@
                 ></p>
 
                 <button id="generate-name-plate" class="button primary-button" type="button">
-                    Generate Name Plate
+                    Gerar placa
                 </button>
 
                 <button id="download-name-plate" class="btn-primary" type="button">
-                    Download STL
+                    Baixar STL
                 </button>
             </div>
 
             <div class="generator-preview">
-                <h2>Preview</h2>
+                <h2>Visualização</h2>
                 <div id="name-plate-preview" class="preview-area"></div>
             </div>
         </section>
 
         <section class="faq">
-            <h2>FAQ</h2>
+            <h2>Perguntas frequentes</h2>
 
-            <h3>Which characters are supported?</h3>
+            <h3>Quais caracteres são suportados?</h3>
             <p>
-                The Latin option supports English, Portuguese accents and cedilla.
-                The Japanese option supports hiragana and katakana. Kanji is not currently supported.
+                A opção Latino aceita inglês, acentos do português e cedilha.
+                A opção Japonês aceita hiragana e katakana. Kanji não é suportado atualmente.
             </p>
 
-            <h3>Why is kanji not supported?</h3>
+            <h3>Por que kanji não é suportado?</h3>
             <p>
-                Kanji requires a much larger font and often contains fine details that may be difficult
-                to print reliably with a standard 0.4 mm nozzle.
+                Kanji exige uma fonte muito maior e frequentemente possui detalhes finos que podem ser difíceis
+                de imprimir de forma confiável com um bico padrão de 0,4 mm.
             </p>
 
-            <h3>What happens when the text is too large?</h3>
+            <h3>O que acontece quando o texto é muito grande?</h3>
             <p>
-                The generator automatically scales the text down to fit inside the plate while preserving
-                a safe margin around the edges and mounting holes.
+                O gerador reduz automaticamente o texto para caber dentro da placa, mantendo
+                uma margem segura nas bordas e nos furos de fixação.
             </p>
         </section>
     </main>
@@ -187,11 +187,11 @@
 
     <script>
         const PAGE = {
-            title: "Name Plate Generator",
-            heading: "Name Plate STL Generator",
+            title: "Gerador de Placa com Nome",
+            heading: "Gerador de Placa com Nome STL",
             canonical: "https://vekmaker.com/en/name-plate-generator/",
             description: "Create custom 3D printable name plates with raised Latin, Portuguese, hiragana or katakana text and download the STL file.",
-            keywords: "name plate STL generator, custom sign, Portuguese text, hiragana, katakana, 3D printing",
+            keywords: "gerador STL de placa com nome, placa personalizada, texto português, hiragana, katakana, impressão 3D",
             generator: "name-plate-generator"
         };
     </script>

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Create custom 3D printable washers and rings by setting the outer diameter, inner diameter and thickness, then download the STL file.">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://vekmaker.com/en/washer-ring-generator/">
+    <link rel="canonical" href="https://vekmaker.com/pt/washer-ring-generator/">
     <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/washer-ring-generator/">
     <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/washer-ring-generator/">
     <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/washer-ring-generator/">
     <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/washer-ring-generator/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <title>Washer / Ring Generator | VEKMaker</title>
+    <title>Gerador de Arruela / Anel STL | VEKMaker</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
@@ -46,23 +46,23 @@
     <div id="site-menu"></div>
 
     <main class="container generator-page">
-        <nav class="language-switcher" aria-label="Language selection">
-            <a href="/en/washer-ring-generator/" hreflang="en" aria-current="page">EN</a>
-            <a href="/pt/washer-ring-generator/" hreflang="pt">PT</a>
+        <nav class="language-switcher" aria-label="Seleção de idioma">
+            <a href="/en/washer-ring-generator/" hreflang="en">EN</a>
+            <a href="/pt/washer-ring-generator/" hreflang="pt" aria-current="page">PT</a>
             <a href="/ja/washer-ring-generator/" hreflang="ja">日本語</a>
         </nav>
 
         <section class="generator-intro">
-            <h1>Washer / Ring STL Generator</h1>
-            <p>Create a custom washer or flat ring and download a printable STL file.</p>
+            <h1>Gerador de Arruela / Anel STL</h1>
+            <p>Crie uma arruela ou anel plano personalizado e baixe um arquivo STL pronto para impressão.</p>
         </section>
 
         <section class="generator-layout">
             <div class="generator-panel">
-                <h2>Dimensions</h2>
+                <h2>Dimensões</h2>
 
                 <label>
-                    Outer Diameter (mm)
+                    Diâmetro externo (mm)
                     <input
                         type="number"
                         id="washer-outer-diameter"
@@ -74,7 +74,7 @@
                 </label>
 
                 <label>
-                    Inner Diameter (mm)
+                    Diâmetro interno (mm)
                     <input
                         type="number"
                         id="washer-inner-diameter"
@@ -86,7 +86,7 @@
                 </label>
 
                 <label>
-                    Thickness (mm)
+                    Espessura (mm)
                     <input
                         type="number"
                         id="washer-thickness"
@@ -98,7 +98,7 @@
                 </label>
 
                 <label>
-                    Segments
+                    Segmentos
                     <input
                         type="number"
                         id="washer-segments"
@@ -121,7 +121,7 @@
                     class="button primary-button"
                     type="button"
                 >
-                    Generate Washer
+                    Gerar arruela
                 </button>
 
                 <button
@@ -129,34 +129,34 @@
                     class="btn-primary"
                     type="button"
                 >
-                    Download STL
+                    Baixar STL
                 </button>
             </div>
 
             <div class="generator-preview">
-                <h2>Preview</h2>
+                <h2>Visualização</h2>
                 <div id="washer-preview" class="preview-area"></div>
             </div>
         </section>
 
         <section class="faq">
-            <h2>FAQ</h2>
+            <h2>Perguntas frequentes</h2>
 
-            <h3>What is the ring width?</h3>
+            <h3>O que é a largura do anel?</h3>
             <p>
-                The ring width is half the difference between the outer and inner diameters.
-                The generator checks that enough material remains around the center hole.
+                A largura do anel é metade da diferença entre os diâmetros externo e interno.
+                O gerador verifica se resta material suficiente ao redor do furo central.
             </p>
 
-            <h3>Is the STL ready for printing?</h3>
+            <h3>O STL está pronto para impressão?</h3>
             <p>
-                Yes. The model is exported flat, centered and placed on the virtual print bed.
+                Sim. O modelo é exportado plano, centralizado e posicionado na mesa virtual de impressão.
             </p>
 
-            <h3>Can I create a very thin washer?</h3>
+            <h3>Posso criar uma arruela muito fina?</h3>
             <p>
-                You can enter small dimensions, but the practical minimum depends on your nozzle,
-                material, layer height and printer calibration.
+                É possível informar dimensões pequenas, mas o mínimo prático depende do bico,
+                material, altura de camada e calibração da impressora.
             </p>
         </section>
     </main>
@@ -165,11 +165,11 @@
 
     <script>
         const PAGE = {
-            title: "Washer / Ring Generator",
-            heading: "Washer / Ring STL Generator",
-            canonical: "https://vekmaker.com/en/washer-ring-generator/",
-            description: "Create custom 3D printable washers and rings by setting the outer diameter, inner diameter and thickness, then download the STL file.",
-            keywords: "washer STL generator, ring STL generator, custom washer, 3D printing, browser STL generator",
+            title: "Gerador de Arruela / Anel",
+            heading: "Gerador de Arruela / Anel STL",
+            canonical: "https://vekmaker.com/pt/washer-ring-generator/",
+            description: "Crie arruelas e anéis personalizados para impressão 3D definindo diâmetro externo, diâmetro interno e espessura, e baixe o STL.",
+            keywords: "gerador STL de arruela, gerador STL de anel, arruela personalizada, impressão 3D, STL online",
             generator: "washer-ring-generator"
         };
     </script>

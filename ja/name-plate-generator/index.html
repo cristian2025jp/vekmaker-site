@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Create custom 3D printable name plates with raised Latin, Portuguese, hiragana or katakana text and download the STL file.">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://vekmaker.com/en/name-plate-generator/">
+    <link rel="canonical" href="https://vekmaker.com/ja/name-plate-generator/">
     <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/name-plate-generator/">
     <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/name-plate-generator/">
     <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/name-plate-generator/">
     <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/name-plate-generator/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <title>Name Plate Generator | VEKMaker</title>
+    <title>ネームプレートSTLジェネレーター | VEKMaker</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
@@ -54,23 +54,23 @@
     <div id="site-menu"></div>
 
     <main class="container generator-page">
-        <nav class="language-switcher" aria-label="Language selection">
-            <a href="/en/name-plate-generator/" hreflang="en" aria-current="page">EN</a>
+        <nav class="language-switcher" aria-label="言語選択">
+            <a href="/en/name-plate-generator/" hreflang="en">EN</a>
             <a href="/pt/name-plate-generator/" hreflang="pt">PT</a>
-            <a href="/ja/name-plate-generator/" hreflang="ja">日本語</a>
+            <a href="/ja/name-plate-generator/" hreflang="ja" aria-current="page">日本語</a>
         </nav>
 
         <section class="generator-intro">
-            <h1>Name Plate STL Generator</h1>
-            <p>Create a custom name plate with raised text and download a printable STL file.</p>
+            <h1>ネームプレートSTLジェネレーター</h1>
+            <p>浮き文字入りのカスタムネームプレートを作成し、印刷用STLをダウンロードできます。</p>
         </section>
 
         <section class="generator-layout">
             <div class="generator-panel">
-                <h2>Plate and Text</h2>
+                <h2>プレートと文字</h2>
 
                 <label>
-                    Text
+                    文字
                     <input
                         type="text"
                         id="name-plate-text"
@@ -79,62 +79,62 @@
                         autocomplete="off"
                     >
                     <span class="field-note">
-                        Latin supports English and Portuguese. Japanese supports hiragana and katakana. Kanji is not supported.
+                        ラテン文字は英語とポルトガル語に対応しています。日本語はひらがなとカタカナに対応しています。漢字には対応していません。
                     </span>
                 </label>
 
                 <div class="character-set-card">
                     <label for="name-plate-character-set">
-                        <span class="character-set-title">Character Set</span>
-                        <span class="character-set-help">Choose the character set before entering your text.</span>
+                        <span class="character-set-title">文字セット</span>
+                        <span class="character-set-help">文字を入力する前に、使用する文字セットを選択してください。</span>
                     </label>
                     <select id="name-plate-character-set">
-                        <option value="latin">Latin / Portuguese</option>
-                        <option value="kana">Japanese Kana</option>
+                        <option value="latin">ラテン文字 / ポルトガル語</option>
+                        <option value="kana">日本語かな</option>
                     </select>
                 </div>
 
                 <label>
-                    Plate Width (mm)
+                    プレート幅（mm）
                     <input type="number" id="name-plate-width" value="100" min="30" max="300" step="1">
                 </label>
 
                 <label>
-                    Plate Height (mm)
+                    プレート高さ（mm）
                     <input type="number" id="name-plate-height" value="35" min="15" max="150" step="1">
                 </label>
 
                 <label>
-                    Base Thickness (mm)
+                    ベース厚さ（mm）
                     <input type="number" id="name-plate-base-thickness" value="3" min="1" max="20" step="0.1">
                 </label>
 
                 <label>
-                    Text Height (mm)
+                    文字の高さ（mm）
                     <input type="number" id="name-plate-text-height" value="5" min="0.4" max="10" step="0.1">
                 </label>
 
                 <label>
-                    Font Size (mm)
+                    フォントサイズ（mm）
                     <input type="number" id="name-plate-font-size" value="18" min="5" max="80" step="0.5">
                 </label>
 
                 <label>
-                    Corner Radius (mm)
+                    角の半径（mm）
                     <input type="number" id="name-plate-corner-radius" value="4" min="0" max="30" step="0.5">
                 </label>
 
                 <label>
-                    Mounting Holes
+                    取付穴
                     <select id="name-plate-hole-count">
-                        <option value="0">No holes</option>
-                        <option value="1">One hole</option>
-                        <option value="2">Two holes</option>
+                        <option value="0">穴なし</option>
+                        <option value="1">1個</option>
+                        <option value="2">2個</option>
                     </select>
                 </label>
 
                 <label>
-                    Hole Diameter (mm)
+                    穴の直径（mm）
                     <input type="number" id="name-plate-hole-diameter" value="4" min="1" max="20" step="0.1">
                 </label>
 
@@ -146,39 +146,39 @@
                 ></p>
 
                 <button id="generate-name-plate" class="button primary-button" type="button">
-                    Generate Name Plate
+                    ネームプレートを生成
                 </button>
 
                 <button id="download-name-plate" class="btn-primary" type="button">
-                    Download STL
+                    STLをダウンロード
                 </button>
             </div>
 
             <div class="generator-preview">
-                <h2>Preview</h2>
+                <h2>プレビュー</h2>
                 <div id="name-plate-preview" class="preview-area"></div>
             </div>
         </section>
 
         <section class="faq">
-            <h2>FAQ</h2>
+            <h2>よくある質問</h2>
 
-            <h3>Which characters are supported?</h3>
+            <h3>どの文字に対応していますか？</h3>
             <p>
-                The Latin option supports English, Portuguese accents and cedilla.
-                The Japanese option supports hiragana and katakana. Kanji is not currently supported.
+                ラテン文字では英語、ポルトガル語のアクセント記号、セディーユに対応しています。
+                日本語ではひらがなとカタカナに対応しています。現在、漢字には対応していません。
             </p>
 
-            <h3>Why is kanji not supported?</h3>
+            <h3>なぜ漢字に対応していないのですか？</h3>
             <p>
-                Kanji requires a much larger font and often contains fine details that may be difficult
-                to print reliably with a standard 0.4 mm nozzle.
+                漢字はより大きなフォントデータが必要で、細かい形状も多いため、
+                一般的な0.4 mmノズルでは安定して印刷しにくい場合があります。
             </p>
 
-            <h3>What happens when the text is too large?</h3>
+            <h3>文字が大きすぎる場合はどうなりますか？</h3>
             <p>
-                The generator automatically scales the text down to fit inside the plate while preserving
-                a safe margin around the edges and mounting holes.
+                文字がプレート内に収まるように自動的に縮小され、
+                外周や取付穴の周囲には安全な余白が保たれます。
             </p>
         </section>
     </main>
@@ -187,11 +187,11 @@
 
     <script>
         const PAGE = {
-            title: "Name Plate Generator",
-            heading: "Name Plate STL Generator",
+            title: "ネームプレートジェネレーター",
+            heading: "ネームプレートSTLジェネレーター",
             canonical: "https://vekmaker.com/en/name-plate-generator/",
             description: "Create custom 3D printable name plates with raised Latin, Portuguese, hiragana or katakana text and download the STL file.",
-            keywords: "name plate STL generator, custom sign, Portuguese text, hiragana, katakana, 3D printing",
+            keywords: "ネームプレート STL ジェネレーター, カスタムサイン, ポルトガル語, ひらがな, カタカナ, 3Dプリント",
             generator: "name-plate-generator"
         };
     </script>

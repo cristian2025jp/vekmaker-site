@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create a custom 3D printable rectangular frame with adjustable size, border, thickness and rear rebate, then download the STL file.">
+    <meta name="description" content="サイズ、枠幅、厚さ、背面段差、オプションの背面パネルを調整できる3Dプリント用フレームを作成できます。">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://vekmaker.com/en/frame-generator/">
+    <link rel="canonical" href="https://vekmaker.com/ja/frame-generator/">
     <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/frame-generator/">
     <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/frame-generator/">
     <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/frame-generator/">
     <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/frame-generator/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <title>Frame Generator | VEKMaker</title>
+    <title>フレームSTLジェネレーター | VEKMaker</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
@@ -65,90 +65,90 @@
 
     <main class="container generator-page">
         <nav class="language-switcher" aria-label="Language selection">
-            <a href="/en/frame-generator/" hreflang="en" aria-current="page">EN</a>
+            <a href="/en/frame-generator/" hreflang="en">EN</a>
             <a href="/pt/frame-generator/" hreflang="pt">PT</a>
-            <a href="/ja/frame-generator/" hreflang="ja">日本語</a>
+            <a href="/ja/frame-generator/" hreflang="ja" aria-current="page">日本語</a>
         </nav>
 
         <section class="generator-intro">
-            <h1>Frame STL Generator</h1>
-            <p>Create a rectangular display frame with a rear rebate and download a printable STL file.</p>
+            <h1>フレームSTLジェネレーター</h1>
+            <p>背面段差とオプションの背面パネルを備えた長方形フレームを作成し、印刷用STLをダウンロードできます。</p>
         </section>
 
         <section class="generator-layout">
             <div class="generator-panel">
-                <h2>Frame Dimensions</h2>
+                <h2>フレーム寸法</h2>
 
                 <label>
-                    Outer Width (mm)
+                    外幅（mm）
                     <input type="number" id="frame-outer-width" value="170" min="30" max="500" step="1">
                 </label>
 
                 <label>
-                    Outer Height (mm)
+                    外高さ（mm）
                     <input type="number" id="frame-outer-height" value="120" min="30" max="500" step="1">
                 </label>
 
                 <label>
-                    Border Width (mm)
+                    枠幅（mm）
                     <input type="number" id="frame-border-width" value="12" min="3" max="100" step="0.5">
                 </label>
 
                 <label>
-                    Total Thickness (mm)
+                    全体の厚さ（mm）
                     <input type="number" id="frame-thickness" value="8" min="2" max="50" step="0.5">
                 </label>
 
                 <label>
-                    Rear Rebate Depth (mm)
+                    背面段差の深さ（mm）
                     <input type="number" id="frame-rebate-depth" value="3" min="0" max="40" step="0.5">
                     <span class="field-note">
-                        The rebate is the rear step that provides space for the displayed item and backing.
+                        背面段差は、展示物や裏板を収めるためのスペースです。
                     </span>
                 </label>
 
                 <label>
-                    Rear Rebate Margin (mm)
+                    背面段差の余白（mm）
                     <input type="number" id="frame-rebate-margin" value="3" min="0" max="30" step="0.5">
                 </label>
 
                 <label>
-                    Corner Radius (mm)
+                    角の半径（mm）
                     <input type="number" id="frame-corner-radius" value="5" min="0" max="100" step="0.5">
                 </label>
 
-                <h2>Optional Back Panel</h2>
+                <h2>オプションの背面パネル</h2>
 
                 <label class="checkbox-label">
                     <input type="checkbox" id="frame-generate-back-panel" checked>
-                    Generate Back Panel
+                    背面パネルを生成
                 </label>
 
                 <label>
-                    Back Panel Thickness (mm)
+                    背面パネルの厚さ（mm）
                     <input type="number" id="frame-back-panel-thickness" value="2" min="0.8" max="10" step="0.1">
                 </label>
 
                 <label>
-                    Back Panel Clearance (mm)
+                    背面パネルのクリアランス（mm）
                     <input type="number" id="frame-back-panel-clearance" value="0.4" min="0" max="5" step="0.1">
                     <span class="field-note">
-                        Clearance is removed from each side so the panel can fit inside the rear opening.
+                        パネルが背面開口部に収まるように、各辺からクリアランス分を差し引きます。
                     </span>
                 </label>
 
-                <h2>Calculated Openings</h2>
+                <h2>計算された開口部</h2>
                 <ul class="result-list">
                     <li>
-                        <span>Front Opening</span>
+                        <span>前面開口部</span>
                         <strong id="frame-front-opening">—</strong>
                     </li>
                     <li>
-                        <span>Rear Opening</span>
+                        <span>背面開口部</span>
                         <strong id="frame-rear-opening">—</strong>
                     </li>
                     <li>
-                        <span>Back Panel Size</span>
+                        <span>背面パネルサイズ</span>
                         <strong id="frame-back-panel-size">—</strong>
                     </li>
                 </ul>
@@ -161,48 +161,45 @@
                 ></p>
 
                 <button id="generate-frame" class="button primary-button" type="button">
-                    Generate Frame
+                    フレームを生成
                 </button>
 
                 <button id="download-frame" class="btn-primary" type="button">
-                    Download Frame STL
+                    フレームSTLをダウンロード
                 </button>
 
                 <button id="download-back-panel" class="btn-primary" type="button">
-                    Download Back Panel STL
+                    背面パネルSTLをダウンロード
                 </button>
             </div>
 
             <div class="generator-preview">
-                <h2>Preview</h2>
+                <h2>プレビュー</h2>
                 <div id="frame-preview" class="preview-area"></div>
             </div>
         </section>
 
         <section class="faq">
-            <h2>FAQ</h2>
+            <h2>よくある質問</h2>
 
-            <h3>What is the front opening?</h3>
+            <h3>前面開口部とは何ですか？</h3>
             <p>
-                The front opening is calculated from the outer dimensions minus the border width on all sides.
+                前面開口部は、外形寸法から四辺の枠幅を差し引いて計算されます。
             </p>
 
-            <h3>What is the rear rebate?</h3>
+            <h3>背面段差とは何ですか？</h3>
             <p>
-                The rear rebate creates a wider stepped opening on the back of the frame for a photo,
-                artwork, transparent sheet or backing panel.
+                背面段差は、写真、作品、透明シート、裏板などを収めるためにフレーム背面に設ける広い段付き開口部です。
             </p>
 
-            <h3>What is the optional back panel?</h3>
+            <h3>オプションの背面パネルとは何ですか？</h3>
             <p>
-                The back panel is a separate flat STL sized to fit inside the rear opening.
-                Its thickness and fitting clearance can be adjusted independently.
+                背面パネルは、背面開口部に収まるように作られる別体の平らなSTLです。厚さとクリアランスを個別に調整できます。
             </p>
 
-            <h3>How should the frame be printed?</h3>
+            <h3>フレームはどの向きで印刷しますか？</h3>
             <p>
-                The STL is exported with the front face on the print bed. This orientation keeps the rear
-                rebate facing upward and avoids unnecessary support material.
+                STLは前面をプリントベッドに置く向きで書き出されます。背面段差が上向きになるため、不要なサポートを避けられます。
             </p>
         </section>
     </main>
@@ -211,11 +208,11 @@
 
     <script>
         const PAGE = {
-            title: "Frame Generator",
-            heading: "Frame STL Generator",
-            canonical: "https://vekmaker.com/en/frame-generator/",
-            description: "Create a custom 3D printable rectangular frame with adjustable size, border, thickness and rear rebate, then download the STL file.",
-            keywords: "frame STL generator, picture frame, display frame, rear rebate, 3D printing",
+            title: "フレームジェネレーター",
+            heading: "フレームSTLジェネレーター",
+            canonical: "https://vekmaker.com/ja/frame-generator/",
+            description: "サイズ、枠幅、厚さ、背面段差、オプションの背面パネルを調整できる3Dプリント用フレームを作成できます。",
+            keywords: "STLジェネレーター, フレーム, 写真フレーム, 背面段差, 背面パネル, 3Dプリント",
             generator: "frame-generator"
         };
     </script>
