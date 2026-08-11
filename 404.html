@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+    <title>Page Not Found | VEKMaker</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        .not-found-page{min-height:72vh;display:grid;place-items:center;padding:3rem 1rem}
+        .not-found-card{width:min(720px,100%);padding:2rem;border:1px solid #dbe3ec;border-radius:22px;background:#fff;box-shadow:0 18px 45px rgba(15,23,42,.10);text-align:center}
+        .not-found-code{display:block;font-size:clamp(3rem,12vw,6rem);font-weight:900;line-height:1;color:#cbd5e1}
+        .not-found-card h1{margin:.5rem 0}
+        .not-found-card p{max-width:580px;margin:.5rem auto 1.5rem;color:#64748b;line-height:1.6}
+        .not-found-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+        .not-found-links a{display:flex;align-items:center;justify-content:center;min-height:58px;padding:.8rem 1rem;border:2px solid #dbe3ec;border-radius:12px;background:#f8fafc;text-decoration:none;font-weight:800;color:#172033}
+        .not-found-links a:hover{border-color:#3b82f6;background:#eff6ff;color:#1d4ed8}
+        @media(max-width:600px){.not-found-links{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <main class="not-found-page">
+        <section class="not-found-card">
+            <span class="not-found-code">404</span>
+            <h1>Page not found</h1>
+            <p>
+                The page you requested could not be found.<br>
+                A página solicitada não foi encontrada.<br>
+                お探しのページが見つかりませんでした。
+            </p>
+            <div class="not-found-links">
+                <a href="/en/">English</a>
+                <a href="/pt/">Português</a>
+                <a href="/ja/">日本語</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

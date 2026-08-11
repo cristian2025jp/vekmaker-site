@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crie arquivos STL personalizáveis diretamente no navegador com o VEKMaker. Sem instalação e sem envio de arquivos.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://vekmaker.com/pt/">
+    <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/">
+    <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/">
+    <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/">
+    <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/">
+    <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+    <title>VEKMaker | Crie Arquivos STL Online</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+</style>
+</head>
+<body>
+    <div id="site-header"></div>
+    <div id="site-menu"></div>
+
+    <main>
+        <section class="home-hero">
+            <div class="container home-hero-inner">
+                <nav class="language-switcher" aria-label="Seleção de idioma"><a href="/en/" hreflang="en">EN</a><a href="/pt/" hreflang="pt" aria-current="page">PT</a><a href="/ja/" hreflang="ja">日本語</a></nav>
+                <span class="home-badge">Geradores STL direto no navegador</span>
+                <h1>Crie arquivos STL diretamente no navegador</h1>
+                <p>Modelos simples e personalizáveis para impressão 3D. Sem instalação e sem precisar enviar arquivos.</p>
+                <a href="#available-generators" class="button primary-button">Ver Geradores</a>
+            </div>
+        </section>
+
+        <section class="container home-section home-generators-section" id="available-generators">
+            <div class="section-heading-row">
+                <div class="section-title">
+                    <span class="section-eyebrow">Comece a criar</span>
+                    <h2>Geradores Disponíveis</h2>
+                    <p>Escolha uma ferramenta, ajuste as medidas e baixe seu arquivo STL.</p>
+                </div>
+                <span class="generator-count" data-available-count></span>
+            </div>
+
+            <div class="generator-grid generator-grid-available" data-generator-grid="available"></div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script>
+        const PAGE = {
+            title: "Crie Arquivos STL Online",
+            heading: "Crie Arquivos STL Online",
+            canonical: "https://vekmaker.com/pt/",
+            description: "Crie arquivos STL personalizáveis diretamente no navegador com o VEKMaker. Sem instalação e sem envio de arquivos.",
+            keywords: "gerador STL, impressão 3D, gerador STL online, STL personalizado, VEKMaker",
+            generator: "home"
+        };
+    </script>
+
+    <script src="/assets/js/core/config.js"></script>
+    <script src="/assets/js/core/layout.js"></script>
+    <script src="/assets/js/core/page.js"></script>
+    <script src="/assets/js/core/generators-data.js"></script>
+    <script src="/assets/js/core/generator-cards.js"></script>
+</body>
+</html>

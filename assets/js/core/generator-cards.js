@@ -48,18 +48,55 @@ function escapeHtml(value) {
         .replaceAll("'", "&#039;");
 }
 
+const CARD_I18N = {
+    en: {
+        open: "Open",
+        button: "Open Generator",
+        count: (count) => `${count} generators available`
+    },
+    pt: {
+        open: "Abrir",
+        button: "Abrir Gerador",
+        count: (count) => `${count} geradores disponíveis`
+    },
+    ja: {
+        open: "開く",
+        button: "ジェネレーターを開く",
+        count: (count) => `利用可能なジェネレーター：${count}`
+    }
+};
+
+function currentLanguage() {
+    const lang = (document.documentElement.lang || "en").toLowerCase().split("-")[0];
+    return ["en", "pt", "ja"].includes(lang) ? lang : "en";
+}
+
+function localizedGenerator(generator, lang) {
+    const translated = lang === "en" ? null : generator.translations?.[lang];
+
+    return {
+        name: translated?.name || generator.name,
+        description: translated?.description || generator.description,
+        url: `/${lang}/${generator.slug || generator.id}/`
+    };
+}
+
 function createGeneratorCard(generator) {
+    const lang = currentLanguage();
+    const text = CARD_I18N[lang];
+    const localized = localizedGenerator(generator, lang);
+
     const card = document.createElement("article");
     card.className = "generator-card generator-card-available";
 
     const icon = GENERATOR_ICONS[generator.icon] || GENERATOR_ICONS.box;
-    const name = escapeHtml(generator.name);
-    const description = escapeHtml(generator.description);
-    const url = escapeHtml(generator.url);
+    const name = escapeHtml(localized.name);
+    const description = escapeHtml(localized.description);
+    const url = escapeHtml(localized.url);
     const image = escapeHtml(generator.image || "");
 
     card.innerHTML = `
-        <a href="${url}" class="generator-card-image-link" aria-label="Open ${name}">
+        <a href="${url}" class="generator-card-image-link" aria-label="${text.open} ${name}">
             <div class="generator-card-image-wrap">
                 <img class="generator-card-image" src="${image}" alt="${name}"
                      width="1200" height="900" loading="lazy" decoding="async">
@@ -74,8 +111,8 @@ function createGeneratorCard(generator) {
             <p>${description}</p>
         </div>
 
-        <a href="${url}" class="generator-card-link" aria-label="Open ${name}">
-            Open Generator <span aria-hidden="true">→</span>
+        <a href="${url}" class="generator-card-link" aria-label="${text.open} ${name}">
+            ${text.button} <span aria-hidden="true">→</span>
         </a>
     `;
 
@@ -110,7 +147,8 @@ function renderGeneratorCards() {
         const count = GENERATORS.filter(
             (generator) => generator.status === "available"
         ).length;
-        availableCount.textContent = `${count} generators available`;
+        const lang = currentLanguage();
+        availableCount.textContent = CARD_I18N[lang].count(count);
     }
 }
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VEKMakerでカスタマイズしたSTLファイルをブラウザ上で直接作成できます。インストールやファイル送信は不要です。">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://vekmaker.com/ja/">
+    <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/">
+    <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/">
+    <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/">
+    <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/">
+    <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+    <title>VEKMaker | STLファイルをオンライン作成</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+</style>
+</head>
+<body>
+    <div id="site-header"></div>
+    <div id="site-menu"></div>
+
+    <main>
+        <section class="home-hero">
+            <div class="container home-hero-inner">
+                <nav class="language-switcher" aria-label="言語選択"><a href="/en/" hreflang="en">EN</a><a href="/pt/" hreflang="pt">PT</a><a href="/ja/" hreflang="ja" aria-current="page">日本語</a></nav>
+                <span class="home-badge">ブラウザで使えるSTLジェネレーター</span>
+                <h1>ブラウザでSTLファイルを直接作成</h1>
+                <p>3Dプリント用のシンプルで調整可能なモデルを作成できます。インストールやファイル送信は不要です。</p>
+                <a href="#available-generators" class="button primary-button">ジェネレーターを見る</a>
+            </div>
+        </section>
+
+        <section class="container home-section home-generators-section" id="available-generators">
+            <div class="section-heading-row">
+                <div class="section-title">
+                    <span class="section-eyebrow">作成を始める</span>
+                    <h2>利用可能なジェネレーター</h2>
+                    <p>ツールを選び、寸法を調整してSTLファイルをダウンロードできます。</p>
+                </div>
+                <span class="generator-count" data-available-count></span>
+            </div>
+
+            <div class="generator-grid generator-grid-available" data-generator-grid="available"></div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script>
+        const PAGE = {
+            title: "STLファイルをオンライン作成",
+            heading: "STLファイルをオンライン作成",
+            canonical: "https://vekmaker.com/ja/",
+            description: "VEKMakerでカスタマイズしたSTLファイルをブラウザ上で直接作成できます。インストールやファイル送信は不要です。",
+            keywords: "STL ジェネレーター, 3Dプリント, オンライン STL, カスタム STL, VEKMaker",
+            generator: "home"
+        };
+    </script>
+
+    <script src="/assets/js/core/config.js"></script>
+    <script src="/assets/js/core/layout.js"></script>
+    <script src="/assets/js/core/page.js"></script>
+    <script src="/assets/js/core/generators-data.js"></script>
+    <script src="/assets/js/core/generator-cards.js"></script>
+</body>
+</html>

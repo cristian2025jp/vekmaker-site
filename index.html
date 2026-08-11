@@ -3,75 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Choose your language to use VEKMaker browser-based STL generators.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://vekmaker.com/">
+    <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/">
+    <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/">
+    <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/">
+    <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-
-    <title>VEKMaker | Create STL Files Online</title>
+    <title>VEKMaker | Choose Language</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        .language-entry{min-height:72vh;display:grid;place-items:center;padding:3rem 1rem}
+        .language-entry-card{width:min(680px,100%);padding:2rem;border:1px solid #dbe3ec;border-radius:22px;background:#fff;box-shadow:0 18px 45px rgba(15,23,42,.10);text-align:center}
+        .language-entry-card h1{margin-bottom:.65rem}
+        .language-entry-card p{max-width:520px;margin:.4rem auto 1.5rem;color:#64748b;line-height:1.6}
+        .language-entry-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+        .language-entry-buttons a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:84px;padding:1rem;border:2px solid #dbe3ec;border-radius:14px;background:#f8fafc;text-decoration:none;font-weight:800;color:#172033}
+        .language-entry-buttons a:hover{border-color:#3b82f6;background:#eff6ff;color:#1d4ed8}
+        .language-entry-buttons small{margin-top:.2rem;font-weight:600;color:#64748b}
+        @media(max-width:600px){.language-entry-buttons{grid-template-columns:1fr}}
+    </style>
 </head>
 <body>
-    <div id="site-header"></div>
-    <div id="site-menu"></div>
-
-    <main>
-        <section class="home-hero">
-            <div class="container home-hero-inner">
-                <span class="home-badge">Browser-based STL generators</span>
-                <h1>Create STL files directly in your browser</h1>
-                <p>
-                    Simple customizable models for 3D printing.
-                    No installation and no file upload required.
-                </p>
-                <a href="#available-generators" class="button primary-button">
-                    Browse Generators
-                </a>
-            </div>
-        </section>
-
-        <section class="container home-section home-generators-section" id="available-generators">
-            <div class="section-heading-row">
-                <div class="section-title">
-                    <span class="section-eyebrow">Start creating</span>
-                    <h2>Available Generators</h2>
-                    <p>Choose a tool, adjust the dimensions and download your STL file.</p>
-                </div>
-                <span class="generator-count" data-available-count></span>
-            </div>
-
-            <div class="generator-grid generator-grid-available" data-generator-grid="available"></div>
-        </section>
-
-        <section class="home-soon-section">
-            <div class="container home-section">
-                <div class="section-title">
-                    <span class="section-eyebrow">In development</span>
-                    <h2>Coming Soon</h2>
-                    <p>More practical tools are planned for the VEKMaker collection.</p>
-                </div>
-
-                <div class="generator-grid generator-grid-soon" data-generator-grid="soon"></div>
+    <main class="language-entry">
+        <section class="language-entry-card">
+            <h1>VEKMaker</h1>
+            <p>Choose your language / Escolha seu idioma / 言語を選択してください</p>
+            <div class="language-entry-buttons">
+                <a href="/en/" hreflang="en">English<small>EN</small></a>
+                <a href="/pt/" hreflang="pt">Português<small>PT</small></a>
+                <a href="/ja/" hreflang="ja">日本語<small>JA</small></a>
             </div>
         </section>
     </main>
-
-    <div id="site-footer"></div>
-
-    <script>
-        const PAGE = {
-            title: "Create STL Files Online",
-            heading: "Create STL Files Online",
-            canonical: "https://vekmaker.com/",
-            description: "Create customizable STL files directly in your browser with VEKMaker. No installation or file upload required.",
-            keywords: "STL generator, 3D printing, browser STL generator, custom STL, VEKMaker",
-            generator: "home"
-        };
-    </script>
-
-    <script src="/assets/js/core/config.js"></script>
-    <script src="/assets/js/core/layout.js"></script>
-    <script src="/assets/js/core/page.js"></script>
-    <script src="/assets/js/core/generators-data.js"></script>
-    <script src="/assets/js/core/generator-cards.js"></script>
 </body>
 </html>
