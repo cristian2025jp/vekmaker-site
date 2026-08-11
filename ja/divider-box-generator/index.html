@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Create a custom 3D printable divider box with adjustable internal dimensions, rows, columns and divider thickness.">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://vekmaker.com/en/divider-box-generator/">
+    <link rel="canonical" href="https://vekmaker.com/ja/divider-box-generator/">
     <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/divider-box-generator/">
     <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/divider-box-generator/">
     <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/divider-box-generator/">
     <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/divider-box-generator/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <title>Divider Box Generator | VEKMaker</title>
+    <title>仕切りボックスSTLジェネレーター | VEKMaker</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
@@ -64,90 +64,90 @@
     <div id="site-menu"></div>
 
     <main class="container generator-page">
-        <nav class="language-switcher" aria-label="Language selection">
-            <a href="/en/divider-box-generator/" hreflang="en" aria-current="page">EN</a>
+        <nav class="language-switcher" aria-label="言語選択">
+            <a href="/en/divider-box-generator/" hreflang="en">EN</a>
             <a href="/pt/divider-box-generator/" hreflang="pt">PT</a>
-            <a href="/ja/divider-box-generator/" hreflang="ja">日本語</a>
+            <a href="/ja/divider-box-generator/" hreflang="ja" aria-current="page">日本語</a>
         </nav>
 
         <section class="generator-intro">
-            <h1>Divider Box STL Generator</h1>
-            <p>Create an open storage box with an adjustable grid of integrated compartments.</p>
+            <h1>仕切りボックスSTLジェネレーター</h1>
+            <p>一体型の仕切りを行・列で調整できるオープン収納ボックスを作成できます。</p>
         </section>
 
         <section class="generator-layout">
             <div class="generator-panel">
-                <h2>Internal Dimensions</h2>
+                <h2>内寸</h2>
 
                 <label>
-                    Internal Width (mm)
+                    内幅（mm）
                     <input type="number" id="divider-box-internal-width" value="150" min="20" max="450" step="1">
                 </label>
 
                 <label>
-                    Internal Depth (mm)
+                    内奥行き（mm）
                     <input type="number" id="divider-box-internal-depth" value="100" min="20" max="450" step="1">
                 </label>
 
                 <label>
-                    Internal Height (mm)
+                    内高さ（mm）
                     <input type="number" id="divider-box-internal-height" value="35" min="5" max="200" step="1">
                 </label>
 
-                <h2>Box Construction</h2>
+                <h2>ボックス構造</h2>
 
                 <label>
-                    Wall Thickness (mm)
+                    壁の厚さ（mm）
                     <input type="number" id="divider-box-wall-thickness" value="2" min="0.8" max="20" step="0.1">
                 </label>
 
                 <label>
-                    Bottom Thickness (mm)
+                    底の厚さ（mm）
                     <input type="number" id="divider-box-bottom-thickness" value="2" min="0.8" max="20" step="0.1">
                 </label>
 
                 <label>
-                    Outer Corner Radius (mm)
+                    外側の角半径（mm）
                     <input type="number" id="divider-box-corner-radius" value="6" min="0" max="100" step="0.5">
                 </label>
 
-                <h2>Compartments</h2>
+                <h2>仕切り設定</h2>
 
                 <label>
-                    Columns Across Width
+                    幅方向の列数
                     <input type="number" id="divider-box-columns" value="3" min="1" max="12" step="1">
                 </label>
 
                 <label>
-                    Rows Across Depth
+                    奥行き方向の行数
                     <input type="number" id="divider-box-rows" value="2" min="1" max="12" step="1">
                 </label>
 
                 <label>
-                    Divider Thickness (mm)
+                    仕切りの厚さ（mm）
                     <input type="number" id="divider-box-divider-thickness" value="1.6" min="0.8" max="10" step="0.1">
                 </label>
 
                 <label>
-                    Divider Height (mm)
+                    仕切りの高さ（mm）
                     <input type="number" id="divider-box-divider-height" value="30" min="1" max="200" step="1">
                     <span class="field-note">
-                        Divider height is measured from the inside bottom of the box.
+                        仕切りの高さはボックス内側の底面から測定されます。
                     </span>
                 </label>
 
-                <h2>Calculated Results</h2>
+                <h2>計算結果</h2>
                 <ul class="result-list">
                     <li>
-                        <span>External Size</span>
+                        <span>外形サイズ</span>
                         <strong id="divider-box-external-size">—</strong>
                     </li>
                     <li>
-                        <span>Compartments</span>
+                        <span>仕切り設定</span>
                         <strong id="divider-box-compartment-count">—</strong>
                     </li>
                     <li>
-                        <span>Approx. Compartment Size</span>
+                        <span>おおよその区画サイズ</span>
                         <strong id="divider-box-compartment-size">—</strong>
                     </li>
                 </ul>
@@ -160,38 +160,38 @@
                 ></p>
 
                 <button id="generate-divider-box" class="button primary-button" type="button">
-                    Generate Divider Box
+                    仕切りボックスを生成
                 </button>
 
                 <button id="download-divider-box" class="btn-primary" type="button">
-                    Download STL
+                    STLをダウンロード
                 </button>
             </div>
 
             <div class="generator-preview">
-                <h2>Preview</h2>
+                <h2>プレビュー</h2>
                 <div id="divider-box-preview" class="preview-area"></div>
             </div>
         </section>
 
         <section class="faq">
-            <h2>FAQ</h2>
+            <h2>よくある質問</h2>
 
-            <h3>What do columns and rows mean?</h3>
+            <h3>列と行は何を意味しますか？</h3>
             <p>
-                Columns divide the internal width. Rows divide the internal depth.
-                For example, 3 columns and 2 rows create 6 compartments.
+                列は内幅を分割し、行は内奥行きを分割します。
+                たとえば3列×2行では6区画になります。
             </p>
 
-            <h3>Are the dividers part of the box?</h3>
+            <h3>仕切りはボックスと一体ですか？</h3>
             <p>
-                Yes. The walls, bottom and dividers are exported together as one STL file.
+                はい。壁、底、仕切りは1つのSTLファイルとしてまとめて書き出されます。
             </p>
 
-            <h3>How should the divider box be printed?</h3>
+            <h3>仕切りボックスはどの向きで印刷しますか？</h3>
             <p>
-                The STL is exported with the bottom on the print bed and the open side facing upward,
-                normally allowing support-free printing.
+                STLは底面をプリントベッドに置き、開口部を上に向けた状態で書き出されるため、
+                通常はサポートなしで印刷できます。
             </p>
         </section>
     </main>
@@ -200,11 +200,11 @@
 
     <script>
         const PAGE = {
-            title: "Divider Box Generator",
-            heading: "Divider Box STL Generator",
-            canonical: "https://vekmaker.com/en/divider-box-generator/",
-            description: "Create a custom 3D printable divider box with adjustable internal dimensions, rows, columns and divider thickness.",
-            keywords: "divider box STL generator, compartment box, organizer box, divided tray, 3D printing",
+            title: "仕切りボックスジェネレーター",
+            heading: "仕切りボックスSTLジェネレーター",
+            canonical: "https://vekmaker.com/ja/divider-box-generator/",
+            description: "内寸、行数、列数、仕切り厚を調整して3Dプリント用の仕切りボックスを作成できます。",
+            keywords: "仕切りボックス STL ジェネレーター, 収納ボックス, 区画, 整理箱, 3Dプリント",
             generator: "divider-box-generator"
         };
     </script>

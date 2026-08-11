@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Create custom 3D printable cable clips and multi-cable organizers with adjustable cable diameter, opening and mounting base.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/cable-clip-generator/"><link rel="alternate" hreflang="en" href="https://vekmaker.com/en/cable-clip-generator/"><link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/cable-clip-generator/"><link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/cable-clip-generator/"><link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/cable-clip-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Cable Clip Generator | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#cable-clip-preview{width:100%;min-width:0;overflow:hidden}
+#cable-clip-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.hidden-field{display:none}
+
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.model-type-card{margin:1rem 0 1.25rem;padding:1rem;border:2px solid #3b82f6;border-radius:12px;background:#eff6ff;box-shadow:0 4px 14px rgba(59,130,246,.10)}
+.model-type-title{display:block;margin-bottom:.25rem;color:#1d4ed8;font-weight:800}
+.model-type-help{display:block;margin-bottom:.7rem;color:#475569;font-size:.85rem;line-height:1.4}
+.model-type-card select{width:100%;min-height:48px;border:2px solid #93c5fd;border-radius:9px;background:#fff;font-weight:700}
+.model-type-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.45rem;margin-top:.7rem}
+.model-type-option{padding:.45rem .55rem;border:1px solid #bfdbfe;border-radius:8px;background:#fff;color:#334155;font-size:.78rem;font-weight:700;text-align:center;line-height:1.25}
+@media (max-width:560px){.model-type-options{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="site-header"></div><div id="site-menu"></div>
+<main class="container generator-page"><nav class="language-switcher" aria-label="言語選択"><a href="/en/cable-clip-generator/">EN</a><a href="/pt/cable-clip-generator/">PT</a><a href="/ja/cable-clip-generator/" aria-current='page'>日本語</a></nav>
+<section class="generator-intro">
+<h1>ケーブルクリップSTLジェネレーター</h1>
+<p>個別ケーブルクリップ、複数ケーブルオーガナイザー、ネジ固定ベース付きクリップを作成できます。</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+<h2>クリップタイプ</h2><div class="model-type-card"><label for="cc-type"><span class="model-type-title">モデルタイプ</span><span class="model-type-help">3種類のケーブルクリップから1つ選択してください。</span></label><select id="cc-type"><option value="individual">個別クリップ</option><option value="multi">複数ケーブルオーガナイザー</option><option value="screw">ネジ固定ベース付きクリップ</option></select><div class="model-type-options" aria-hidden="true"><span class="model-type-option">1. 個別クリップ</span><span class="model-type-option">2. 複数ケーブルオーガナイザー</span><span class="model-type-option">3. ネジ固定ベース付きクリップ</span></div></div>
+
+<h2>ケーブルとクリップ</h2>
+<label>ケーブル直径（mm）<input type="number" id="cc-cable-diameter" value="6" min="2" max="40" step="0.1"></label>
+<label>はめ合いクリアランス（mm）<input type="number" id="cc-clearance" value="0.5" min="0" max="3" step="0.1"><span class="field-note">クリップ内でケーブルが圧迫されないよう、ケーブル直径に加える余裕です。</span></label>
+<label>クリップ壁厚（mm）<input type="number" id="cc-wall" value="1.6" min="0.8" max="6" step="0.1"></label>
+<label>クリップ幅（mm）<input type="number" id="cc-width" value="10" min="3" max="40" step="0.5"><span class="field-note">印刷されたクリップの前後方向の厚さです。</span></label>
+<label>開口幅（mm）<input type="number" id="cc-opening" value="4.5" min="1" max="40" step="0.1"><span class="field-note">開口を狭くするとケーブルを強く保持できますが、材料にはより高い柔軟性が必要です。</span></label>
+
+<div id="cc-multi-fields" class="hidden-field">
+<h2>複数スロット</h2>
+<label>ケーブルスロット数<input type="number" id="cc-count" value="4" min="2" max="12" step="1"></label>
+<label>クリップ間隔（mm）<input type="number" id="cc-gap" value="4" min="0" max="30" step="0.5"></label>
+</div>
+
+<h2>Base</h2>
+<label>ベース厚（mm）<input type="number" id="cc-base-thickness" value="2.4" min="1" max="10" step="0.1"></label>
+<label>ベース余白（mm）<input type="number" id="cc-base-margin" value="4" min="1" max="20" step="0.5"></label>
+
+<div id="cc-screw-fields" class="hidden-field">
+<label>ネジ穴直径（mm）<input type="number" id="cc-screw-hole" value="4" min="2" max="12" step="0.1"></label>
+<label>ネジ穴間隔（mm）<input type="number" id="cc-screw-spacing" value="24" min="8" max="120" step="0.5"><span class="field-note">2つの固定穴の中心間距離です。</span></label>
+</div>
+
+<label>
+解像度
+<select id="cc-segments">
+<option value="32">標準 — 32分割</option>
+<option value="64" selected>滑らか — 64分割</option>
+<option value="96">高 — 96分割</option>
+</select>
+</label>
+
+<h2>計算結果</h2>
+<ul class="result-list">
+<li><span>内径</span><strong id="cc-inner-result">—</strong></li>
+<li><span>外径</span><strong id="cc-outer-result">—</strong></li>
+<li><span>全幅</span><strong id="cc-total-result">—</strong></li>
+<li><span>中心間隔</span><strong id="cc-spacing-result">—</strong></li>
+</ul>
+
+<p id="cc-message" class="validation-message" role="status" aria-live="polite"></p>
+<button id="cc-generate" class="button primary-button" type="button">ケーブルクリップを生成</button>
+<button id="cc-download" class="btn-primary" type="button">STLをダウンロード</button>
+</div>
+
+<div class="generator-preview">
+<h2>プレビュー</h2>
+<div id="cable-clip-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>よくある質問</h2>
+<h3>どの材料が適していますか？</h3>
+<p>PETG is generally more suitable for clips that must flex repeatedly. PLA can work for gentle snap fits, but narrow openings and thick walls may cause it to crack.</p>
+<h3>開口幅はどのくらいが適切ですか？</h3>
+<p>Start with an opening around 70% to 85% of the fitted cable diameter. Increase it for rigid materials or cables that should be removed frequently.</p>
+<h3>クリップはどの向きで印刷しますか？</h3>
+<p>The STL is exported with the flat base on the print bed and the cable openings facing upward. This normally avoids support material.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+<script>
+const PAGE={
+title:"ケーブルクリップジェネレーター",
+heading:"ケーブルクリップSTLジェネレーター",
+canonical:"https://vekmaker.com/ja/cable-clip-generator/",
+description:"Create custom 3D printable cable clips and multi-cable organizers with adjustable cable diameter, opening and mounting base.",
+keywords:"cable clip STL generator, cable organizer, wire holder, screw mount cable clip, 3D printing",
+generator:"cable-clip-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/cable-clip/cable-clip-generator.js"></script>
+</body>
+</html>

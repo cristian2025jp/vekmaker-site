@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Create a custom 3D printable divider box with adjustable internal dimensions, rows, columns and divider thickness.">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://vekmaker.com/en/divider-box-generator/">
+    <link rel="canonical" href="https://vekmaker.com/pt/divider-box-generator/">
     <link rel="alternate" hreflang="en" href="https://vekmaker.com/en/divider-box-generator/">
     <link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/divider-box-generator/">
     <link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/divider-box-generator/">
     <link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/divider-box-generator/">
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <title>Divider Box Generator | VEKMaker</title>
+    <title>Gerador de Caixa com Divisórias STL | VEKMaker</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <style>
@@ -64,90 +64,90 @@
     <div id="site-menu"></div>
 
     <main class="container generator-page">
-        <nav class="language-switcher" aria-label="Language selection">
-            <a href="/en/divider-box-generator/" hreflang="en" aria-current="page">EN</a>
-            <a href="/pt/divider-box-generator/" hreflang="pt">PT</a>
+        <nav class="language-switcher" aria-label="Seleção de idioma">
+            <a href="/en/divider-box-generator/" hreflang="en">EN</a>
+            <a href="/pt/divider-box-generator/" hreflang="pt" aria-current="page">PT</a>
             <a href="/ja/divider-box-generator/" hreflang="ja">日本語</a>
         </nav>
 
         <section class="generator-intro">
-            <h1>Divider Box STL Generator</h1>
-            <p>Create an open storage box with an adjustable grid of integrated compartments.</p>
+            <h1>Gerador de Caixa com Divisórias STL</h1>
+            <p>Crie uma caixa aberta de armazenamento com uma grade ajustável de compartimentos integrados.</p>
         </section>
 
         <section class="generator-layout">
             <div class="generator-panel">
-                <h2>Internal Dimensions</h2>
+                <h2>Dimensões internas</h2>
 
                 <label>
-                    Internal Width (mm)
+                    Largura interna (mm)
                     <input type="number" id="divider-box-internal-width" value="150" min="20" max="450" step="1">
                 </label>
 
                 <label>
-                    Internal Depth (mm)
+                    Profundidade interna (mm)
                     <input type="number" id="divider-box-internal-depth" value="100" min="20" max="450" step="1">
                 </label>
 
                 <label>
-                    Internal Height (mm)
+                    Altura interna (mm)
                     <input type="number" id="divider-box-internal-height" value="35" min="5" max="200" step="1">
                 </label>
 
-                <h2>Box Construction</h2>
+                <h2>Construção da caixa</h2>
 
                 <label>
-                    Wall Thickness (mm)
+                    Espessura da parede (mm)
                     <input type="number" id="divider-box-wall-thickness" value="2" min="0.8" max="20" step="0.1">
                 </label>
 
                 <label>
-                    Bottom Thickness (mm)
+                    Espessura do fundo (mm)
                     <input type="number" id="divider-box-bottom-thickness" value="2" min="0.8" max="20" step="0.1">
                 </label>
 
                 <label>
-                    Outer Corner Radius (mm)
+                    Raio externo dos cantos (mm)
                     <input type="number" id="divider-box-corner-radius" value="6" min="0" max="100" step="0.5">
                 </label>
 
-                <h2>Compartments</h2>
+                <h2>Compartimentos</h2>
 
                 <label>
-                    Columns Across Width
+                    Colunas na largura
                     <input type="number" id="divider-box-columns" value="3" min="1" max="12" step="1">
                 </label>
 
                 <label>
-                    Rows Across Depth
+                    Linhas na profundidade
                     <input type="number" id="divider-box-rows" value="2" min="1" max="12" step="1">
                 </label>
 
                 <label>
-                    Divider Thickness (mm)
+                    Espessura da divisória (mm)
                     <input type="number" id="divider-box-divider-thickness" value="1.6" min="0.8" max="10" step="0.1">
                 </label>
 
                 <label>
-                    Divider Height (mm)
+                    Altura da divisória (mm)
                     <input type="number" id="divider-box-divider-height" value="30" min="1" max="200" step="1">
                     <span class="field-note">
-                        Divider height is measured from the inside bottom of the box.
+                        A altura da divisória é medida a partir do fundo interno da caixa.
                     </span>
                 </label>
 
-                <h2>Calculated Results</h2>
+                <h2>Resultados calculados</h2>
                 <ul class="result-list">
                     <li>
-                        <span>External Size</span>
+                        <span>Tamanho externo</span>
                         <strong id="divider-box-external-size">—</strong>
                     </li>
                     <li>
-                        <span>Compartments</span>
+                        <span>Compartimentos</span>
                         <strong id="divider-box-compartment-count">—</strong>
                     </li>
                     <li>
-                        <span>Approx. Compartment Size</span>
+                        <span>Tamanho aproximado do compartimento</span>
                         <strong id="divider-box-compartment-size">—</strong>
                     </li>
                 </ul>
@@ -160,38 +160,38 @@
                 ></p>
 
                 <button id="generate-divider-box" class="button primary-button" type="button">
-                    Generate Divider Box
+                    Gerar caixa com divisórias
                 </button>
 
                 <button id="download-divider-box" class="btn-primary" type="button">
-                    Download STL
+                    Baixar STL
                 </button>
             </div>
 
             <div class="generator-preview">
-                <h2>Preview</h2>
+                <h2>Visualização</h2>
                 <div id="divider-box-preview" class="preview-area"></div>
             </div>
         </section>
 
         <section class="faq">
-            <h2>FAQ</h2>
+            <h2>Perguntas frequentes</h2>
 
-            <h3>What do columns and rows mean?</h3>
+            <h3>O que significam colunas e linhas?</h3>
             <p>
-                Columns divide the internal width. Rows divide the internal depth.
-                For example, 3 columns and 2 rows create 6 compartments.
+                As colunas dividem a largura interna. As linhas dividem a profundidade interna.
+                Por exemplo, 3 colunas e 2 linhas criam 6 compartimentos.
             </p>
 
-            <h3>Are the dividers part of the box?</h3>
+            <h3>As divisórias fazem parte da caixa?</h3>
             <p>
-                Yes. The walls, bottom and dividers are exported together as one STL file.
+                Sim. As paredes, o fundo e as divisórias são exportados juntos em um único arquivo STL.
             </p>
 
-            <h3>How should the divider box be printed?</h3>
+            <h3>Como a caixa com divisórias deve ser impressa?</h3>
             <p>
-                The STL is exported with the bottom on the print bed and the open side facing upward,
-                normally allowing support-free printing.
+                O STL é exportado com o fundo apoiado na mesa e a abertura voltada para cima,
+                normalmente permitindo impressão sem suportes.
             </p>
         </section>
     </main>
@@ -200,11 +200,11 @@
 
     <script>
         const PAGE = {
-            title: "Divider Box Generator",
-            heading: "Divider Box STL Generator",
-            canonical: "https://vekmaker.com/en/divider-box-generator/",
-            description: "Create a custom 3D printable divider box with adjustable internal dimensions, rows, columns and divider thickness.",
-            keywords: "divider box STL generator, compartment box, organizer box, divided tray, 3D printing",
+            title: "Gerador de Caixa com Divisórias",
+            heading: "Gerador de Caixa com Divisórias STL",
+            canonical: "https://vekmaker.com/pt/divider-box-generator/",
+            description: "Crie uma caixa com divisórias para impressão 3D com dimensões internas, linhas, colunas e espessura das divisórias ajustáveis.",
+            keywords: "gerador STL de caixa com divisórias, caixa organizadora, compartimentos, bandeja dividida, impressão 3D",
             generator: "divider-box-generator"
         };
     </script>

@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Create custom 3D printable solid cones, hollow conical adapters and funnels, then download the STL file."><meta name="robots" content="index, follow, max-image-preview:large"><link rel="canonical" href="https://vekmaker.com/pt/cone-funnel-generator/"><link rel="alternate" hreflang="en" href="https://vekmaker.com/en/cone-funnel-generator/"><link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/cone-funnel-generator/"><link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/cone-funnel-generator/"><link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/cone-funnel-generator/"><link rel="icon" href="/assets/icons/favicon.ico" sizes="any"><title>Gerador de Cone / Funil STL | VEKMaker</title><link rel="stylesheet" href="/assets/css/style.css"><style>.generator-preview{min-width:0}#cone-funnel-preview{width:100%;min-width:0;overflow:hidden}#cone-funnel-preview canvas{display:block;width:100%!important;max-width:100%}.result-list{margin:1rem 0;padding:0;list-style:none}.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}.hidden-field{display:none}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+
+.model-type-card{
+    margin:1rem 0 1.25rem;
+    padding:1rem;
+    border:2px solid #3b82f6;
+    border-radius:12px;
+    background:#eff6ff;
+    box-shadow:0 4px 14px rgba(59,130,246,.10)
+}
+.model-type-card .model-type-title{
+    display:block;
+    margin-bottom:.25rem;
+    color:#1d4ed8;
+    font-size:1rem;
+    font-weight:800
+}
+.model-type-card .model-type-help{
+    display:block;
+    margin-bottom:.7rem;
+    color:#475569;
+    font-size:.85rem;
+    line-height:1.4
+}
+.model-type-card select{
+    width:100%;
+    min-height:48px;
+    border:2px solid #93c5fd;
+    border-radius:9px;
+    background:#fff;
+    font-weight:700;
+    cursor:pointer
+}
+.model-type-options{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:.45rem;
+    margin-top:.7rem
+}
+.model-type-option{
+    padding:.45rem .55rem;
+    border:1px solid #bfdbfe;
+    border-radius:8px;
+    background:#fff;
+    color:#334155;
+    font-size:.78rem;
+    font-weight:700;
+    text-align:center;
+    line-height:1.25
+}
+@media (max-width:560px){
+    .model-type-options{grid-template-columns:1fr}
+}
+</style></head><body><div id="site-header"></div><div id="site-menu"></div><main class="container generator-page"><nav class="language-switcher" aria-label="Seleção de idioma"><a href="/en/cone-funnel-generator/" hreflang="en">EN</a><a href="/pt/cone-funnel-generator/" hreflang="pt" aria-current="page">PT</a><a href="/ja/cone-funnel-generator/" hreflang="ja">日本語</a></nav><section class="generator-intro"><h1>Gerador de Cone / Funil STL</h1><p>Crie cones sólidos, adaptadores cônicos ocos ou funis e baixe um arquivo STL pronto para impressão.</p></section><section class="generator-layout"><div class="generator-panel"><h2>Modelo</h2><div class="model-type-card"><label for="cone-model-type"><span class="model-type-title">Tipo de modelo</span><span class="model-type-help">Escolha uma das 3 opções de modelo disponíveis.</span></label><select id="cone-model-type"><option value="solid">Cone sólido / Tronco de cone</option><option value="hollow">Cone oco / Adaptador</option><option value="funnel">Funil</option></select><div class="model-type-options" aria-hidden="true"><span class="model-type-option">1. Cone sólido / Tronco de cone</span><span class="model-type-option">2. Cone oco / Adaptador</span><span class="model-type-option">3. Funil</span></div></div><label id="cone-bottom-diameter-field">Diâmetro inferior (mm)<input type="number" id="cone-bottom-diameter" value="60" min="0" max="500" step="0.5"><span class="field-note">Este é o diâmetro da extremidade inferior colocada sobre a mesa de impressão.</span></label><label>Diâmetro superior (mm)<input type="number" id="cone-top-diameter" value="20" min="0" max="500" step="0.5"><span class="field-note" id="cone-top-note">Use 0 mm para criar um cone sólido pontiagudo.</span></label><label>Altura do cone (mm)<input type="number" id="cone-height" value="50" min="2" max="500" step="0.5"></label><label id="cone-wall-thickness-field">Espessura da parede (mm)<input type="number" id="cone-wall-thickness" value="2" min="0.8" max="30" step="0.1"></label><div id="funnel-fields" class="hidden-field"><h2>Saída do funil</h2><label>Diâmetro interno da saída (mm)<input type="number" id="funnel-outlet-inner-diameter" value="12" min="2" max="200" step="0.5"></label><label>Comprimento do tubo de saída (mm)<input type="number" id="funnel-outlet-length" value="35" min="2" max="300" step="0.5"></label></div><label>Resolução<select id="cone-segments"><option value="32">Padrão — 32 segmentos</option><option value="64" selected>Suave — 64 segmentos</option><option value="96">Alta — 96 segmentos</option><option value="128">Muito alta — 128 segmentos</option></select></label><h2>Resultados calculados</h2><ul class="result-list"><li><span>Altura total</span><strong id="cone-total-height">—</strong></li><li><span>Diâmetro máximo</span><strong id="cone-maximum-diameter">—</strong></li><li id="funnel-outlet-result" class="hidden-field"><span>Diâmetro externo da saída</span><strong id="funnel-outlet-outer-diameter">—</strong></li></ul><p id="cone-validation-message" class="validation-message" role="status" aria-live="polite"></p><button id="generate-cone" class="button primary-button" type="button">Gerar modelo</button><button id="download-cone" class="btn-primary" type="button">Baixar STL</button></div><div class="generator-preview"><h2>Visualização</h2><div id="cone-funnel-preview" class="preview-area"></div></div></section><section class="faq"><h2>Perguntas frequentes</h2><h3>Qual é a diferença entre um cone e um tronco de cone?</h3><p>Um cone pontiagudo possui diâmetro superior de 0 mm. Quando as duas extremidades possuem diâmetro, o resultado é um cone truncado, também chamado de tronco de cone.</p><h3>O que a opção Cone oco cria?</h3><p>Ela cria um tubo cônico aberto nas duas extremidades, útil para reduções, adaptadores, coberturas e mangas.</p><h3>Como a saída do funil é calculada?</h3><p>O diâmetro externo da saída é igual ao diâmetro interno mais duas vezes a espessura da parede. O cone e o tubo de saída formam um único modelo contínuo.</p><h3>Como o modelo deve ser impresso?</h3><p>A extremidade inferior é colocada sobre a mesa de impressão. Algumas proporções de funil podem exigir suportes, dependendo do ângulo da parede.</p></section></main><div id="site-footer"></div><script>const PAGE={title:"Gerador de Cone / Funil",heading:"Gerador de Cone / Funil STL",canonical:"https://vekmaker.com/pt/cone-funnel-generator/",description:"Crie cones sólidos, adaptadores cônicos ocos e funis personalizados para impressão 3D e baixe o STL.",keywords:"gerador STL de cone, gerador STL de funil, adaptador cônico, cone oco, tronco de cone, impressão 3D",generator:"cone-funnel-generator"};</script><script src="/assets/js/core/config.js"></script><script src="/assets/js/core/layout.js"></script><script src="/assets/js/core/page.js"></script><script type="module" src="/assets/generators/cone-funnel/cone-funnel-generator.js"></script></body></html>

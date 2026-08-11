@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Create a custom 3D printable phone stand with adjustable dimensions, viewing angle and optional charging cable opening.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/phone-stand-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/phone-stand-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/phone-stand-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/phone-stand-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/phone-stand-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>スマホスタンドSTLジェネレーター | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}#phone-stand-preview{width:100%;min-width:0;overflow:hidden}
+#phone-stand-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+</style>
+</head>
+<body>
+<div id="site-header"></div><div id="site-menu"></div>
+<main class="container generator-page"><nav class="language-switcher" aria-label="言語選択">
+<a href="/en/phone-stand-generator/" hreflang="en">EN</a>
+<a href="/pt/phone-stand-generator/" hreflang="pt">PT</a>
+<a href="/ja/phone-stand-generator/" hreflang="ja" aria-current="page">日本語</a>
+</nav>
+<section class="generator-intro"><h1>スマホスタンドSTLジェネレーター</h1><p>カスタマイズ可能な卓上スマホスタンドを作成し、印刷用STLをダウンロードできます。</p></section>
+<section class="generator-layout">
+<div class="generator-panel">
+<h2>スタンド寸法</h2>
+<label>スタンド幅（mm）<input type="number" id="ps-width" value="80" min="30" max="250" step="1"></label>
+<label>ベース奥行き（mm）<input type="number" id="ps-depth" value="95" min="40" max="250" step="1"></label>
+<label>ベース厚（mm）<input type="number" id="ps-base-thickness" value="5" min="2" max="30" step="0.5"></label>
+<label>背面高さ（mm）<input type="number" id="ps-back-height" value="105" min="40" max="250" step="1"></label>
+<label>背面厚（mm）<input type="number" id="ps-back-thickness" value="5" min="2" max="20" step="0.5"></label>
+<label>背面角度（度）<input type="number" id="ps-angle" value="65" min="50" max="80" step="1"><span class="field-note">角度は水平なベースから測定します。</span></label>
+<h2>スマホ支持部</h2>
+<label>スマホ差し込み幅（mm）<input type="number" id="ps-slot" value="14" min="6" max="40" step="0.5"><span class="field-note">ケースを含めたスマホ全体の厚さを使用してください。</span></label>
+<label>前面ストッパー高さ（mm）<input type="number" id="ps-lip-height" value="12" min="3" max="40" step="0.5"></label>
+<label class="checkbox-label"><input type="checkbox" id="ps-cable" checked>充電ケーブル用開口部を追加</label>
+<label>ケーブル開口幅（mm）<input type="number" id="ps-cable-width" value="18" min="5" max="60" step="0.5"></label>
+<h2>計算結果</h2>
+<ul class="result-list"><li><span>おおよその全高</span><strong id="ps-total-height">—</strong></li><li><span>背面の水平張り出し</span><strong id="ps-back-reach">—</strong></li></ul>
+<p id="ps-message" class="validation-message" role="status" aria-live="polite"></p>
+<button id="ps-generate" class="button primary-button" type="button">スマホスタンドを生成</button>
+<button id="ps-download" class="btn-primary" type="button">STLをダウンロード</button>
+</div>
+<div class="generator-preview"><h2>プレビュー</h2><div id="phone-stand-preview" class="preview-area"></div></div>
+</section>
+<section class="faq"><h2>よくある質問</h2>
+<h3>スマホ差し込み幅とは何ですか？</h3><p>スマホを置くためのスペースです。ケースを含めたスマホ全体の厚さを測り、必要に応じて少し余裕を加えてください。</p>
+<h3>背面角度は何を調整しますか？</h3><p>小さい値ではスマホがより後ろに傾き、大きい値ではより垂直に近くなります。</p>
+<h3>スタンドはどの向きで印刷しますか？</h3><p>STLはベースをプリントベッドに置いた状態で書き出されます。寸法によっては傾斜した背面の下にサポートが必要になる場合があります。</p>
+</section>
+</main>
+<div id="site-footer"></div>
+<script>const PAGE={title:"スマホスタンドジェネレーター",heading:"スマホスタンドSTLジェネレーター",canonical:"https://vekmaker.com/ja/phone-stand-generator/",description:"寸法、表示角度、充電ケーブル用開口部を調整して3Dプリント用スマホスタンドを作成できます。",keywords:"スマホスタンド STL ジェネレーター, スマートフォンホルダー, 充電スタンド, 卓上スタンド, 3Dプリント",generator:"phone-stand-generator"};</script>
+<script src="/assets/js/core/config.js"></script><script src="/assets/js/core/layout.js"></script><script src="/assets/js/core/page.js"></script><script type="module" src="/assets/generators/phone-stand/phone-stand-generator.js"></script>
+</body></html>

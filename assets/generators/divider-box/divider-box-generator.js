@@ -4,6 +4,62 @@ import { exportSTL } from '../../js/core/stl-exporter.js';
 
 const MODEL_COLOR = 0x3b82f6;
 
+const DIVIDER_BOX_I18N={
+en:{
+previewMissing:'Divider box preview container was not found.',
+widthRange:'Internal width must be between 20 mm and 450 mm.',
+depthRange:'Internal depth must be between 20 mm and 450 mm.',
+heightRange:'Internal height must be between 5 mm and 200 mm.',
+wallRange:'Wall thickness must be between 0.8 mm and 20 mm.',
+bottomRange:'Bottom thickness must be between 0.8 mm and 20 mm.',
+columnsRange:'Columns must be a whole number between 1 and 12.',
+rowsRange:'Rows must be a whole number between 1 and 12.',
+dividerThickness:'Divider thickness must be between 0.8 mm and 10 mm.',
+dividerHeight:max=>`Divider height must be between 1 mm and ${max} mm.`,
+compartmentSmall:'The selected divider layout leaves compartments smaller than 5 mm.',
+cornerRadius:max=>`Outer corner radius must be between 0 mm and ${max} mm.`,
+generated:'Divider box generated successfully.',
+generateFirst:'Generate the divider box before downloading.',
+downloaded:'STL downloaded successfully.'
+},
+pt:{
+previewMissing:'A área de visualização da caixa com divisórias não foi encontrada.',
+widthRange:'A largura interna deve estar entre 20 mm e 450 mm.',
+depthRange:'A profundidade interna deve estar entre 20 mm e 450 mm.',
+heightRange:'A altura interna deve estar entre 5 mm e 200 mm.',
+wallRange:'A espessura da parede deve estar entre 0,8 mm e 20 mm.',
+bottomRange:'A espessura do fundo deve estar entre 0,8 mm e 20 mm.',
+columnsRange:'O número de colunas deve ser inteiro entre 1 e 12.',
+rowsRange:'O número de linhas deve ser inteiro entre 1 e 12.',
+dividerThickness:'A espessura da divisória deve estar entre 0,8 mm e 10 mm.',
+dividerHeight:max=>`A altura da divisória deve estar entre 1 mm e ${max} mm.`,
+compartmentSmall:'A configuração escolhida deixa compartimentos menores que 5 mm.',
+cornerRadius:max=>`O raio externo dos cantos deve estar entre 0 mm e ${max} mm.`,
+generated:'Caixa com divisórias gerada com sucesso.',
+generateFirst:'Gere a caixa com divisórias antes de baixar.',
+downloaded:'STL baixado com sucesso.'
+},
+ja:{
+previewMissing:'仕切りボックスのプレビュー領域が見つかりません。',
+widthRange:'内幅は20 mmから450 mmの範囲で指定してください。',
+depthRange:'内奥行きは20 mmから450 mmの範囲で指定してください。',
+heightRange:'内高さは5 mmから200 mmの範囲で指定してください。',
+wallRange:'壁の厚さは0.8 mmから20 mmの範囲で指定してください。',
+bottomRange:'底の厚さは0.8 mmから20 mmの範囲で指定してください。',
+columnsRange:'列数は1から12の整数で指定してください。',
+rowsRange:'行数は1から12の整数で指定してください。',
+dividerThickness:'仕切りの厚さは0.8 mmから10 mmの範囲で指定してください。',
+dividerHeight:max=>`仕切りの高さは1 mmから${max} mmの範囲で指定してください。`,
+compartmentSmall:'選択した仕切り配置では区画サイズが5 mm未満になります。',
+cornerRadius:max=>`外側の角半径は0 mmから${max} mmの範囲で指定してください。`,
+generated:'仕切りボックスを生成しました。',
+generateFirst:'ダウンロードする前に仕切りボックスを生成してください。',
+downloaded:'STLをダウンロードしました。'
+}
+};
+const DIVIDER_BOX_LANG=['en','pt','ja'].includes(document.documentElement.lang)?document.documentElement.lang:'en';
+const DIVIDER_BOX_TEXT=DIVIDER_BOX_I18N[DIVIDER_BOX_LANG];
+
 const elements = {};
 let scene;
 let camera;
@@ -16,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cacheElements();
 
     if (!elements.preview) {
-        console.error('Divider box preview container was not found.');
+        console.error(DIVIDER_BOX_TEXT.previewMissing);
         return;
     }
 
@@ -190,46 +246,46 @@ function calculateDimensions(params) {
 
 function validateParameters(params, dimensions) {
     if (!isBetween(params.internalWidth, 20, 450)) {
-        return 'Internal width must be between 20 mm and 450 mm.';
+        return DIVIDER_BOX_TEXT.widthRange;
     }
 
     if (!isBetween(params.internalDepth, 20, 450)) {
-        return 'Internal depth must be between 20 mm and 450 mm.';
+        return DIVIDER_BOX_TEXT.depthRange;
     }
 
     if (!isBetween(params.internalHeight, 5, 200)) {
-        return 'Internal height must be between 5 mm and 200 mm.';
+        return DIVIDER_BOX_TEXT.heightRange;
     }
 
     if (!isBetween(params.wallThickness, 0.8, 20)) {
-        return 'Wall thickness must be between 0.8 mm and 20 mm.';
+        return DIVIDER_BOX_TEXT.wallRange;
     }
 
     if (!isBetween(params.bottomThickness, 0.8, 20)) {
-        return 'Bottom thickness must be between 0.8 mm and 20 mm.';
+        return DIVIDER_BOX_TEXT.bottomRange;
     }
 
     if (!Number.isInteger(params.columns) || params.columns < 1 || params.columns > 12) {
-        return 'Columns must be a whole number between 1 and 12.';
+        return DIVIDER_BOX_TEXT.columnsRange;
     }
 
     if (!Number.isInteger(params.rows) || params.rows < 1 || params.rows > 12) {
-        return 'Rows must be a whole number between 1 and 12.';
+        return DIVIDER_BOX_TEXT.rowsRange;
     }
 
     if (!isBetween(params.dividerThickness, 0.8, 10)) {
-        return 'Divider thickness must be between 0.8 mm and 10 mm.';
+        return DIVIDER_BOX_TEXT.dividerThickness;
     }
 
     if (!isBetween(params.dividerHeight, 1, params.internalHeight)) {
-        return `Divider height must be between 1 mm and ${formatNumber(params.internalHeight)} mm.`;
+        return DIVIDER_BOX_TEXT.dividerHeight(formatNumber(params.internalHeight));
     }
 
     if (
         dimensions.compartmentWidth < 5 ||
         dimensions.compartmentDepth < 5
     ) {
-        return 'The selected divider layout leaves compartments smaller than 5 mm.';
+        return DIVIDER_BOX_TEXT.compartmentSmall;
     }
 
     const maximumRadius =
@@ -240,7 +296,7 @@ function validateParameters(params, dimensions) {
         params.cornerRadius < 0 ||
         params.cornerRadius > maximumRadius
     ) {
-        return `Outer corner radius must be between 0 mm and ${formatNumber(maximumRadius)} mm.`;
+        return DIVIDER_BOX_TEXT.cornerRadius(formatNumber(maximumRadius));
     }
 
     return '';
@@ -330,7 +386,7 @@ function generateDividerBox() {
     scene.add(modelGroup);
     fitCamera(dimensions);
     setValidationMessage(
-        'Divider box generated successfully.',
+        DIVIDER_BOX_TEXT.generated,
         'success'
     );
     setDownloadEnabled(true);
@@ -552,7 +608,7 @@ function downloadDividerBoxSTL() {
 
     if (!modelGroup) {
         setValidationMessage(
-            'Generate the divider box before downloading.',
+            DIVIDER_BOX_TEXT.generateFirst,
             'error'
         );
         return;
@@ -566,7 +622,7 @@ function downloadDividerBoxSTL() {
         }
     );
 
-    setValidationMessage('STL downloaded successfully.', 'success');
+    setValidationMessage(DIVIDER_BOX_TEXT.downloaded, 'success');
 }
 
 function buildFilename(params, dimensions) {

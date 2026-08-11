@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Create custom 3D printable solid cones, hollow conical adapters and funnels, then download the STL file."><meta name="robots" content="index, follow, max-image-preview:large"><link rel="canonical" href="https://vekmaker.com/ja/cone-funnel-generator/"><link rel="alternate" hreflang="en" href="https://vekmaker.com/en/cone-funnel-generator/"><link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/cone-funnel-generator/"><link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/cone-funnel-generator/"><link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/cone-funnel-generator/"><link rel="icon" href="/assets/icons/favicon.ico" sizes="any"><title>コーン・漏斗STLジェネレーター | VEKMaker</title><link rel="stylesheet" href="/assets/css/style.css"><style>.generator-preview{min-width:0}#cone-funnel-preview{width:100%;min-width:0;overflow:hidden}#cone-funnel-preview canvas{display:block;width:100%!important;max-width:100%}.result-list{margin:1rem 0;padding:0;list-style:none}.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}.hidden-field{display:none}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+
+.model-type-card{
+    margin:1rem 0 1.25rem;
+    padding:1rem;
+    border:2px solid #3b82f6;
+    border-radius:12px;
+    background:#eff6ff;
+    box-shadow:0 4px 14px rgba(59,130,246,.10)
+}
+.model-type-card .model-type-title{
+    display:block;
+    margin-bottom:.25rem;
+    color:#1d4ed8;
+    font-size:1rem;
+    font-weight:800
+}
+.model-type-card .model-type-help{
+    display:block;
+    margin-bottom:.7rem;
+    color:#475569;
+    font-size:.85rem;
+    line-height:1.4
+}
+.model-type-card select{
+    width:100%;
+    min-height:48px;
+    border:2px solid #93c5fd;
+    border-radius:9px;
+    background:#fff;
+    font-weight:700;
+    cursor:pointer
+}
+.model-type-options{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:.45rem;
+    margin-top:.7rem
+}
+.model-type-option{
+    padding:.45rem .55rem;
+    border:1px solid #bfdbfe;
+    border-radius:8px;
+    background:#fff;
+    color:#334155;
+    font-size:.78rem;
+    font-weight:700;
+    text-align:center;
+    line-height:1.25
+}
+@media (max-width:560px){
+    .model-type-options{grid-template-columns:1fr}
+}
+</style></head><body><div id="site-header"></div><div id="site-menu"></div><main class="container generator-page"><nav class="language-switcher" aria-label="言語選択"><a href="/en/cone-funnel-generator/" hreflang="en">EN</a><a href="/pt/cone-funnel-generator/" hreflang="pt">PT</a><a href="/ja/cone-funnel-generator/" hreflang="ja" aria-current="page">日本語</a></nav><section class="generator-intro"><h1>コーン・漏斗STLジェネレーター</h1><p>ソリッドコーン、中空の円すいアダプター、漏斗を作成し、印刷用STLをダウンロードできます。</p></section><section class="generator-layout"><div class="generator-panel"><h2>モデル</h2><div class="model-type-card"><label for="cone-model-type"><span class="model-type-title">モデルタイプ</span><span class="model-type-help">3種類のモデルから1つ選択してください。</span></label><select id="cone-model-type"><option value="solid">ソリッドコーン / 円すい台</option><option value="hollow">中空コーン / アダプター</option><option value="funnel">漏斗</option></select><div class="model-type-options" aria-hidden="true"><span class="model-type-option">1. ソリッドコーン / 円すい台</span><span class="model-type-option">2. 中空コーン / アダプター</span><span class="model-type-option">3. 漏斗</span></div></div><label id="cone-bottom-diameter-field">下部直径（mm）<input type="number" id="cone-bottom-diameter" value="60" min="0" max="500" step="0.5"><span class="field-note">プリントベッドに置かれる下端の直径です。</span></label><label>上部直径（mm）<input type="number" id="cone-top-diameter" value="20" min="0" max="500" step="0.5"><span class="field-note" id="cone-top-note">先端が尖ったソリッドコーンを作る場合は0 mmにします。</span></label><label>コーン高さ（mm）<input type="number" id="cone-height" value="50" min="2" max="500" step="0.5"></label><label id="cone-wall-thickness-field">壁の厚さ（mm）<input type="number" id="cone-wall-thickness" value="2" min="0.8" max="30" step="0.1"></label><div id="funnel-fields" class="hidden-field"><h2>漏斗出口</h2><label>出口内径（mm）<input type="number" id="funnel-outlet-inner-diameter" value="12" min="2" max="200" step="0.5"></label><label>出口チューブ長さ（mm）<input type="number" id="funnel-outlet-length" value="35" min="2" max="300" step="0.5"></label></div><label>解像度<select id="cone-segments"><option value="32">標準 — 32分割</option><option value="64" selected>滑らか — 64分割</option><option value="96">高 — 96分割</option><option value="128">非常に高い — 128分割</option></select></label><h2>計算結果</h2><ul class="result-list"><li><span>全高</span><strong id="cone-total-height">—</strong></li><li><span>最大直径</span><strong id="cone-maximum-diameter">—</strong></li><li id="funnel-outlet-result" class="hidden-field"><span>出口外径</span><strong id="funnel-outlet-outer-diameter">—</strong></li></ul><p id="cone-validation-message" class="validation-message" role="status" aria-live="polite"></p><button id="generate-cone" class="button primary-button" type="button">モデルを生成</button><button id="download-cone" class="btn-primary" type="button">STLをダウンロード</button></div><div class="generator-preview"><h2>プレビュー</h2><div id="cone-funnel-preview" class="preview-area"></div></div></section><section class="faq"><h2>よくある質問</h2><h3>コーンと円すい台の違いは何ですか？</h3><p>先端が尖ったコーンは上部直径が0 mmです。上下の両方に直径がある場合は切頭円すい（円すい台）になります。</p><h3>中空コーンは何を作りますか？</h3><p>両端が開いた円すい形のチューブを作成します。レデューサー、アダプター、カバー、スリーブなどに使用できます。</p><h3>漏斗の出口はどのように計算されますか？</h3><p>出口外径は出口内径に壁厚の2倍を加えた値です。コーン部分と出口チューブは一体の連続したモデルになります。</p><h3>モデルはどの向きで印刷しますか？</h3><p>下端をプリントベッドに置きます。漏斗の形状や壁の角度によってはサポートが必要になる場合があります。</p></section></main><div id="site-footer"></div><script>const PAGE={title:"コーン・漏斗ジェネレーター",heading:"コーン・漏斗STLジェネレーター",canonical:"https://vekmaker.com/ja/cone-funnel-generator/",description:"ソリッドコーン、中空の円すいアダプター、漏斗を3Dプリント用に作成し、STLをダウンロードできます。",keywords:"コーン STL ジェネレーター, 漏斗 STL ジェネレーター, 円すいアダプター, 中空コーン, 円すい台, 3Dプリント",generator:"cone-funnel-generator"};</script><script src="/assets/js/core/config.js"></script><script src="/assets/js/core/layout.js"></script><script src="/assets/js/core/page.js"></script><script type="module" src="/assets/generators/cone-funnel/cone-funnel-generator.js"></script></body></html>

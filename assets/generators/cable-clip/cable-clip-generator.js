@@ -3,6 +3,7 @@ import { OrbitControls } from '../../libs/three/OrbitControls.js';
 import { exportSTL } from '../../js/core/stl-exporter.js';
 
 const MODEL_COLOR=0x3b82f6;
+const CABLE_CLIP_I18N={en:{type:'Select a valid clip type.',cable:'Cable diameter must be between 2 mm and 40 mm.',clearance:'Fit clearance must be between 0 mm and 3 mm.',wall:'Clip wall thickness must be between 0.8 mm and 6 mm.',width:'Clip width must be between 3 mm and 40 mm.',opening:'Opening width must be smaller than the fitted inner diameter.',baseT:'Base thickness must be between 1 mm and 10 mm.',margin:'Base margin must be between 1 mm and 20 mm.',resolution:'Select a valid resolution.',count:'Number of cable slots must be a whole number between 2 and 12.',gap:'Gap between clips must be between 0 mm and 30 mm.',screwHole:'Screw hole diameter must be between 2 mm and 12 mm.',screwSpacing:'Screw hole spacing must be between 8 mm and 120 mm.',screwSmall:'Screw hole spacing is too small for the selected hole diameter.',screwLarge:'Screw hole diameter is too large for the base depth.',rigid:'This wall and opening combination may be too rigid. Increase the opening or reduce wall thickness.',generated:'Cable clip generated successfully.',generateFirst:'Generate the cable clip before downloading.',downloaded:'STL downloaded successfully.'},pt:{type:'Selecione um tipo de clipe válido.',cable:'O diâmetro do cabo deve estar entre 2 mm e 40 mm.',clearance:'A folga de encaixe deve estar entre 0 mm e 3 mm.',wall:'A espessura da parede do clipe deve estar entre 0,8 mm e 6 mm.',width:'A largura do clipe deve estar entre 3 mm e 40 mm.',opening:'A largura da abertura deve ser menor que o diâmetro interno ajustado.',baseT:'A espessura da base deve estar entre 1 mm e 10 mm.',margin:'A margem da base deve estar entre 1 mm e 20 mm.',resolution:'Selecione uma resolução válida.',count:'O número de encaixes para cabos deve ser inteiro entre 2 e 12.',gap:'O espaço entre clipes deve estar entre 0 mm e 30 mm.',screwHole:'O diâmetro do furo do parafuso deve estar entre 2 mm e 12 mm.',screwSpacing:'O espaçamento entre os furos deve estar entre 8 mm e 120 mm.',screwSmall:'O espaçamento entre os furos é pequeno demais para o diâmetro selecionado.',screwLarge:'O diâmetro do furo é grande demais para a profundidade da base.',rigid:'Esta combinação de parede e abertura pode ficar rígida demais. Aumente a abertura ou reduza a espessura da parede.',generated:'Clipe para cabos gerado com sucesso.',generateFirst:'Gere o clipe para cabos antes de baixar.',downloaded:'STL baixado com sucesso.'},ja:{type:'有効なクリップタイプを選択してください。',cable:'ケーブル直径は2 mmから40 mmの範囲で指定してください。',clearance:'はめ合いクリアランスは0 mmから3 mmの範囲で指定してください。',wall:'クリップ壁厚は0.8 mmから6 mmの範囲で指定してください。',width:'クリップ幅は3 mmから40 mmの範囲で指定してください。',opening:'開口幅は調整後の内径より小さくしてください。',baseT:'ベース厚は1 mmから10 mmの範囲で指定してください。',margin:'ベース余白は1 mmから20 mmの範囲で指定してください。',resolution:'有効な解像度を選択してください。',count:'ケーブルスロット数は2から12の整数で指定してください。',gap:'クリップ間隔は0 mmから30 mmの範囲で指定してください。',screwHole:'ネジ穴直径は2 mmから12 mmの範囲で指定してください。',screwSpacing:'ネジ穴間隔は8 mmから120 mmの範囲で指定してください。',screwSmall:'選択した穴径に対してネジ穴間隔が小さすぎます。',screwLarge:'ベース奥行きに対してネジ穴直径が大きすぎます。',rigid:'この壁厚と開口幅の組み合わせは硬すぎる可能性があります。開口を広げるか、壁厚を小さくしてください。',generated:'ケーブルクリップを生成しました。',generateFirst:'ダウンロードする前にケーブルクリップを生成してください。',downloaded:'STLをダウンロードしました。'}};const CABLE_CLIP_LANG=['en','pt','ja'].includes(document.documentElement.lang)?document.documentElement.lang:'en';const CABLE_CLIP_TEXT=CABLE_CLIP_I18N[CABLE_CLIP_LANG];
 const e={};
 let scene,camera,renderer,controls,modelGroup=null,resizeObserver=null;
 
@@ -127,30 +128,30 @@ function dims(p){
 const between=(v,a,b)=>Number.isFinite(v)&&v>=a&&v<=b;
 
 function validate(p,d){
-    if(!['individual','multi','screw'].includes(p.type)) return 'Select a valid clip type.';
-    if(!between(p.cable,2,40)) return 'Cable diameter must be between 2 mm and 40 mm.';
-    if(!between(p.clearance,0,3)) return 'Fit clearance must be between 0 mm and 3 mm.';
-    if(!between(p.wall,0.8,6)) return 'Clip wall thickness must be between 0.8 mm and 6 mm.';
-    if(!between(p.width,3,40)) return 'Clip width must be between 3 mm and 40 mm.';
-    if(!between(p.opening,1,d.inner*0.98)) return 'Opening width must be smaller than the fitted inner diameter.';
-    if(!between(p.baseT,1,10)) return 'Base thickness must be between 1 mm and 10 mm.';
-    if(!between(p.margin,1,20)) return 'Base margin must be between 1 mm and 20 mm.';
-    if(![32,64,96].includes(p.segments)) return 'Select a valid resolution.';
+    if(!['individual','multi','screw'].includes(p.type)) return CABLE_CLIP_TEXT.type;
+    if(!between(p.cable,2,40)) return CABLE_CLIP_TEXT.cable;
+    if(!between(p.clearance,0,3)) return CABLE_CLIP_TEXT.clearance;
+    if(!between(p.wall,0.8,6)) return CABLE_CLIP_TEXT.wall;
+    if(!between(p.width,3,40)) return CABLE_CLIP_TEXT.width;
+    if(!between(p.opening,1,d.inner*0.98)) return CABLE_CLIP_TEXT.opening;
+    if(!between(p.baseT,1,10)) return CABLE_CLIP_TEXT.baseT;
+    if(!between(p.margin,1,20)) return CABLE_CLIP_TEXT.margin;
+    if(![32,64,96].includes(p.segments)) return CABLE_CLIP_TEXT.resolution;
 
     if(p.type==='multi'){
-        if(!Number.isInteger(p.count)||p.count<2||p.count>12) return 'Number of cable slots must be a whole number between 2 and 12.';
-        if(!between(p.gap,0,30)) return 'Gap between clips must be between 0 mm and 30 mm.';
+        if(!Number.isInteger(p.count)||p.count<2||p.count>12) return CABLE_CLIP_TEXT.count;
+        if(!between(p.gap,0,30)) return CABLE_CLIP_TEXT.gap;
     }
 
     if(p.type==='screw'){
-        if(!between(p.screwHole,2,12)) return 'Screw hole diameter must be between 2 mm and 12 mm.';
-        if(!between(p.screwSpacing,8,120)) return 'Screw hole spacing must be between 8 mm and 120 mm.';
-        if(p.screwSpacing<=p.screwHole+2) return 'Screw hole spacing is too small for the selected hole diameter.';
-        if(p.screwHole>=d.baseDepth-2) return 'Screw hole diameter is too large for the base depth.';
+        if(!between(p.screwHole,2,12)) return CABLE_CLIP_TEXT.screwHole;
+        if(!between(p.screwSpacing,8,120)) return CABLE_CLIP_TEXT.screwSpacing;
+        if(p.screwSpacing<=p.screwHole+2) return CABLE_CLIP_TEXT.screwSmall;
+        if(p.screwHole>=d.baseDepth-2) return CABLE_CLIP_TEXT.screwLarge;
     }
 
     if(p.wall>2.5 && p.opening<d.inner*0.65){
-        return 'This wall and opening combination may be too rigid. Increase the opening or reduce wall thickness.';
+        return CABLE_CLIP_TEXT.rigid;
     }
 
     return '';
@@ -183,7 +184,7 @@ function generate(){
 
     scene.add(modelGroup);
     fit(d);
-    message('Cable clip generated successfully.','success');
+    message(CABLE_CLIP_TEXT.generated,'success');
     enable(true);
     return true;
 }
@@ -309,7 +310,7 @@ function download(){
         return;
     }
     if(!modelGroup){
-        message('Generate the cable clip before downloading.','error');
+        message(CABLE_CLIP_TEXT.generateFirst,'error');
         return;
     }
 
@@ -319,7 +320,7 @@ function download(){
         `vekmaker-cable-clip-${typeName}-${d.actualCount}x-${fmt(d.inner)}mm.stl`,
         {rotateForPrint:false}
     );
-    message('STL downloaded successfully.','success');
+    message(CABLE_CLIP_TEXT.downloaded,'success');
 }
 
 function message(text,type=''){

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Create a custom 3D printable phone stand with adjustable dimensions, viewing angle and optional charging cable opening.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/pt/phone-stand-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/phone-stand-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/phone-stand-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/phone-stand-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/phone-stand-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Gerador de Suporte para Celular STL | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}#phone-stand-preview{width:100%;min-width:0;overflow:hidden}
+#phone-stand-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+</style>
+</head>
+<body>
+<div id="site-header"></div><div id="site-menu"></div>
+<main class="container generator-page"><nav class="language-switcher" aria-label="Seleção de idioma">
+<a href="/en/phone-stand-generator/" hreflang="en">EN</a>
+<a href="/pt/phone-stand-generator/" hreflang="pt" aria-current="page">PT</a>
+<a href="/ja/phone-stand-generator/" hreflang="ja">日本語</a>
+</nav>
+<section class="generator-intro"><h1>Gerador de Suporte para Celular STL</h1><p>Crie um suporte de mesa personalizado para celular e baixe um arquivo STL pronto para impressão.</p></section>
+<section class="generator-layout">
+<div class="generator-panel">
+<h2>Dimensões do suporte</h2>
+<label>Largura do suporte (mm)<input type="number" id="ps-width" value="80" min="30" max="250" step="1"></label>
+<label>Profundidade da base (mm)<input type="number" id="ps-depth" value="95" min="40" max="250" step="1"></label>
+<label>Espessura da base (mm)<input type="number" id="ps-base-thickness" value="5" min="2" max="30" step="0.5"></label>
+<label>Altura do encosto (mm)<input type="number" id="ps-back-height" value="105" min="40" max="250" step="1"></label>
+<label>Espessura do encosto (mm)<input type="number" id="ps-back-thickness" value="5" min="2" max="20" step="0.5"></label>
+<label>Ângulo do encosto (graus)<input type="number" id="ps-angle" value="65" min="50" max="80" step="1"><span class="field-note">O ângulo é medido a partir da base horizontal.</span></label>
+<h2>Apoio do celular</h2>
+<label>Largura do encaixe do celular (mm)<input type="number" id="ps-slot" value="14" min="6" max="40" step="0.5"><span class="field-note">Use a espessura total do celular incluindo a capa.</span></label>
+<label>Altura da borda frontal (mm)<input type="number" id="ps-lip-height" value="12" min="3" max="40" step="0.5"></label>
+<label class="checkbox-label"><input type="checkbox" id="ps-cable" checked>Adicionar abertura para cabo de carregamento</label>
+<label>Largura da abertura do cabo (mm)<input type="number" id="ps-cable-width" value="18" min="5" max="60" step="0.5"></label>
+<h2>Resultados calculados</h2>
+<ul class="result-list"><li><span>Altura total aproximada</span><strong id="ps-total-height">—</strong></li><li><span>Avanço horizontal do encosto</span><strong id="ps-back-reach">—</strong></li></ul>
+<p id="ps-message" class="validation-message" role="status" aria-live="polite"></p>
+<button id="ps-generate" class="button primary-button" type="button">Gerar suporte para celular</button>
+<button id="ps-download" class="btn-primary" type="button">Baixar STL</button>
+</div>
+<div class="generator-preview"><h2>Visualização</h2><div id="phone-stand-preview" class="preview-area"></div></div>
+</section>
+<section class="faq"><h2>Perguntas frequentes</h2>
+<h3>O que é a largura do encaixe do celular?</h3><p>É o espaço reservado para o celular. Meça a espessura total do aparelho com a capa e adicione uma pequena folga, se necessário.</p>
+<h3>O que o ângulo do encosto controla?</h3><p>Um valor menor deixa o celular mais inclinado para trás, enquanto um valor maior o deixa mais vertical.</p>
+<h3>Como o suporte deve ser impresso?</h3><p>O STL é exportado com a base sobre a mesa de impressão. Algumas dimensões podem exigir suporte sob o encosto inclinado.</p>
+</section>
+</main>
+<div id="site-footer"></div>
+<script>const PAGE={title:"Gerador de Suporte para Celular",heading:"Gerador de Suporte para Celular STL",canonical:"https://vekmaker.com/pt/phone-stand-generator/",description:"Crie um suporte para celular personalizado para impressão 3D com dimensões, ângulo de visualização e abertura opcional para cabo de carregamento.",keywords:"gerador STL de suporte para celular, suporte de smartphone, suporte com carregamento, suporte de mesa, impressão 3D",generator:"phone-stand-generator"};</script>
+<script src="/assets/js/core/config.js"></script><script src="/assets/js/core/layout.js"></script><script src="/assets/js/core/page.js"></script><script type="module" src="/assets/generators/phone-stand/phone-stand-generator.js"></script>
+</body></html>

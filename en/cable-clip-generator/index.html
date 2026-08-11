@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Create custom 3D printable cable clips and multi-cable organizers with adjustable cable diameter, opening and mounting base.">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="canonical" href="https://vekmaker.com/en/cable-clip-generator/">
+<link rel="canonical" href="https://vekmaker.com/en/cable-clip-generator/"><link rel="alternate" hreflang="en" href="https://vekmaker.com/en/cable-clip-generator/"><link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/cable-clip-generator/"><link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/cable-clip-generator/"><link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/cable-clip-generator/">
 <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
 <title>Cable Clip Generator | VEKMaker</title>
 <link rel="stylesheet" href="/assets/css/style.css">
@@ -17,11 +17,22 @@
 .result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
 .field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
 .hidden-field{display:none}
+
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.model-type-card{margin:1rem 0 1.25rem;padding:1rem;border:2px solid #3b82f6;border-radius:12px;background:#eff6ff;box-shadow:0 4px 14px rgba(59,130,246,.10)}
+.model-type-title{display:block;margin-bottom:.25rem;color:#1d4ed8;font-weight:800}
+.model-type-help{display:block;margin-bottom:.7rem;color:#475569;font-size:.85rem;line-height:1.4}
+.model-type-card select{width:100%;min-height:48px;border:2px solid #93c5fd;border-radius:9px;background:#fff;font-weight:700}
+.model-type-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.45rem;margin-top:.7rem}
+.model-type-option{padding:.45rem .55rem;border:1px solid #bfdbfe;border-radius:8px;background:#fff;color:#334155;font-size:.78rem;font-weight:700;text-align:center;line-height:1.25}
+@media (max-width:560px){.model-type-options{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div id="site-header"></div><div id="site-menu"></div>
-<main class="container generator-page">
+<main class="container generator-page"><nav class="language-switcher" aria-label="Language selection"><a href="/en/cable-clip-generator/" aria-current='page'>EN</a><a href="/pt/cable-clip-generator/">PT</a><a href="/ja/cable-clip-generator/">日本語</a></nav>
 <section class="generator-intro">
 <h1>Cable Clip STL Generator</h1>
 <p>Create individual cable clips, multi-cable organizers or clips with a screw-mounting base.</p>
@@ -29,15 +40,7 @@
 
 <section class="generator-layout">
 <div class="generator-panel">
-<h2>Clip Type</h2>
-<label>
-Model Type
-<select id="cc-type">
-<option value="individual">Individual Clip</option>
-<option value="multi">Multi-Cable Organizer</option>
-<option value="screw">Clip with Screw Base</option>
-</select>
-</label>
+<h2>Clip Type</h2><div class="model-type-card"><label for="cc-type"><span class="model-type-title">Model Type</span><span class="model-type-help">Choose one of the 3 available cable clip models.</span></label><select id="cc-type"><option value="individual">Individual Clip</option><option value="multi">Multi-Cable Organizer</option><option value="screw">Clip with Screw Base</option></select><div class="model-type-options" aria-hidden="true"><span class="model-type-option">1. Individual Clip</span><span class="model-type-option">2. Multi-Cable Organizer</span><span class="model-type-option">3. Clip with Screw Base</span></div></div>
 
 <h2>Cable and Clip</h2>
 <label>Cable Diameter (mm)<input type="number" id="cc-cable-diameter" value="6" min="2" max="40" step="0.1"></label>
