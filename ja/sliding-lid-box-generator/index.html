@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="内寸、フタのクリアランス、ガイド溝の深さを調整して、3Dプリント用のスライド式フタ付きボックスを作成できます。">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/sliding-lid-box-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/sliding-lid-box-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/sliding-lid-box-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/sliding-lid-box-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/sliding-lid-box-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>スライド式フタ付きボックスジェネレーター | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#slb-preview{width:100%;min-width:0;overflow:hidden}
+#slb-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.fit-settings{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.fit-settings h2{margin-top:0;color:#1d4ed8}
+.fit-settings>p{margin-top:-4px;color:#334155;line-height:1.5}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.fit-settings{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="言語選択"><a href="/en/sliding-lid-box-generator/" hreflang="en">EN</a><a href="/pt/sliding-lid-box-generator/" hreflang="pt">PT</a><a href="/ja/sliding-lid-box-generator/" hreflang="ja" aria-current="page">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>スライド式フタ付きボックス STL ジェネレーター</h1>
+<p>スライド式の別パーツのフタが付いたボックスを作成し、ボックスとフタのSTLファイルをダウンロードできます。</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+<h2>内寸</h2>
+<label>内幅 (mm)<input type="number" id="slb-internal-width" value="100" min="20" max="350" step="1"></label>
+<label>内奥行き (mm)<input type="number" id="slb-internal-depth" value="70" min="20" max="350" step="1"></label>
+<label>有効内高さ (mm)<input type="number" id="slb-internal-height" value="40" min="10" max="200" step="1"></label>
+
+<h2>ボックス構造</h2>
+<label>壁の厚さ (mm)<input type="number" id="slb-wall-thickness" value="2.4" min="1.2" max="10" step="0.1"></label>
+<label>底の厚さ (mm)<input type="number" id="slb-bottom-thickness" value="2.4" min="1" max="10" step="0.1"></label>
+
+<div class="fit-settings">
+<h2>フタのフィット調整</h2>
+<p>印刷したフタが側面の溝をスムーズにスライドするように調整します。</p>
+<label>フタの厚さ (mm)<input type="number" id="slb-lid-thickness" value="2" min="1" max="6" step="0.1"></label>
+<label>フタのクリアランス (mm)<input type="number" id="slb-clearance" value="0.35" min="0.1" max="1.5" step="0.05"><span class="field-note">クリアランスはスライド溝内のフタ周囲に設定されます。多くのFDMプリンターでは0.3〜0.4 mmが実用的な開始値です。</span></label>
+<label>溝の深さ (mm)<input type="number" id="slb-groove-depth" value="1.2" min="0.6" max="9.4" step="0.1"><span class="field-note">溝は左右の壁の内側に入ります。強度を保つため、外側の壁を十分に残してください。</span></label>
+</div>
+
+<h2>計算されたサイズ</h2>
+<ul class="result-list">
+<li><span>外幅</span><strong id="slb-external-width">—</strong></li>
+<li><span>外奥行き</span><strong id="slb-external-depth">—</strong></li>
+<li><span>全高</span><strong id="slb-total-height">—</strong></li>
+<li><span>フタのサイズ</span><strong id="slb-lid-size">—</strong></li>
+</ul>
+
+<p id="slb-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="slb-generate" class="button primary-button" type="button">ボックスを生成</button>
+<button id="slb-download-box" class="btn-primary" type="button">ボックスSTLをダウンロード</button>
+<button id="slb-download-lid" class="btn-primary" type="button">フタSTLをダウンロード</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>プレビュー</h2>
+<div id="slb-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>よくある質問</h2>
+<h3>スライド式フタはどのように動きますか？</h3><p>ボックス上部の左右の壁に溝があります。別パーツのフタを前側から差し込み、溝に沿ってスライドさせると背面の壁で止まります。</p>
+<h3>クリアランスはどのくらいにすればよいですか？</h3><p>0.35 mmは多くのFDMプリンターで使いやすい開始値ですが、最適な値はプリンター、フィラメント、調整状態によって変わります。きつい場合はクリアランスを増やしてください。</p>
+<h3>どの向きで印刷しますか？</h3><p>ボックスは底面をビルドプレートに置いて上向きに印刷します。フタは平らに印刷します。側面の溝上のブリッジは短く、通常はサポートなしで印刷できる構造です。</p>
+<h3>フタの前側に小さなタブがあるのはなぜですか？</h3><p>別の取っ手やサポート材を追加せずに、フタをつまんで開けやすくするためです。</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "スライド式フタ付きボックスジェネレーター",
+    heading: "スライド式フタ付きボックス STL ジェネレーター",
+    canonical: "https://vekmaker.com/ja/sliding-lid-box-generator/",
+    description: "内寸、フタのクリアランス、ガイド溝の深さを調整して、3Dプリント用のスライド式フタ付きボックスを作成できます。",
+    keywords: "スライド式フタ ボックス STL ジェネレーター, 収納ボックス, 3Dプリント, フタ付きボックス",
+    generator: "sliding-lid-box-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/sliding-lid-box/sliding-lid-box-generator.js"></script>
+</body>
+</html>

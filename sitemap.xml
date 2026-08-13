@@ -275,4 +275,35 @@
     <lastmod>2026-08-12</lastmod>
     <priority>0.4</priority>
   </url>
+  <url>
+    <loc>https://vekmaker.com/en/support/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vekmaker.com/pt/support/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vekmaker.com/ja/support/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://vekmaker.com/en/sliding-lid-box-generator/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vekmaker.com/pt/sliding-lid-box-generator/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vekmaker.com/ja/sliding-lid-box-generator/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>

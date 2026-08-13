@@ -1,5 +1,19 @@
 const GENERATORS = [
     {
+        id: "sliding-lid-box-generator",
+        slug: "sliding-lid-box-generator",
+        name: 'Sliding Lid Box Generator',
+        icon: "box",
+        image: "/assets/images/generators/sliding-lid-box-generator.jpg",
+        description: 'Create storage boxes with a separate sliding lid, adjustable fit clearance and side guide grooves.',
+        url: "/en/sliding-lid-box-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Caixa com Tampa Deslizante', description: 'Crie caixas com tampa deslizante separada, folga de encaixe e canaletas laterais ajustáveis.' },
+            ja: { name: 'スライド式フタ付きボックスジェネレーター', description: '別パーツのスライド式フタ、フィット用クリアランス、側面ガイド溝を調整できる収納ボックスを作成できます。' }
+        }
+    },
+    {
         id: "3d-print-price-calculator",
         slug: "3d-print-price-calculator",
         name: '3D Print Price Calculator',

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Crie uma caixa personalizada para impressão 3D com tampa deslizante, dimensões internas, folga da tampa e profundidade das canaletas ajustáveis.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/pt/sliding-lid-box-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/sliding-lid-box-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/sliding-lid-box-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/sliding-lid-box-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/sliding-lid-box-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Gerador de Caixa com Tampa Deslizante | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#slb-preview{width:100%;min-width:0;overflow:hidden}
+#slb-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.fit-settings{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.fit-settings h2{margin-top:0;color:#1d4ed8}
+.fit-settings>p{margin-top:-4px;color:#334155;line-height:1.5}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.fit-settings{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="Seleção de idioma"><a href="/en/sliding-lid-box-generator/" hreflang="en">EN</a><a href="/pt/sliding-lid-box-generator/" hreflang="pt" aria-current="page">PT</a><a href="/ja/sliding-lid-box-generator/" hreflang="ja">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>Gerador de Caixa com Tampa Deslizante STL</h1>
+<p>Crie uma caixa com tampa deslizante separada e baixe os arquivos STL da caixa e da tampa prontos para impressão.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+<h2>Dimensões internas</h2>
+<label>Largura interna (mm)<input type="number" id="slb-internal-width" value="100" min="20" max="350" step="1"></label>
+<label>Profundidade interna (mm)<input type="number" id="slb-internal-depth" value="70" min="20" max="350" step="1"></label>
+<label>Altura interna útil (mm)<input type="number" id="slb-internal-height" value="40" min="10" max="200" step="1"></label>
+
+<h2>Construção da caixa</h2>
+<label>Espessura da parede (mm)<input type="number" id="slb-wall-thickness" value="2.4" min="1.2" max="10" step="0.1"></label>
+<label>Espessura do fundo (mm)<input type="number" id="slb-bottom-thickness" value="2.4" min="1" max="10" step="0.1"></label>
+
+<div class="fit-settings">
+<h2>Encaixe da tampa</h2>
+<p>Estas configurações controlam a facilidade com que a tampa impressa desliza pelas canaletas laterais.</p>
+<label>Espessura da tampa (mm)<input type="number" id="slb-lid-thickness" value="2" min="1" max="6" step="0.1"></label>
+<label>Folga da tampa (mm)<input type="number" id="slb-clearance" value="0.35" min="0.1" max="1.5" step="0.05"><span class="field-note">A folga é aplicada ao redor da tampa dentro das canaletas. Entre 0,3 e 0,4 mm é um bom ponto de partida para muitas impressoras FDM.</span></label>
+<label>Profundidade da canaleta (mm)<input type="number" id="slb-groove-depth" value="1.2" min="0.6" max="9.4" step="0.1"><span class="field-note">A canaleta entra em cada parede lateral. Mantenha espessura suficiente na parede externa para uma impressão resistente.</span></label>
+</div>
+
+<h2>Tamanho calculado</h2>
+<ul class="result-list">
+<li><span>Largura externa</span><strong id="slb-external-width">—</strong></li>
+<li><span>Profundidade externa</span><strong id="slb-external-depth">—</strong></li>
+<li><span>Altura total</span><strong id="slb-total-height">—</strong></li>
+<li><span>Tamanho da tampa</span><strong id="slb-lid-size">—</strong></li>
+</ul>
+
+<p id="slb-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="slb-generate" class="button primary-button" type="button">Gerar caixa</button>
+<button id="slb-download-box" class="btn-primary" type="button">Baixar STL da caixa</button>
+<button id="slb-download-lid" class="btn-primary" type="button">Baixar STL da tampa</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>Visualização</h2>
+<div id="slb-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>Perguntas frequentes</h2>
+<h3>Como funciona a tampa deslizante?</h3><p>A caixa possui canaletas próximas ao topo das duas paredes laterais. A tampa separada entra pela frente, desliza por essas canaletas e para ao encostar na parede traseira.</p>
+<h3>Qual folga devo usar?</h3><p>O valor inicial de 0,35 mm funciona em muitas impressoras FDM, mas o melhor encaixe depende da impressora, do filamento e da calibração. Aumente a folga se a tampa ficar apertada.</p>
+<h3>Como as peças devem ser impressas?</h3><p>Imprima a caixa em pé, com o fundo apoiado na mesa. Imprima a tampa deitada. As pequenas pontes acima das canaletas laterais foram mantidas curtas para normalmente dispensar suportes.</p>
+<h3>Por que a tampa possui uma pequena aba frontal?</h3><p>A aba facilita puxar a tampa para abrir sem precisar adicionar uma alça separada ou utilizar suportes.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "Gerador de Caixa com Tampa Deslizante",
+    heading: "Gerador de Caixa com Tampa Deslizante STL",
+    canonical: "https://vekmaker.com/pt/sliding-lid-box-generator/",
+    description: "Crie uma caixa personalizada para impressão 3D com tampa deslizante, dimensões internas, folga da tampa e profundidade das canaletas ajustáveis.",
+    keywords: "gerador STL caixa tampa deslizante, caixa deslizante, tampa ajustada, caixa organizadora, impressão 3D",
+    generator: "sliding-lid-box-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/sliding-lid-box/sliding-lid-box-generator.js"></script>
+</body>
+</html>
