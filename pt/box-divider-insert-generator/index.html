@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Crie uma divisória removível para uma caixa existente, com linhas, colunas, altura, folga de encaixe e espessuras ajustáveis para impressão 3D.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/pt/box-divider-insert-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/box-divider-insert-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/box-divider-insert-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/box-divider-insert-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/box-divider-insert-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Gerador de Divisória Removível para Caixa | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#bdi-preview{width:100%;min-width:0;overflow:hidden}
+#bdi-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.layout-settings{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.layout-settings h2{margin-top:0;color:#1d4ed8}
+.layout-settings>p{margin-top:-4px;color:#334155;line-height:1.5}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.layout-settings{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="Seleção de idioma"><a href="/en/box-divider-insert-generator/" hreflang="en">EN</a><a href="/pt/box-divider-insert-generator/" hreflang="pt" aria-current="page">PT</a><a href="/ja/box-divider-insert-generator/" hreflang="ja">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>Gerador de Divisória Removível para Caixa STL</h1>
+<p>Transforme uma caixa aberta que você já possui em vários compartimentos usando uma divisória removível de uma única peça.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>Caixa existente — medidas internas</h2>
+<label>Largura interna da caixa (mm)<input type="number" id="bdi-box-width" value="120" min="30" max="500" step="1"></label>
+<label>Profundidade interna da caixa (mm)<input type="number" id="bdi-box-depth" value="90" min="30" max="500" step="1"></label>
+<label>Altura interna da caixa (mm)<input type="number" id="bdi-box-height" value="50" min="10" max="250" step="1"></label>
+
+<h2>Encaixe da divisória</h2>
+<label>Folga de encaixe por lado (mm)<input type="number" id="bdi-clearance" value="0.5" min="0" max="5" step="0.1"><span class="field-note">A divisória é reduzida por esse valor em cada lado. 0,5 mm por lado é um bom ponto de partida para muitas caixas impressas.</span></label>
+<label>Altura das divisórias (mm)<input type="number" id="bdi-insert-height" value="35" min="5" max="250" step="1"></label>
+
+<div class="layout-settings">
+<h2>Divisão dos compartimentos</h2>
+<p>Escolha quantos compartimentos iguais o inserto deve criar dentro da caixa.</p>
+<label>Colunas<input type="number" id="bdi-columns" value="3" min="1" max="10" step="1"></label>
+<label>Linhas<input type="number" id="bdi-rows" value="2" min="1" max="10" step="1"></label>
+</div>
+
+<h2>Construção das divisórias</h2>
+<label>Espessura do contorno (mm)<input type="number" id="bdi-frame-thickness" value="1.6" min="1.2" max="8" step="0.1"></label>
+<label>Espessura das divisórias internas (mm)<input type="number" id="bdi-divider-thickness" value="1.6" min="1" max="8" step="0.1"></label>
+<label>Raio externo dos cantos (mm)<input type="number" id="bdi-corner-radius" value="3" min="0" max="100" step="0.5"><span class="field-note">Use um raio maior quando os cantos internos da caixa existente forem arredondados.</span></label>
+
+<h2>Tamanho calculado</h2>
+<ul class="result-list">
+<li><span>Largura da divisória</span><strong id="bdi-insert-width-result">—</strong></li>
+<li><span>Profundidade da divisória</span><strong id="bdi-insert-depth-result">—</strong></li>
+<li><span>Largura do compartimento</span><strong id="bdi-cell-width-result">—</strong></li>
+<li><span>Profundidade do compartimento</span><strong id="bdi-cell-depth-result">—</strong></li>
+<li><span>Total de compartimentos</span><strong id="bdi-compartments-result">—</strong></li>
+</ul>
+
+<p id="bdi-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="bdi-generate" class="button primary-button" type="button">Gerar divisória</button>
+<button id="bdi-download" class="btn-primary" type="button">Baixar STL</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>Visualização</h2>
+<div id="bdi-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>Perguntas frequentes</h2>
+<h3>O que é uma divisória removível para caixa?</h3><p>É uma grade divisora removível que entra em uma caixa aberta já existente. Ela cria compartimentos sem gerar uma nova caixa e sem adicionar outro fundo.</p>
+<h3>Qual é a diferença para o Divider Box Generator?</h3><p>O Divider Box Generator cria a própria caixa junto com os compartimentos. Este gerador cria somente a divisória removível para uma caixa que você já possui.</p>
+<h3>Qual folga de encaixe devo usar?</h3><p>Para uma caixa impressa em 3D, 0,5 mm por lado é um bom ponto de partida. Aumente se a caixa tiver variações nas medidas ou se quiser retirar a divisória com mais facilidade.</p>
+<h3>A divisória possui fundo?</h3><p>Não. A peça contém apenas o contorno e a grade de divisórias. O fundo da própria caixa continua sendo o fundo de todos os compartimentos.</p>
+<h3>Como devo imprimir?</h3><p>Imprima em pé, com toda a grade de divisórias apoiada na mesa. O modelo é uma única malha contínua e normalmente não precisa de suportes.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "Gerador de Divisória Removível para Caixa",
+    heading: "Gerador de Divisória Removível para Caixa STL",
+    canonical: "https://vekmaker.com/pt/box-divider-insert-generator/",
+    description: "Crie uma divisória removível para uma caixa existente, com linhas, colunas, altura, folga de encaixe e espessuras ajustáveis para impressão 3D.",
+    keywords: "gerador STL divisória removível caixa, grade divisora, compartimentos, organizador caixa, impressão 3D",
+    generator: "box-divider-insert-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/box-divider-insert/box-divider-insert-generator.js"></script>
+</body>
+</html>

@@ -1,5 +1,19 @@
 const GENERATORS = [
     {
+        id: "box-divider-insert-generator",
+        slug: "box-divider-insert-generator",
+        name: 'Box Divider Insert Generator',
+        icon: "organizer",
+        image: "/assets/images/generators/box-divider-insert-generator.jpg",
+        description: 'Create removable divider grids sized to fit inside an existing storage box.',
+        url: "/en/box-divider-insert-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Divisória Removível para Caixa', description: 'Crie divisórias removíveis sob medida para organizar os compartimentos de uma caixa existente.' },
+            ja: { name: 'ボックス用仕切りインサートジェネレーター', description: '既存の収納ボックスに合わせた取り外し可能な仕切りグリッドを作成できます。' }
+        }
+    },
+    {
         id: "sliding-lid-box-generator",
         slug: "sliding-lid-box-generator",
         name: 'Sliding Lid Box Generator',

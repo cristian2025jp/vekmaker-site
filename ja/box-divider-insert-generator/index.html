@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="既存のボックスに入れる取り外し可能な3Dプリント用仕切りインサートを、行数・列数・高さ・クリアランス・壁厚を調整して作成します。">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/box-divider-insert-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/box-divider-insert-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/box-divider-insert-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/box-divider-insert-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/box-divider-insert-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>ボックス用仕切りインサートジェネレーター | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#bdi-preview{width:100%;min-width:0;overflow:hidden}
+#bdi-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.layout-settings{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.layout-settings h2{margin-top:0;color:#1d4ed8}
+.layout-settings>p{margin-top:-4px;color:#334155;line-height:1.5}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.layout-settings{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="言語選択"><a href="/en/box-divider-insert-generator/" hreflang="en">EN</a><a href="/pt/box-divider-insert-generator/" hreflang="pt">PT</a><a href="/ja/box-divider-insert-generator/" hreflang="ja" aria-current="page">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>ボックス用仕切りインサート STL ジェネレーター</h1>
+<p>すでに持っているオープンボックスに、取り外し可能な一体型の仕切りグリッドを追加できます。</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>既存ボックス — 内寸</h2>
+<label>ボックス内幅 (mm)<input type="number" id="bdi-box-width" value="120" min="30" max="500" step="1"></label>
+<label>ボックス内奥行き (mm)<input type="number" id="bdi-box-depth" value="90" min="30" max="500" step="1"></label>
+<label>ボックス内高さ (mm)<input type="number" id="bdi-box-height" value="50" min="10" max="250" step="1"></label>
+
+<h2>インサートのフィット</h2>
+<label>片側クリアランス (mm)<input type="number" id="bdi-clearance" value="0.5" min="0" max="5" step="0.1"><span class="field-note">各側面からこの値だけ小さく作成します。3Dプリントしたボックスでは片側0.5 mmが実用的な開始値です。</span></label>
+<label>仕切り高さ (mm)<input type="number" id="bdi-insert-height" value="35" min="5" max="250" step="1"></label>
+
+<div class="layout-settings">
+<h2>区画レイアウト</h2>
+<p>ボックス内に作る均等な区画の列数と行数を選択します。</p>
+<label>列数<input type="number" id="bdi-columns" value="3" min="1" max="10" step="1"></label>
+<label>行数<input type="number" id="bdi-rows" value="2" min="1" max="10" step="1"></label>
+</div>
+
+<h2>仕切り構造</h2>
+<label>外周の厚さ (mm)<input type="number" id="bdi-frame-thickness" value="1.6" min="1.2" max="8" step="0.1"></label>
+<label>内部仕切りの厚さ (mm)<input type="number" id="bdi-divider-thickness" value="1.6" min="1" max="8" step="0.1"></label>
+<label>外側コーナー半径 (mm)<input type="number" id="bdi-corner-radius" value="3" min="0" max="100" step="0.5"><span class="field-note">既存ボックスの内側角が丸い場合は、より大きな半径を設定してください。</span></label>
+
+<h2>計算されたサイズ</h2>
+<ul class="result-list">
+<li><span>インサート幅</span><strong id="bdi-insert-width-result">—</strong></li>
+<li><span>インサート奥行き</span><strong id="bdi-insert-depth-result">—</strong></li>
+<li><span>区画の幅</span><strong id="bdi-cell-width-result">—</strong></li>
+<li><span>区画の奥行き</span><strong id="bdi-cell-depth-result">—</strong></li>
+<li><span>区画数</span><strong id="bdi-compartments-result">—</strong></li>
+</ul>
+
+<p id="bdi-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="bdi-generate" class="button primary-button" type="button">仕切りインサートを生成</button>
+<button id="bdi-download" class="btn-primary" type="button">STLをダウンロード</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>プレビュー</h2>
+<div id="bdi-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>よくある質問</h2>
+<h3>ボックス用仕切りインサートとは何ですか？</h3><p>既存のオープンボックスの中に入れる取り外し可能なグリッドです。新しいボックスや底面を作らずに区画を追加できます。</p>
+<h3>Divider Box Generatorとの違いは何ですか？</h3><p>Divider Box Generatorはボックス本体と区画を一緒に作ります。このツールは、すでにあるボックスに入れる取り外し可能な仕切り構造だけを作成します。</p>
+<h3>クリアランスはどのくらいがよいですか？</h3><p>3Dプリントしたボックスでは片側0.5 mmが使いやすい開始値です。寸法差がある場合や取り外しやすくしたい場合は増やしてください。</p>
+<h3>インサートに底はありますか？</h3><p>ありません。外周と仕切りグリッドだけで構成され、既存ボックスの底面が各区画の底になります。</p>
+<h3>どの向きで印刷しますか？</h3><p>仕切りグリッド全体をビルドプレートに接触させて上向きに印刷します。一体の連続メッシュで、通常はサポート不要です。</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "ボックス用仕切りインサートジェネレーター",
+    heading: "ボックス用仕切りインサート STL ジェネレーター",
+    canonical: "https://vekmaker.com/ja/box-divider-insert-generator/",
+    description: "既存のボックスに入れる取り外し可能な3Dプリント用仕切りインサートを、行数・列数・高さ・クリアランス・壁厚を調整して作成します。",
+    keywords: "ボックス 仕切り インサート STL ジェネレーター, 取り外し可能 仕切り, 収納, 3Dプリント",
+    generator: "box-divider-insert-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/box-divider-insert/box-divider-insert-generator.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create a removable 3D printable divider insert for an existing box with adjustable rows, columns, height, fit clearance and wall thickness.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/en/box-divider-insert-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/box-divider-insert-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/box-divider-insert-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/box-divider-insert-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/box-divider-insert-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Box Divider Insert Generator | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#bdi-preview{width:100%;min-width:0;overflow:hidden}
+#bdi-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.layout-settings{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.layout-settings h2{margin-top:0;color:#1d4ed8}
+.layout-settings>p{margin-top:-4px;color:#334155;line-height:1.5}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.layout-settings{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="Language selection"><a href="/en/box-divider-insert-generator/" hreflang="en" aria-current="page">EN</a><a href="/pt/box-divider-insert-generator/" hreflang="pt">PT</a><a href="/ja/box-divider-insert-generator/" hreflang="ja">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>Box Divider Insert STL Generator</h1>
+<p>Turn an existing open box into organized compartments with a removable one-piece divider insert.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>Existing Box — Internal Size</h2>
+<label>Box Internal Width (mm)<input type="number" id="bdi-box-width" value="120" min="30" max="500" step="1"></label>
+<label>Box Internal Depth (mm)<input type="number" id="bdi-box-depth" value="90" min="30" max="500" step="1"></label>
+<label>Box Internal Height (mm)<input type="number" id="bdi-box-height" value="50" min="10" max="250" step="1"></label>
+
+<h2>Insert Fit</h2>
+<label>Fit Clearance per Side (mm)<input type="number" id="bdi-clearance" value="0.5" min="0" max="5" step="0.1"><span class="field-note">The insert is reduced by this amount on every side. 0.5 mm per side is a practical starting point for many printed boxes.</span></label>
+<label>Divider Height (mm)<input type="number" id="bdi-insert-height" value="35" min="5" max="250" step="1"></label>
+
+<div class="layout-settings">
+<h2>Compartment Layout</h2>
+<p>Choose how many equal compartments the insert should create inside the box.</p>
+<label>Columns<input type="number" id="bdi-columns" value="3" min="1" max="10" step="1"></label>
+<label>Rows<input type="number" id="bdi-rows" value="2" min="1" max="10" step="1"></label>
+</div>
+
+<h2>Divider Construction</h2>
+<label>Perimeter Thickness (mm)<input type="number" id="bdi-frame-thickness" value="1.6" min="1.2" max="8" step="0.1"></label>
+<label>Internal Divider Thickness (mm)<input type="number" id="bdi-divider-thickness" value="1.6" min="1" max="8" step="0.1"></label>
+<label>Outer Corner Radius (mm)<input type="number" id="bdi-corner-radius" value="3" min="0" max="100" step="0.5"><span class="field-note">Use a larger radius when the inside corners of the existing box are rounded.</span></label>
+
+<h2>Calculated Size</h2>
+<ul class="result-list">
+<li><span>Insert Width</span><strong id="bdi-insert-width-result">—</strong></li>
+<li><span>Insert Depth</span><strong id="bdi-insert-depth-result">—</strong></li>
+<li><span>Compartment Width</span><strong id="bdi-cell-width-result">—</strong></li>
+<li><span>Compartment Depth</span><strong id="bdi-cell-depth-result">—</strong></li>
+<li><span>Total Compartments</span><strong id="bdi-compartments-result">—</strong></li>
+</ul>
+
+<p id="bdi-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="bdi-generate" class="button primary-button" type="button">Generate Divider Insert</button>
+<button id="bdi-download" class="btn-primary" type="button">Download STL</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>Preview</h2>
+<div id="bdi-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>FAQ</h2>
+<h3>What is a box divider insert?</h3><p>It is a removable grid that fits inside an existing open box. It adds compartments without generating a new box or a new bottom.</p>
+<h3>How is this different from the Divider Box Generator?</h3><p>The Divider Box Generator creates the box and its compartments together. This tool creates only the removable divider structure for a box you already have.</p>
+<h3>What clearance should I use?</h3><p>For a 3D printed box, 0.5 mm per side is a useful starting point. Increase it if the box has dimensional variation or if you want the insert to come out more easily.</p>
+<h3>Does the insert have a bottom?</h3><p>No. The insert is only the perimeter and divider grid, so the existing box bottom remains the bottom of every compartment.</p>
+<h3>How should it be printed?</h3><p>Print it upright with the full divider grid touching the build plate. The model is a single continuous mesh and normally requires no supports.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "Box Divider Insert Generator",
+    heading: "Box Divider Insert STL Generator",
+    canonical: "https://vekmaker.com/en/box-divider-insert-generator/",
+    description: "Create a removable 3D printable divider insert for an existing box with adjustable rows, columns, height, fit clearance and wall thickness.",
+    keywords: "box divider insert STL generator, removable divider, storage box insert, compartment grid, 3D printing",
+    generator: "box-divider-insert-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/box-divider-insert/box-divider-insert-generator.js"></script>
+</body>
+</html>
