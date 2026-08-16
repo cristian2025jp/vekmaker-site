@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create a custom 3D printable pen and tool holder with adjustable hole diameter, rows, columns, spacing, height and base dimensions.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/en/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/pen-tool-holder-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Pen / Tool Holder Generator | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#pth-preview{width:100%;min-width:0;overflow:hidden}
+#pth-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.layout-settings{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.layout-settings h2{margin-top:0;color:#1d4ed8}
+.layout-settings>p{margin-top:-4px;color:#334155;line-height:1.5}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.layout-settings{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="Language selection"><a href="/en/pen-tool-holder-generator/" hreflang="en" aria-current="page">EN</a><a href="/pt/pen-tool-holder-generator/" hreflang="pt">PT</a><a href="/ja/pen-tool-holder-generator/" hreflang="ja">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>Pen / Tool Holder STL Generator</h1>
+<p>Create a desktop holder with individual circular slots for pens, markers, brushes and small tools.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>Pen / Tool Size</h2>
+<label>Pen / Tool Diameter (mm)<input type="number" id="pth-tool-diameter" value="12" min="2" max="60" step="0.1"></label>
+<label>Hole Clearance (mm)<input type="number" id="pth-clearance" value="1" min="0" max="5" step="0.1"><span class="field-note">The final hole diameter is the tool diameter plus this clearance. 1 mm is a practical starting point for pens and markers.</span></label>
+
+<div class="layout-settings">
+<h2>Slot Layout</h2>
+<p>Choose the number of slots. The overall holder size is calculated automatically.</p>
+<label>Columns<input type="number" id="pth-columns" value="4" min="1" max="10" step="1"></label>
+<label>Rows<input type="number" id="pth-rows" value="2" min="1" max="10" step="1"></label>
+<label>Material Between Holes (mm)<input type="number" id="pth-gap" value="3" min="1.2" max="15" step="0.1"></label>
+</div>
+
+<h2>Holder Construction</h2>
+<label>Outer Margin (mm)<input type="number" id="pth-margin" value="4" min="1.5" max="20" step="0.1"></label>
+<label>Holder Height (mm)<input type="number" id="pth-height" value="55" min="10" max="150" step="1"></label>
+<label>Bottom Thickness (mm)<input type="number" id="pth-bottom" value="3" min="1" max="10" step="0.1"></label>
+<label>Outer Corner Radius (mm)<input type="number" id="pth-radius" value="6" min="0" max="100" step="0.5"></label>
+
+<h2>Calculated Size</h2>
+<ul class="result-list">
+<li><span>Final Hole Diameter</span><strong id="pth-hole-result">—</strong></li>
+<li><span>Holder Width</span><strong id="pth-width-result">—</strong></li>
+<li><span>Holder Depth</span><strong id="pth-depth-result">—</strong></li>
+<li><span>Total Slots</span><strong id="pth-count-result">—</strong></li>
+</ul>
+
+<p id="pth-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="pth-generate" class="button primary-button" type="button">Generate Holder</button>
+<button id="pth-download" class="btn-primary" type="button">Download STL</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>Preview</h2>
+<div id="pth-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>FAQ</h2>
+<h3>What can this holder be used for?</h3><p>It can hold pens, markers, brushes, craft tools, small screwdrivers and other cylindrical tools that fit the selected hole diameter.</p>
+<h3>How is the hole diameter calculated?</h3><p>The generator adds the selected clearance to the measured pen or tool diameter. For example, a 12 mm tool with 1 mm clearance creates a 13 mm hole.</p>
+<h3>Why are the holes separate instead of one large compartment?</h3><p>Individual holes keep pens and tools upright and separated, making them easier to organize and grab.</p>
+<h3>How should the holder be printed?</h3><p>Print it upright with the flat bottom on the build plate. The holes are vertical, so the model normally prints without support.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "Pen / Tool Holder Generator",
+    heading: "Pen / Tool Holder STL Generator",
+    canonical: "https://vekmaker.com/en/pen-tool-holder-generator/",
+    description: "Create a custom 3D printable pen and tool holder with adjustable hole diameter, rows, columns, spacing, height and base dimensions.",
+    keywords: "pen holder STL generator, tool holder generator, marker organizer, brush holder, 3D printing",
+    generator: "pen-tool-holder-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/pen-tool-holder/pen-tool-holder-generator.js"></script>
+</body>
+</html>

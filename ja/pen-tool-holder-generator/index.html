@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="穴径、行数、列数、間隔、高さ、底面を調整して、ペンや工具用の3Dプリントホルダーを作成できます。">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/pen-tool-holder-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>ペン／ツールホルダージェネレーター | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#pth-preview{width:100%;min-width:0;overflow:hidden}
+#pth-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.layout-settings{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.layout-settings h2{margin-top:0;color:#1d4ed8}
+.layout-settings>p{margin-top:-4px;color:#334155;line-height:1.5}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.layout-settings{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="言語選択"><a href="/en/pen-tool-holder-generator/" hreflang="en">EN</a><a href="/pt/pen-tool-holder-generator/" hreflang="pt">PT</a><a href="/ja/pen-tool-holder-generator/" hreflang="ja" aria-current="page">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>ペン／ツールホルダー STL ジェネレーター</h1>
+<p>ペン、マーカー、ブラシ、小型工具を1本ずつ収納できる円形スロット付きのデスクホルダーを作成します。</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>ペン／工具サイズ</h2>
+<label>ペン／工具の直径 (mm)<input type="number" id="pth-tool-diameter" value="12" min="2" max="60" step="0.1"></label>
+<label>穴のクリアランス (mm)<input type="number" id="pth-clearance" value="1" min="0" max="5" step="0.1"><span class="field-note">最終的な穴径は工具径にこのクリアランスを加えた値です。ペンやマーカーでは1 mmが実用的な開始値です。</span></label>
+
+<div class="layout-settings">
+<h2>スロット配置</h2>
+<p>スロット数を選択すると、ホルダー全体のサイズを自動計算します。</p>
+<label>列数<input type="number" id="pth-columns" value="4" min="1" max="10" step="1"></label>
+<label>行数<input type="number" id="pth-rows" value="2" min="1" max="10" step="1"></label>
+<label>穴の間の肉厚 (mm)<input type="number" id="pth-gap" value="3" min="1.2" max="15" step="0.1"></label>
+</div>
+
+<h2>ホルダー構造</h2>
+<label>外周マージン (mm)<input type="number" id="pth-margin" value="4" min="1.5" max="20" step="0.1"></label>
+<label>ホルダー高さ (mm)<input type="number" id="pth-height" value="55" min="10" max="150" step="1"></label>
+<label>底の厚さ (mm)<input type="number" id="pth-bottom" value="3" min="1" max="10" step="0.1"></label>
+<label>外側コーナー半径 (mm)<input type="number" id="pth-radius" value="6" min="0" max="100" step="0.5"></label>
+
+<h2>計算されたサイズ</h2>
+<ul class="result-list">
+<li><span>最終穴径</span><strong id="pth-hole-result">—</strong></li>
+<li><span>ホルダー幅</span><strong id="pth-width-result">—</strong></li>
+<li><span>ホルダー奥行き</span><strong id="pth-depth-result">—</strong></li>
+<li><span>スロット数</span><strong id="pth-count-result">—</strong></li>
+</ul>
+
+<p id="pth-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="pth-generate" class="button primary-button" type="button">ホルダーを生成</button>
+<button id="pth-download" class="btn-primary" type="button">STLをダウンロード</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>プレビュー</h2>
+<div id="pth-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>よくある質問</h2>
+<h3>どのような物を収納できますか？</h3><p>ペン、マーカー、ブラシ、クラフト工具、小型ドライバーなど、選択した穴径に収まる円筒形の工具を収納できます。</p>
+<h3>穴径はどのように計算されますか？</h3><p>測定したペンや工具の直径に、選択したクリアランスを加えます。例えば直径12 mmの工具に1 mmのクリアランスを設定すると13 mmの穴になります。</p>
+<h3>大きな1つの区画ではなく個別の穴なのはなぜですか？</h3><p>個別の穴にすることで、ペンや工具を立てた状態で分けて収納でき、整理しやすく取り出しやすくなります。</p>
+<h3>どの向きで印刷しますか？</h3><p>平らな底面をビルドプレートに置いて上向きに印刷します。穴は垂直なので、通常はサポートなしで印刷できます。</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "ペン／ツールホルダージェネレーター",
+    heading: "ペン／ツールホルダー STL ジェネレーター",
+    canonical: "https://vekmaker.com/ja/pen-tool-holder-generator/",
+    description: "穴径、行数、列数、間隔、高さ、底面を調整して、ペンや工具用の3Dプリントホルダーを作成できます。",
+    keywords: "ペンホルダー STL ジェネレーター, ツールホルダー, マーカー収納, ブラシ収納, 3Dプリント",
+    generator: "pen-tool-holder-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/pen-tool-holder/pen-tool-holder-generator.js"></script>
+</body>
+</html>

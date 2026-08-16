@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Crie um porta-canetas e ferramentas personalizado para impressão 3D, com diâmetro dos furos, linhas, colunas, espaçamento, altura e base ajustáveis.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/pt/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/pen-tool-holder-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/pen-tool-holder-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Gerador de Porta-Canetas / Ferramentas | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#pth-preview{width:100%;min-width:0;overflow:hidden}
+#pth-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.layout-settings{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.layout-settings h2{margin-top:0;color:#1d4ed8}
+.layout-settings>p{margin-top:-4px;color:#334155;line-height:1.5}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.layout-settings{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="Seleção de idioma"><a href="/en/pen-tool-holder-generator/" hreflang="en">EN</a><a href="/pt/pen-tool-holder-generator/" hreflang="pt" aria-current="page">PT</a><a href="/ja/pen-tool-holder-generator/" hreflang="ja">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>Gerador de Porta-Canetas / Ferramentas STL</h1>
+<p>Crie um suporte de mesa com espaços circulares individuais para canetas, marcadores, pincéis e pequenas ferramentas.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>Tamanho da caneta / ferramenta</h2>
+<label>Diâmetro da caneta / ferramenta (mm)<input type="number" id="pth-tool-diameter" value="12" min="2" max="60" step="0.1"></label>
+<label>Folga do furo (mm)<input type="number" id="pth-clearance" value="1" min="0" max="5" step="0.1"><span class="field-note">O diâmetro final do furo será o diâmetro da ferramenta mais esta folga. 1 mm é um bom ponto de partida para canetas e marcadores.</span></label>
+
+<div class="layout-settings">
+<h2>Distribuição dos espaços</h2>
+<p>Escolha a quantidade de espaços. O tamanho total do suporte é calculado automaticamente.</p>
+<label>Colunas<input type="number" id="pth-columns" value="4" min="1" max="10" step="1"></label>
+<label>Linhas<input type="number" id="pth-rows" value="2" min="1" max="10" step="1"></label>
+<label>Material entre os furos (mm)<input type="number" id="pth-gap" value="3" min="1.2" max="15" step="0.1"></label>
+</div>
+
+<h2>Construção do suporte</h2>
+<label>Margem externa (mm)<input type="number" id="pth-margin" value="4" min="1.5" max="20" step="0.1"></label>
+<label>Altura do suporte (mm)<input type="number" id="pth-height" value="55" min="10" max="150" step="1"></label>
+<label>Espessura do fundo (mm)<input type="number" id="pth-bottom" value="3" min="1" max="10" step="0.1"></label>
+<label>Raio externo dos cantos (mm)<input type="number" id="pth-radius" value="6" min="0" max="100" step="0.5"></label>
+
+<h2>Tamanho calculado</h2>
+<ul class="result-list">
+<li><span>Diâmetro final dos furos</span><strong id="pth-hole-result">—</strong></li>
+<li><span>Largura do suporte</span><strong id="pth-width-result">—</strong></li>
+<li><span>Profundidade do suporte</span><strong id="pth-depth-result">—</strong></li>
+<li><span>Total de espaços</span><strong id="pth-count-result">—</strong></li>
+</ul>
+
+<p id="pth-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="pth-generate" class="button primary-button" type="button">Gerar suporte</button>
+<button id="pth-download" class="btn-primary" type="button">Baixar STL</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>Visualização</h2>
+<div id="pth-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>Perguntas frequentes</h2>
+<h3>Para que posso usar este suporte?</h3><p>Ele pode organizar canetas, marcadores, pincéis, ferramentas de artesanato, pequenas chaves de fenda e outros objetos cilíndricos compatíveis com o diâmetro escolhido.</p>
+<h3>Como o diâmetro do furo é calculado?</h3><p>O gerador soma a folga escolhida ao diâmetro medido da caneta ou ferramenta. Por exemplo, uma ferramenta de 12 mm com 1 mm de folga cria um furo de 13 mm.</p>
+<h3>Por que existem furos separados em vez de um único compartimento?</h3><p>Os espaços individuais mantêm canetas e ferramentas em pé e separadas, facilitando a organização e o acesso.</p>
+<h3>Como devo imprimir o suporte?</h3><p>Imprima em pé, com o fundo plano apoiado na mesa. Como os furos ficam na vertical, normalmente o modelo não precisa de suportes.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "Gerador de Porta-Canetas / Ferramentas",
+    heading: "Gerador de Porta-Canetas / Ferramentas STL",
+    canonical: "https://vekmaker.com/pt/pen-tool-holder-generator/",
+    description: "Crie um porta-canetas e ferramentas personalizado para impressão 3D, com diâmetro dos furos, linhas, colunas, espaçamento, altura e base ajustáveis.",
+    keywords: "gerador STL porta-canetas, porta ferramentas, organizador marcadores, porta pincéis, impressão 3D",
+    generator: "pen-tool-holder-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/pen-tool-holder/pen-tool-holder-generator.js"></script>
+</body>
+</html>

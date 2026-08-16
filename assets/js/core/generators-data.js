@@ -1,5 +1,19 @@
 const GENERATORS = [
     {
+        id: "pen-tool-holder-generator",
+        slug: "pen-tool-holder-generator",
+        name: 'Pen / Tool Holder Generator',
+        icon: "organizer",
+        image: "/assets/images/generators/pen-tool-holder-generator.jpg",
+        description: 'Create desktop holders with individual circular slots for pens, markers, brushes and small tools.',
+        url: "/en/pen-tool-holder-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Porta-Canetas / Ferramentas', description: 'Crie suportes de mesa com espaços circulares individuais para canetas, marcadores, pincéis e pequenas ferramentas.' },
+            ja: { name: 'ペン／ツールホルダージェネレーター', description: 'ペン、マーカー、ブラシ、小型工具を1本ずつ収納できるデスクホルダーを作成できます。' }
+        }
+    },
+    {
         id: "box-divider-insert-generator",
         slug: "box-divider-insert-generator",
         name: 'Box Divider Insert Generator',
