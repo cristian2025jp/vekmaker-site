@@ -1,5 +1,19 @@
 const GENERATORS = [
     {
+        id: "favor-box-generator",
+        slug: "favor-box-generator",
+        name: 'Favor Box Generator',
+        icon: "box",
+        image: "/assets/images/generators/favor-box-generator.jpg",
+        description: 'Create customizable favor boxes with fitted lids for parties, weddings, candy and small gifts.',
+        url: "/en/favor-box-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Caixa de Lembrancinha', description: 'Crie caixas de lembrancinha personalizadas com tampa de encaixe para festas, doces e pequenos presentes.' },
+            ja: { name: 'ギフトボックスジェネレーター', description: 'パーティー、お菓子、小さな贈り物用のフィット式ふた付きボックスを作成できます。' }
+        }
+    },
+    {
         id: "decorative-cake-kit-generator",
         slug: "decorative-cake-kit-generator",
         name: 'Decorative Cake Kit Generator',
