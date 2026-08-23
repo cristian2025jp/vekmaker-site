@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="中空のケーキベース、ケーキスタンド、滑らかまたは波形の装飾リングを組み合わせた3Dプリント用デコレーションキットを作成します。">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/decorative-cake-kit-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/decorative-cake-kit-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/decorative-cake-kit-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/decorative-cake-kit-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/decorative-cake-kit-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>デコレーションケーキキットジェネレーター | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#dck-preview{width:100%;min-width:0;overflow:hidden}
+#dck-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.option-card{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.option-card h2{margin-top:0;color:#1d4ed8}
+.option-card>p{margin-top:-4px;color:#334155;line-height:1.5}
+.hidden-field{display:none!important}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.option-card{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="言語選択"><a href="/en/decorative-cake-kit-generator/" hreflang="en">EN</a><a href="/pt/decorative-cake-kit-generator/" hreflang="pt">PT</a><a href="/ja/decorative-cake-kit-generator/" hreflang="ja" aria-current="page">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>デコレーションケーキキット STL ジェネレーター</h1>
+<p>中空のケーキベース、スタンド、別パーツの装飾リングを作成できます。数字、文字、トッパーは含まれません。</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>デコレーションケーキベース</h2>
+<label>ケーキベース直径 (mm)<input type="number" id="dck-cake-diameter" value="100" min="50" max="300" step="1"></label>
+<label>ケーキベース高さ (mm)<input type="number" id="dck-cake-height" value="45" min="15" max="150" step="1"></label>
+<label>壁の厚さ (mm)<input type="number" id="dck-cake-wall" value="2" min="1.2" max="8" step="0.1"></label>
+<label>上面の厚さ (mm)<input type="number" id="dck-cake-top" value="2" min="1" max="8" step="0.1"><span class="field-note">材料を節約するため中空で底面は開いています。印刷しやすいようSTLは上下反転して出力されます。</span></label>
+
+<h2>ケーキスタンド / 台座</h2>
+<label>上皿直径 (mm)<input type="number" id="dck-plate-diameter" value="120" min="60" max="350" step="1"></label>
+<label>上皿厚さ (mm)<input type="number" id="dck-plate-thickness" value="3" min="2" max="10" step="0.1"></label>
+<label>支柱高さ (mm)<input type="number" id="dck-stand-height" value="35" min="15" max="120" step="1"></label>
+<label>支柱直径 (mm)<input type="number" id="dck-stem-diameter" value="28" min="15" max="80" step="1"></label>
+<label>下部台座直径 (mm)<input type="number" id="dck-foot-diameter" value="65" min="30" max="180" step="1"></label>
+<label>下部台座厚さ (mm)<input type="number" id="dck-foot-thickness" value="4" min="2" max="12" step="0.1"><span class="field-note">ケーキスタンドは上皿と台座の2パーツに分かれます。円形の位置決め凹部と中央ピンで、接着時に2つのパーツを中心に合わせやすくします。</span></label>
+
+<div class="option-card">
+<h2>装飾トリム</h2>
+<p>ケーキベース周囲や追加アクセントとして使える平らな別パーツの装飾を作成します。</p>
+<label>装飾スタイル
+<select id="dck-ring-type">
+<option value="scalloped">波形リング</option>
+<option value="smooth">スムーズリング</option>
+</select>
+</label>
+<label>外径 (mm)<input type="number" id="dck-ring-diameter" value="104" min="40" max="320" step="1"></label>
+<label>リング幅 (mm)<input type="number" id="dck-ring-width" value="5" min="2" max="15" step="0.1"></label>
+<label>リング厚さ (mm)<input type="number" id="dck-ring-thickness" value="2.4" min="1" max="8" step="0.1"></label>
+<label id="dck-scallop-field">波形の数<input type="number" id="dck-scallops" value="24" min="8" max="80" step="1"></label>
+</div>
+
+<h2>計算されたサイズ</h2>
+<ul class="result-list">
+<li><span>ケーキベース</span><strong id="dck-base-size-result">—</strong></li>
+<li><span>スタンド</span><strong id="dck-stand-size-result">—</strong></li>
+<li><span>装飾</span><strong id="dck-ring-size-result">—</strong></li>
+</ul>
+
+<p id="dck-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="dck-generate" class="button primary-button" type="button">キットを生成</button>
+<button id="dck-download-base" class="btn-primary" type="button">ケーキベースSTLをダウンロード</button>
+<button id="dck-download-stand-plate" class="btn-primary" type="button">上皿STLをダウンロード</button>
+<button id="dck-download-stand-base" class="btn-primary" type="button">台座STLをダウンロード</button>
+<button id="dck-download-ring" class="btn-primary" type="button">装飾STLをダウンロード</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>プレビュー</h2>
+<div id="dck-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>よくある質問</h2>
+<h3>数字、文字、トッパーも作成できますか？</h3><p>いいえ。このジェネレーターは再利用できる基本パーツに集中しています。数字、名前、トッパー、テーマ装飾は別途作成してください。</p>
+<h3>ケーキベースは中身が詰まっていますか？</h3><p>いいえ。内部は中空で底面は開き、上面のみ閉じています。ソリッド形状よりフィラメント使用量を減らせます。</p>
+<h3>なぜSTLは別々にダウンロードしますか？</h3><p>ケーキベース、スタンド、装飾を別々の色・サイズ・数量で印刷しやすくするためです。</p>
+<h3>ケーキスタンドはどのように組み立てますか？</h3><p>上皿と台座を別々に印刷できるよう2パーツ構成にしています。台座上部の円形位置決め部と中央ピンが上皿裏面に入り、接着時に中心を合わせやすくします。</p>
+<h3>波形リングとは何ですか？</h3><p>外周が繰り返し波形になった平らな一体リングです。特定のトッパーやロゴ、テーマをコピーせず装飾的な仕上げを追加できます。</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "デコレーションケーキキットジェネレーター",
+    heading: "デコレーションケーキキット STL ジェネレーター",
+    canonical: "https://vekmaker.com/ja/decorative-cake-kit-generator/",
+    description: "中空のケーキベース、ケーキスタンド、滑らかまたは波形の装飾リングを組み合わせた3Dプリント用デコレーションキットを作成します。",
+    keywords: "デコレーションケーキ STL ジェネレーター, ケーキスタンド, ケーキベース, 3Dプリント, 装飾リング",
+    generator: "decorative-cake-kit-generator"
+};
+</script>
+
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/decorative-cake-kit/decorative-cake-kit-generator.js"></script>
+</body>
+</html>

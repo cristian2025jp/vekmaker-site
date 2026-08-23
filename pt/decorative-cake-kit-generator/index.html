@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Crie um kit decorativo personalizável para bolo cenográfico com base oca, boleira e acabamento liso ou ondulado para impressão 3D.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/pt/decorative-cake-kit-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/decorative-cake-kit-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/decorative-cake-kit-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/decorative-cake-kit-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/decorative-cake-kit-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Gerador de Kit Decorativo para Bolo | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#dck-preview{width:100%;min-width:0;overflow:hidden}
+#dck-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.field-note{display:block;margin-top:.35rem;font-size:.85rem;color:#64748b;line-height:1.4}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.option-card{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.option-card h2{margin-top:0;color:#1d4ed8}
+.option-card>p{margin-top:-4px;color:#334155;line-height:1.5}
+.hidden-field{display:none!important}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.option-card{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="Seleção de idioma"><a href="/en/decorative-cake-kit-generator/" hreflang="en">EN</a><a href="/pt/decorative-cake-kit-generator/" hreflang="pt" aria-current="page">PT</a><a href="/ja/decorative-cake-kit-generator/" hreflang="ja">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>Gerador de Kit Decorativo para Bolo STL</h1>
+<p>Crie um conjunto decorativo reutilizável com base de bolo cenográfica, boleira e acabamento separado. Topper, números e textos não fazem parte do gerador.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>Base decorativa do bolo</h2>
+<label>Diâmetro da base do bolo (mm)<input type="number" id="dck-cake-diameter" value="100" min="50" max="300" step="1"></label>
+<label>Altura da base do bolo (mm)<input type="number" id="dck-cake-height" value="45" min="15" max="150" step="1"></label>
+<label>Espessura da parede (mm)<input type="number" id="dck-cake-wall" value="2" min="1.2" max="8" step="0.1"></label>
+<label>Espessura do topo (mm)<input type="number" id="dck-cake-top" value="2" min="1" max="8" step="0.1"><span class="field-note">A base do bolo é oca e aberta por baixo para economizar material. O STL é exportado invertido para facilitar a impressão.</span></label>
+
+<h2>Boleira / Pedestal</h2>
+<label>Diâmetro do prato superior (mm)<input type="number" id="dck-plate-diameter" value="120" min="60" max="350" step="1"></label>
+<label>Espessura do prato superior (mm)<input type="number" id="dck-plate-thickness" value="3" min="2" max="10" step="0.1"></label>
+<label>Altura da haste (mm)<input type="number" id="dck-stand-height" value="35" min="15" max="120" step="1"></label>
+<label>Diâmetro da haste (mm)<input type="number" id="dck-stem-diameter" value="28" min="15" max="80" step="1"></label>
+<label>Diâmetro da base inferior (mm)<input type="number" id="dck-foot-diameter" value="65" min="30" max="180" step="1"></label>
+<label>Espessura da base inferior (mm)<input type="number" id="dck-foot-thickness" value="4" min="2" max="12" step="0.1"><span class="field-note">A boleira é dividida em duas peças: prato superior e base do pedestal. Um rebaixo circular com pino central mantém as duas peças centralizadas durante a colagem.</span></label>
+
+<div class="option-card">
+<h2>Acabamento decorativo</h2>
+<p>Crie uma decoração plana separada para usar ao redor da base do bolo ou como detalhe adicional.</p>
+<label>Estilo do acabamento
+<select id="dck-ring-type">
+<option value="scalloped">Anel ondulado</option>
+<option value="smooth">Anel liso</option>
+</select>
+</label>
+<label>Diâmetro externo (mm)<input type="number" id="dck-ring-diameter" value="104" min="40" max="320" step="1"></label>
+<label>Largura do anel (mm)<input type="number" id="dck-ring-width" value="5" min="2" max="15" step="0.1"></label>
+<label>Espessura do anel (mm)<input type="number" id="dck-ring-thickness" value="2.4" min="1" max="8" step="0.1"></label>
+<label id="dck-scallop-field">Quantidade de ondas<input type="number" id="dck-scallops" value="24" min="8" max="80" step="1"></label>
+</div>
+
+<h2>Tamanho calculado</h2>
+<ul class="result-list">
+<li><span>Base do bolo</span><strong id="dck-base-size-result">—</strong></li>
+<li><span>Boleira</span><strong id="dck-stand-size-result">—</strong></li>
+<li><span>Acabamento</span><strong id="dck-ring-size-result">—</strong></li>
+</ul>
+
+<p id="dck-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="dck-generate" class="button primary-button" type="button">Gerar kit</button>
+<button id="dck-download-base" class="btn-primary" type="button">Baixar STL da base do bolo</button>
+<button id="dck-download-stand-plate" class="btn-primary" type="button">Baixar STL do prato superior</button>
+<button id="dck-download-stand-base" class="btn-primary" type="button">Baixar STL da base do pedestal</button>
+<button id="dck-download-ring" class="btn-primary" type="button">Baixar STL do acabamento</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>Visualização</h2>
+<div id="dck-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>Perguntas frequentes</h2>
+<h3>Este gerador cria topper, números ou textos?</h3><p>Não. O gerador foi pensado somente para as peças físicas reutilizáveis do conjunto. Topper, números, nomes e outras decorações temáticas ficam a cargo do usuário.</p>
+<h3>A base decorativa do bolo é maciça?</h3><p>Não. Ela é oca, aberta por baixo e fechada no topo, reduzindo bastante o consumo de filamento em comparação com um cilindro maciço.</p>
+<h3>Por que as peças são baixadas separadamente?</h3><p>Os STLs separados facilitam imprimir a base do bolo, a boleira e o acabamento em cores, tamanhos ou quantidades diferentes.</p>
+<h3>Como a boleira é montada?</h3><p>A boleira é dividida em prato superior e base do pedestal para que as duas peças possam ser impressas sem a grande saliência do prato. A base possui um encaixe circular e um pino central que entram na parte inferior do prato, mantendo tudo centralizado durante a colagem.</p>
+<h3>O que é o acabamento ondulado?</h3><p>É um anel plano contínuo com a borda externa repetidamente ondulada. Ele cria um acabamento decorativo sem reproduzir topper, logotipo ou tema específico.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "Gerador de Kit Decorativo para Bolo",
+    heading: "Gerador de Kit Decorativo para Bolo STL",
+    canonical: "https://vekmaker.com/pt/decorative-cake-kit-generator/",
+    description: "Crie um kit decorativo personalizável para bolo cenográfico com base oca, boleira e acabamento liso ou ondulado para impressão 3D.",
+    keywords: "gerador STL bolo cenográfico, base bolo decorativa, boleira impressão 3D, pedestal bolo, acabamento bolo",
+    generator: "decorative-cake-kit-generator"
+};
+</script>
+
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/decorative-cake-kit/decorative-cake-kit-generator.js"></script>
+</body>
+</html>

@@ -1,5 +1,19 @@
 const GENERATORS = [
     {
+        id: "decorative-cake-kit-generator",
+        slug: "decorative-cake-kit-generator",
+        name: 'Decorative Cake Kit Generator',
+        icon: "cylinder",
+        image: "/assets/images/generators/decorative-cake-kit-generator.jpg",
+        description: 'Create decorative cake display bases, pedestal stands and separate trim rings for 3D printing.',
+        url: "/en/decorative-cake-kit-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Kit Decorativo para Bolo', description: 'Crie bases de bolo cenográficas, boleiras e acabamentos decorativos separados para impressão 3D.' },
+            ja: { name: 'デコレーションケーキキットジェネレーター', description: 'デコレーション用ケーキベース、スタンド、別パーツの装飾リングを作成できます。' }
+        }
+    },
+    {
         id: "pen-tool-holder-generator",
         slug: "pen-tool-holder-generator",
         name: 'Pen / Tool Holder Generator',
