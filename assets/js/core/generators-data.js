@@ -1,5 +1,19 @@
 const GENERATORS = [
     {
+        id: "makeup-organizer-generator",
+        slug: "makeup-organizer-generator",
+        name: 'Makeup Organizer Generator',
+        icon: "organizer",
+        image: "/assets/images/generators/makeup-organizer-generator.jpg",
+        description: 'Create desktop organizers with upper compartments and a separate fitted drawer for makeup, brushes and small accessories.',
+        url: "/en/makeup-organizer-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Organizador de Maquiagem', description: 'Crie organizadores de mesa com compartimentos superiores e gaveta separada para maquiagem, pincéis e pequenos acessórios.' },
+            ja: { name: 'メイクアップオーガナイザージェネレーター', description: 'メイク用品、ブラシ、小物向けの上部区画と別パーツ引き出しを備えたデスク収納を作成できます。' }
+        }
+    },
+    {
         id: "favor-box-generator",
         slug: "favor-box-generator",
         name: 'Favor Box Generator',

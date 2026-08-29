@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="前面を低く、背面を高くした、よりシンプルな3Dプリント用メイクアップオーガナイザーを作成できます。">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/makeup-organizer-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/makeup-organizer-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/makeup-organizer-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/makeup-organizer-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/makeup-organizer-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>メイクアップオーガナイザージェネレーター | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#mo-preview{width:100%;min-width:0;overflow:hidden}
+#mo-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.option-card{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.option-card h2{margin-top:0;color:#1d4ed8}
+.option-card>p{margin-top:-4px;color:#334155;line-height:1.5}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.option-card{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="言語選択"><a href="/en/makeup-organizer-generator/" hreflang="en">EN</a><a href="/pt/makeup-organizer-generator/" hreflang="pt">PT</a><a href="/ja/makeup-organizer-generator/" hreflang="ja" aria-current="page">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>メイクアップオーガナイザー STL ジェネレーター</h1>
+<p>メイク用品、ブラシ、小物向けの、よりシンプルでサポートを減らしやすいオーガナイザーを作成します。前面は低く、背面は高く、初期設定は3行×3列です。</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>オーガナイザーサイズ</h2>
+<label>全体幅 (mm)<input id="mo-width" type="number" value="150" min="80" max="260" step="1"></label>
+<label>全体奥行き (mm)<input id="mo-depth" type="number" value="110" min="60" max="220" step="1"></label>
+
+<div class="option-card">
+<h2>区画レイアウト</h2>
+<p>この簡略版では引き出しを削除し、前から後ろへ傾斜する、より印刷しやすい本体構造にしています。</p>
+<label>前面高さ (mm)<input id="mo-front-height" type="number" value="35" min="20" max="140" step="1"></label>
+<label>背面高さ (mm)<input id="mo-back-height" type="number" value="70" min="30" max="180" step="1"></label>
+<label>行数<input id="mo-rows" type="number" value="3" min="1" max="6" step="1"></label>
+<label>列数<input id="mo-columns" type="number" value="3" min="1" max="6" step="1"></label>
+</div>
+
+<h2>構造</h2>
+<label>壁厚 (mm)<input id="mo-wall" type="number" value="2" min="1.2" max="4" step="0.1"></label>
+<label>底厚 (mm)<input id="mo-bottom" type="number" value="2" min="1.2" max="6" step="0.1"></label>
+<label>仕切り厚 (mm)<input id="mo-divider" type="number" value="1.6" min="1" max="4" step="0.1"></label>
+
+<h2>計算されたスペース</h2>
+<ul class="result-list">
+<li><span>区画幅</span><strong id="mo-comp-width">—</strong></li>
+<li><span>区画奥行き</span><strong id="mo-comp-depth">—</strong></li>
+<li><span>前面の有効高さ</span><strong id="mo-front-inner-height">—</strong></li>
+<li><span>背面の有効高さ</span><strong id="mo-back-inner-height">—</strong></li>
+</ul>
+
+<p id="mo-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="mo-generate" class="button primary-button" type="button">オーガナイザーを生成</button>
+<button id="mo-download" class="btn-primary" type="button">オーガナイザーSTLをダウンロード</button>
+</div>
+
+</div>
+
+<div class="generator-preview">
+<h2>プレビュー</h2>
+<div id="mo-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>よくある質問</h2>
+<h3>なぜ引き出しをなくしたのですか？</h3><p>この簡略版は、印刷時間を短くし、初心者でも扱いやすくするためです。</p>
+<h3>前面高さと背面高さの違いで何が変わりますか？</h3><p>前面を低く、背面を高くすることで、メイク用品、ブラシ、小物を取り出しやすくします。</p>
+<h3>区画数は変更できますか？</h3><p>はい。初期設定は3行×3列ですが、必要に応じて行数と列数を変更できます。</p>
+<h3>このバージョンはサポートが少なくなりますか？</h3><p>はい。引き出し版よりも、上面が開いた単一ボディと平らな底面にすることで、より簡単に印刷できるようにしています。</p>
+<h3>どのようにテストするのが良いですか？</h3><p>まずBambu StudioでSTLを開き、サポートの必要性やスライス結果を確認し、必要なら本番前に小さいサイズでテスト印刷してください。</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "メイクアップオーガナイザージェネレーター",
+    heading: "メイクアップオーガナイザー STL ジェネレーター",
+    canonical: "https://vekmaker.com/ja/makeup-organizer-generator/",
+    description: "前面を低く、背面を高くした、よりシンプルな3Dプリント用メイクアップオーガナイザーを作成できます。",
+    keywords: "メイクアップオーガナイザー STL ジェネレーター, シンプル収納, ブラシ収納, 3Dプリント",
+    generator: "makeup-organizer-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/makeup-organizer/makeup-organizer-generator.js"></script>
+</body>
+</html>

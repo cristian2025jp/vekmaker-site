@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create a simpler 3D printable makeup organizer with a lower front, higher back, and a customizable grid of compartments.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/en/makeup-organizer-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/makeup-organizer-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/makeup-organizer-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/makeup-organizer-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/makeup-organizer-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Makeup Organizer Generator | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#mo-preview{width:100%;min-width:0;overflow:hidden}
+#mo-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a:hover{border-color:#93c5fd;color:#2563eb}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.option-card{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.option-card h2{margin-top:0;color:#1d4ed8}
+.option-card>p{margin-top:-4px;color:#334155;line-height:1.5}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.option-card{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="Language selection"><a href="/en/makeup-organizer-generator/" hreflang="en" aria-current="page">EN</a><a href="/pt/makeup-organizer-generator/" hreflang="pt">PT</a><a href="/ja/makeup-organizer-generator/" hreflang="ja">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>Makeup Organizer STL Generator</h1>
+<p>Create a simpler low-support organizer for makeup, brushes and small accessories. The front is lower and the back is higher, and the default layout starts with 3 rows and 3 columns.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>Organizer Size</h2>
+<label>Overall Width (mm)<input id="mo-width" type="number" value="150" min="80" max="260" step="1"></label>
+<label>Overall Depth (mm)<input id="mo-depth" type="number" value="110" min="60" max="220" step="1"></label>
+
+<div class="option-card">
+<h2>Compartment Layout</h2>
+<p>This simplified version removes the drawer and focuses on a faster-printing organizer body with a sloped front-to-back profile.</p>
+<label>Front Height (mm)<input id="mo-front-height" type="number" value="35" min="20" max="140" step="1"></label>
+<label>Back Height (mm)<input id="mo-back-height" type="number" value="70" min="30" max="180" step="1"></label>
+<label>Rows<input id="mo-rows" type="number" value="3" min="1" max="6" step="1"></label>
+<label>Columns<input id="mo-columns" type="number" value="3" min="1" max="6" step="1"></label>
+</div>
+
+<h2>Construction</h2>
+<label>Wall Thickness (mm)<input id="mo-wall" type="number" value="2" min="1.2" max="4" step="0.1"></label>
+<label>Bottom Thickness (mm)<input id="mo-bottom" type="number" value="2" min="1.2" max="6" step="0.1"></label>
+<label>Divider Thickness (mm)<input id="mo-divider" type="number" value="1.6" min="1" max="4" step="0.1"></label>
+
+<h2>Calculated Space</h2>
+<ul class="result-list">
+<li><span>Compartment Width</span><strong id="mo-comp-width">—</strong></li>
+<li><span>Compartment Depth</span><strong id="mo-comp-depth">—</strong></li>
+<li><span>Usable Front Height</span><strong id="mo-front-inner-height">—</strong></li>
+<li><span>Usable Back Height</span><strong id="mo-back-inner-height">—</strong></li>
+</ul>
+
+<p id="mo-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="mo-generate" class="button primary-button" type="button">Generate Organizer</button>
+<button id="mo-download" class="btn-primary" type="button">Download Organizer STL</button>
+</div>
+
+</div>
+
+<div class="generator-preview">
+<h2>Preview</h2>
+<div id="mo-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>FAQ</h2>
+<h3>Why was the drawer removed?</h3><p>This simplified version is intended to reduce print time and make the model easier to print for beginners.</p>
+<h3>What does the front and back height option change?</h3><p>It creates a lower front and a higher back, making the organizer more practical for makeup, brushes and small desk items.</p>
+<h3>Can I still change the number of compartments?</h3><p>Yes. The default is 3 rows by 3 columns, but you can change rows and columns to suit your needs.</p>
+<h3>Does this version use less support?</h3><p>Yes. The organizer is now a single open-top body with a flat bottom, designed to be simpler and more support-friendly than the drawer version.</p>
+<h3>What is the best way to test it?</h3><p>First open the STL in Bambu Studio, check for support needs and slicing behavior, and if needed print a smaller test before using a full-size version.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE = {
+    title: "Makeup Organizer Generator",
+    heading: "Makeup Organizer STL Generator",
+    canonical: "https://vekmaker.com/en/makeup-organizer-generator/",
+    description: "Create a simpler 3D printable makeup organizer with a lower front, higher back, and a customizable grid of compartments.",
+    keywords: "makeup organizer STL generator, low support organizer, brush organizer, 3D printing organizer",
+    generator: "makeup-organizer-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/makeup-organizer/makeup-organizer-generator.js"></script>
+</body>
+</html>

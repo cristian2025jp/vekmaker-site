@@ -1,3 +1,31 @@
+const GA_MEASUREMENT_ID="G-FHGHM9C4GS";
+
+function initGoogleAnalytics(){
+    const host=window.location.hostname.toLowerCase();
+
+    // Do not count local development/testing in Google Analytics.
+    if(host!=="vekmaker.com"&&host!=="www.vekmaker.com")return;
+
+    if(window.__VEKMAKER_GA_INITIALIZED__)return;
+    window.__VEKMAKER_GA_INITIALIZED__=true;
+
+    window.dataLayer=window.dataLayer||[];
+    window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};
+
+    window.gtag("js",new Date());
+    window.gtag("config",GA_MEASUREMENT_ID,{
+        send_page_view:true
+    });
+
+    const script=document.createElement("script");
+    script.async=true;
+    script.src=`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
+    script.dataset.vekmakerAnalytics="ga4";
+    document.head.appendChild(script);
+}
+
+initGoogleAnalytics();
+
 const LAYOUT_I18N={
 en:{mainNavigation:"Main navigation",tagline:"Online STL Generators",home:"Home",generators:"Generators",priceCalculator:"Price Calculator",about:"About",information:"Information",aboutVekmaker:"About VEKMaker",privacy:"Privacy",terms:"Terms of Use",contact:"Contact",supportVekmaker:"Support VEKMaker ☕",boxGenerator:"Box Generator",cylinderGenerator:"Cylinder Generator",coinTokenGenerator:"Coin / Token Generator",footerDescription:"Browser-based tools for creating customizable STL files for 3D printing.",footerNote:"Models are generated locally in your browser. No file upload is required.",footerBottom:"Simple tools for makers and 3D printing users."},
 pt:{mainNavigation:"Navegação principal",tagline:"Geradores STL Online",home:"Início",generators:"Geradores",priceCalculator:"Calculadora de Preço",about:"Sobre",information:"Informações",aboutVekmaker:"Sobre o VEKMaker",privacy:"Privacidade",terms:"Termos de Uso",contact:"Contato",supportVekmaker:"Apoie o VEKMaker ☕",boxGenerator:"Gerador de Caixa",cylinderGenerator:"Gerador de Cilindro",coinTokenGenerator:"Gerador de Moeda / Token",footerDescription:"Ferramentas no navegador para criar arquivos STL personalizáveis para impressão 3D.",footerNote:"Os modelos são gerados localmente no seu navegador. Não é necessário enviar arquivos.",footerBottom:"Ferramentas simples para makers e usuários de impressão 3D."},
