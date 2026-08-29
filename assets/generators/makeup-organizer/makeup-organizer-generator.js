@@ -236,11 +236,19 @@ function makeOrganizer(a, d) {
     // Bottom plate
     group.add(boxMesh(a.width, a.depth, a.bottom, 0, 0, a.bottom / 2, material));
 
-    // Front and back walls
+    /*
+     * IMPORTANT FOR SLICING
+     * All vertical parts now meet edge-to-edge instead of overlapping.
+     * Bambu Studio can preview intersecting closed solids correctly but the
+     * slicer may remove/alter material in overlapping regions.
+     */
+
+    // Front and back walls are trimmed to the INNER width so they do not overlap side walls.
     const frontWallH = a.frontHeight - a.bottom;
     const backWallH = a.backHeight - a.bottom;
+
     group.add(boxMesh(
-        a.width,
+        d.innerWidth,
         a.wall,
         frontWallH,
         0,
@@ -248,8 +256,9 @@ function makeOrganizer(a, d) {
         a.bottom + frontWallH / 2,
         material
     ));
+
     group.add(boxMesh(
-        a.width,
+        d.innerWidth,
         a.wall,
         backWallH,
         0,
@@ -258,44 +267,84 @@ function makeOrganizer(a, d) {
         material
     ));
 
-    // Left and right sloped side walls
-    const sideLeft = slopedPrism(a.wall, a.depth, frontWallH, backWallH, material);
+    // Left and right side walls keep the full depth.
+    const sideLeft = slopedPrism(
+        a.wall,
+        a.depth,
+        frontWallH,
+        backWallH,
+        material
+    );
     sideLeft.position.set(-a.width / 2 + a.wall / 2, 0, a.bottom);
     group.add(sideLeft);
 
-    const sideRight = slopedPrism(a.wall, a.depth, frontWallH, backWallH, material);
+    const sideRight = slopedPrism(
+        a.wall,
+        a.depth,
+        frontWallH,
+        backWallH,
+        material
+    );
     sideRight.position.set(a.width / 2 - a.wall / 2, 0, a.bottom);
     group.add(sideRight);
 
-    // Internal dividers front-to-back (sloped)
+    /*
+     * Column dividers run front-to-back across the inner depth.
+     * They stop exactly at the inner faces of the front/back walls.
+     */
     for (let c = 1; c < a.columns; c++) {
-        const x = -d.innerWidth / 2 + c * d.compWidth + (c - 0.5) * a.divider;
-        const dividerMesh = slopedPrism(a.divider, d.innerDepth, d.frontInnerHeight, d.backInnerHeight, material);
+        const x =
+            -d.innerWidth / 2 +
+            c * d.compWidth +
+            (c - 0.5) * a.divider;
+
+        const dividerMesh = slopedPrism(
+            a.divider,
+            d.innerDepth,
+            d.frontInnerHeight,
+            d.backInnerHeight,
+            material
+        );
+
         dividerMesh.position.set(x, 0, a.bottom);
         group.add(dividerMesh);
     }
 
-    // Internal dividers left-to-right.
-    // Their top must follow the SAME front-to-back slope as the side walls.
-    // Use the OUTER front/back heights, then subtract the bottom only once
-    // when positioning the divider above the bottom plate.
+    /*
+     * Row dividers no longer pass through the column dividers.
+     * Each row divider is split into one segment per compartment column.
+     * This removes every cross-shaped mesh intersection while keeping the
+     * visible layout identical.
+     */
     for (let r = 1; r < a.rows; r++) {
-        const y = -d.innerDepth / 2 + r * d.compDepth + (r - 0.5) * a.divider;
+        const y =
+            -d.innerDepth / 2 +
+            r * d.compDepth +
+            (r - 0.5) * a.divider;
 
-        // Convert this divider position to the full outside depth of the organizer.
         const t = (y + a.depth / 2) / a.depth;
-        const topZ = a.frontHeight + (a.backHeight - a.frontHeight) * t;
+        const topZ =
+            a.frontHeight +
+            (a.backHeight - a.frontHeight) * t;
+
         const dividerHeight = topZ - a.bottom;
 
-        group.add(boxMesh(
-            d.innerWidth,
-            a.divider,
-            dividerHeight,
-            0,
-            y,
-            a.bottom + dividerHeight / 2,
-            material
-        ));
+        for (let c = 0; c < a.columns; c++) {
+            const x =
+                -d.innerWidth / 2 +
+                c * (d.compWidth + a.divider) +
+                d.compWidth / 2;
+
+            group.add(boxMesh(
+                d.compWidth,
+                a.divider,
+                dividerHeight,
+                x,
+                y,
+                a.bottom + dividerHeight / 2,
+                material
+            ));
+        }
     }
 
     return group;
