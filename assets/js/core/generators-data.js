@@ -1,4 +1,19 @@
 const GENERATORS = [
+
+    {
+        id: "matchbox-style-box-generator",
+        slug: "matchbox-style-box-generator",
+        name: 'Matchbox Style Box Generator',
+        icon: "box",
+        image: "/assets/images/generators/matchbox-style-box-generator.jpg",
+        description: 'Create compact sliding storage boxes with an outer sleeve and inner tray for jewelry, coins, gifts and small accessories.',
+        url: "/en/matchbox-style-box-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Caixa Estilo Caixa de Fósforo', description: 'Crie caixas deslizantes compactas com capa externa e gaveta interna para joias, moedas, presentes e pequenos acessórios.' },
+            ja: { name: 'マッチボックススタイルケースジェネレーター', description: '外側スリーブと内側トレイを備えた、アクセサリーや小物向けのコンパクトなスライドケースを作成できます。' }
+        }
+    },
     {
         id: "makeup-organizer-generator",
         slug: "makeup-organizer-generator",

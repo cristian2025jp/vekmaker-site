@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="指掛け、仕切り、上面パターンを選べる、スライド式マッチボックススタイルの3Dプリント用ケースを作成できます。">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/matchbox-style-box-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/matchbox-style-box-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/matchbox-style-box-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/matchbox-style-box-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/matchbox-style-box-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>マッチボックススタイルケースジェネレーター | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#mb-preview{width:100%;min-width:0;overflow:hidden}
+#mb-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.option-card{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.option-card h2{margin-top:0;color:#1d4ed8}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.option-card{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="言語選択"><a href="/en/matchbox-style-box-generator/" hreflang="en">EN</a><a href="/pt/matchbox-style-box-generator/" hreflang="pt">PT</a><a href="/ja/matchbox-style-box-generator/" hreflang="ja" aria-current="page">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>マッチボックススタイルケース STL ジェネレーター</h1>
+<p>アクセサリー、コイン、小物、ギフト向けのコンパクトなスライドケースを作成します。技術的な設定は自動化され、簡単に使えます。</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>ケースサイズ</h2>
+<label>内寸幅 (mm)<input id="mb-width" type="number" value="70" min="35" max="180" step="1"></label>
+<label>内寸奥行き (mm)<input id="mb-depth" type="number" value="95" min="40" max="220" step="1"></label>
+<label>内寸高さ (mm)<input id="mb-height" type="number" value="24" min="12" max="80" step="1"></label>
+
+<div class="option-card">
+<h2>前面開口</h2>
+<label>指掛け
+<select id="mb-notch">
+<option value="none">なし</option>
+<option value="semi" selected>半円</option>
+<option value="slot">角丸スロット</option>
+</select>
+</label>
+</div>
+
+<div class="option-card">
+<h2>オプション</h2>
+<label>内部仕切り
+<select id="mb-divider">
+<option value="none" selected>なし</option>
+<option value="two">2区画</option>
+</select>
+</label>
+
+<label>上面パターン
+<select id="mb-pattern">
+<option value="smooth" selected>スムーズ</option>
+<option value="grooves">シンプルな溝</option>
+</select>
+</label>
+</div>
+
+<h2>計算された外寸</h2>
+<ul class="result-list">
+<li><span>外寸幅</span><strong id="mb-outer-width">—</strong></li>
+<li><span>外寸奥行き</span><strong id="mb-outer-depth">—</strong></li>
+<li><span>外寸高さ</span><strong id="mb-outer-height">—</strong></li>
+</ul>
+
+<p id="mb-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="mb-download-sleeve" class="btn-primary" type="button">外側スリーブSTLをダウンロード</button>
+<button id="mb-download-tray" class="btn-primary" type="button">内側トレイSTLをダウンロード</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>プレビュー</h2>
+<div id="mb-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>よくある質問</h2>
+<h3>このケースはどのように使いますか？</h3><p>外側スリーブと内側トレイの2パーツで構成され、マッチ箱のようにトレイがスライドします。</p>
+<h3>壁厚やスライドクリアランスを調整する必要がありますか？</h3><p>いいえ。この簡略版では構造値を固定しているため、必要な内寸と簡単なオプションだけを選びます。</p>
+<h3>指掛けは何のためですか？</h3><p>内側トレイを引き出しやすくするためのオプションです。</p>
+<h3>仕切りオプションは何をしますか？</h3><p>2区画を選ぶと、内側トレイの中央に1枚の仕切りを追加します。</p>
+<h3>どの向きで印刷しますか？</h3><p>トレイは底面を下にして印刷します。外側スリーブはサポートを減らすため、開口端を下にした向きでSTLを書き出します。</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE={
+    title:"マッチボックススタイルケースジェネレーター",
+    heading:"マッチボックススタイルケース STL ジェネレーター",
+    canonical:"https://vekmaker.com/ja/matchbox-style-box-generator/",
+    description:"指掛け、仕切り、上面パターンを選べる、スライド式マッチボックススタイルの3Dプリント用ケースを作成できます。",
+    keywords:"マッチボックス ケース STL ジェネレーター, スライドケース, アクセサリーケース, 3Dプリント",
+    generator:"matchbox-style-box-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/matchbox-style-box/matchbox-style-box-generator.js"></script>
+</body>
+</html>

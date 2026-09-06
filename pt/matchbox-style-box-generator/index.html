@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Crie uma caixa deslizante para impressão 3D no estilo caixa de fósforo, com recorte para o dedo, divisória e padrão superior opcionais.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/pt/matchbox-style-box-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/matchbox-style-box-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/matchbox-style-box-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/matchbox-style-box-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/matchbox-style-box-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Gerador de Caixa Estilo Caixa de Fósforo | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#mb-preview{width:100%;min-width:0;overflow:hidden}
+#mb-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.option-card{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.option-card h2{margin-top:0;color:#1d4ed8}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.option-card{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="Seleção de idioma"><a href="/en/matchbox-style-box-generator/" hreflang="en">EN</a><a href="/pt/matchbox-style-box-generator/" hreflang="pt" aria-current="page">PT</a><a href="/ja/matchbox-style-box-generator/" hreflang="ja">日本語</a></nav>
+
+<section class="generator-intro">
+<h1>Gerador de Caixa Estilo Caixa de Fósforo STL</h1>
+<p>Crie uma caixinha deslizante compacta para joias, moedas, pequenos acessórios e presentes. As configurações técnicas ficam automáticas para manter o gerador simples.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<h2>Tamanho da Caixa</h2>
+<label>Largura Interna (mm)<input id="mb-width" type="number" value="70" min="35" max="180" step="1"></label>
+<label>Profundidade Interna (mm)<input id="mb-depth" type="number" value="95" min="40" max="220" step="1"></label>
+<label>Altura Interna (mm)<input id="mb-height" type="number" value="24" min="12" max="80" step="1"></label>
+
+<div class="option-card">
+<h2>Abertura Frontal</h2>
+<label>Recorte para o Dedo
+<select id="mb-notch">
+<option value="none">Nenhum</option>
+<option value="semi" selected>Semicírculo</option>
+<option value="slot">Abertura Arredondada</option>
+</select>
+</label>
+</div>
+
+<div class="option-card">
+<h2>Recursos Opcionais</h2>
+<label>Divisória Interna
+<select id="mb-divider">
+<option value="none" selected>Não</option>
+<option value="two">2 compartimentos</option>
+</select>
+</label>
+
+<label>Padrão Superior
+<select id="mb-pattern">
+<option value="smooth" selected>Liso</option>
+<option value="grooves">Ranhuras Simples</option>
+</select>
+</label>
+</div>
+
+<h2>Tamanho Externo Calculado</h2>
+<ul class="result-list">
+<li><span>Largura Externa</span><strong id="mb-outer-width">—</strong></li>
+<li><span>Profundidade Externa</span><strong id="mb-outer-depth">—</strong></li>
+<li><span>Altura Externa</span><strong id="mb-outer-height">—</strong></li>
+</ul>
+
+<p id="mb-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="mb-download-sleeve" class="btn-primary" type="button">Baixar STL da Capa Externa</button>
+<button id="mb-download-tray" class="btn-primary" type="button">Baixar STL da Gaveta Interna</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>Visualização</h2>
+<div id="mb-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>Perguntas frequentes</h2>
+<h3>Como funciona esta caixa?</h3><p>Ela usa duas peças para impressão: uma capa externa e uma gaveta interna que desliza para dentro e para fora como uma caixa de fósforo.</p>
+<h3>Preciso ajustar espessura da parede ou folga de deslizamento?</h3><p>Não. Este gerador simplificado utiliza valores internos fixos, então você escolhe apenas o tamanho útil e algumas opções visuais.</p>
+<h3>Para que serve o recorte para o dedo?</h3><p>O recorte opcional facilita puxar a gaveta interna para fora da capa.</p>
+<h3>O que faz a opção de divisória?</h3><p>A opção de 2 compartimentos adiciona uma divisória central na gaveta interna.</p>
+<h3>Como as peças devem ser impressas?</h3><p>A gaveta foi projetada para imprimir em pé sobre o fundo. A capa externa é exportada apoiada em uma das extremidades abertas para reduzir a necessidade de suportes.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE={
+    title:"Gerador de Caixa Estilo Caixa de Fósforo",
+    heading:"Gerador de Caixa Estilo Caixa de Fósforo STL",
+    canonical:"https://vekmaker.com/pt/matchbox-style-box-generator/",
+    description:"Crie uma caixa deslizante para impressão 3D no estilo caixa de fósforo, com recorte para o dedo, divisória e padrão superior opcionais.",
+    keywords:"gerador STL caixa de fósforo, caixa deslizante, caixa joias, caixa gaveta, impressão 3D",
+    generator:"matchbox-style-box-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/matchbox-style-box/matchbox-style-box-generator.js"></script>
+</body>
+</html>
