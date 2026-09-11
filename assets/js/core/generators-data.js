@@ -1,6 +1,22 @@
 const GENERATORS = [
 
     {
+        id: "round-screw-lid-box-generator",
+        slug: "round-screw-lid-box-generator",
+        name: 'Round Screw-Lid Box Generator',
+        icon: "cylinder",
+        image: "/assets/images/generators/round-screw-lid-box-generator.jpg",
+        description: 'Create round storage boxes with a coarse printable screw lid using controlled predefined sizes.',
+        url: "/en/round-screw-lid-box-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Caixa Redonda com Tampa de Rosca', description: 'Crie caixas redondas com tampa de rosca grossa para impressão 3D usando tamanhos predefinidos e controlados.' },
+            ja: { name: 'ねじ式丸型ケースジェネレーター', description: '定型サイズから、3Dプリント向けの粗いねじ式ふた付き丸型ケースを作成できます。' }
+        }
+    },
+
+
+    {
         id: "matchbox-style-box-generator",
         slug: "matchbox-style-box-generator",
         name: 'Matchbox Style Box Generator',

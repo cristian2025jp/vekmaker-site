@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Crie uma caixa redonda para impressão 3D com tampa de rosca grossa. Escolha diâmetro e altura em incrementos controlados de 10 mm.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/pt/round-screw-lid-box-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/round-screw-lid-box-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/round-screw-lid-box-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/round-screw-lid-box-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/round-screw-lid-box-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Gerador de Caixa Redonda com Tampa de Rosca | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#sl-preview{width:100%;min-width:0;overflow:hidden}
+#sl-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.option-card{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.option-card h2{margin-top:0;color:#1d4ed8}
+.option-card select{font-weight:700}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.option-card{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+
+.product-photo-section{margin:10px 0 24px}
+.product-photo-card{max-width:720px;margin:0 auto;padding:16px;border:1px solid #e5e7eb;border-radius:14px;background:#fff}
+.product-photo-card img{display:block;width:100%;height:auto;border-radius:10px;object-fit:cover}
+.product-photo-card p{margin:12px 0 0;color:#4b5563;text-align:center}
+
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="Seleção de idioma"><a href="/en/round-screw-lid-box-generator/" hreflang="en">EN</a><a href="/pt/round-screw-lid-box-generator/" hreflang="pt" aria-current="page">PT</a><a href="/ja/round-screw-lid-box-generator/" hreflang="ja">日本語</a></nav>
+
+<section class="product-photo-section">
+<h2>Exemplo Impresso</h2>
+<div class="product-photo-card">
+<img
+    src="/assets/images/generators/round-screw-lid-box-generator.jpg"
+    alt="Exemplo real de uma caixa redonda com tampa de rosca impressa em 3D e gerada no VEKMaker."
+    loading="lazy"
+    width="1200"
+    height="900">
+<p>Exemplo real de uma caixa redonda com tampa de rosca impressa em 3D e gerada no VEKMaker.</p>
+</div>
+</section>
+
+<section class="generator-intro">
+<h1>Gerador de Caixa Redonda com Tampa de Rosca STL</h1>
+<p>Crie uma caixa redonda simples com tampa rosqueável para impressão 3D. O diâmetro e a altura usam tamanhos predefinidos de 10 em 10 mm para manter a rosca dentro de uma faixa controlada e mais fácil de testar.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<div class="option-card">
+<h2>Tamanho da Caixa</h2>
+
+<label>Diâmetro Interno
+<select id="sl-diameter">
+<option value="40">40 mm</option>
+<option value="50">50 mm</option>
+<option value="60" selected>60 mm</option>
+<option value="70">70 mm</option>
+<option value="80">80 mm</option>
+<option value="90">90 mm</option>
+<option value="100">100 mm</option>
+</select>
+</label>
+
+<label>Altura Interna
+<select id="sl-height">
+<option value="20">20 mm</option>
+<option value="30">30 mm</option>
+<option value="40" selected>40 mm</option>
+<option value="50">50 mm</option>
+<option value="60">60 mm</option>
+<option value="70">70 mm</option>
+<option value="80">80 mm</option>
+<option value="90">90 mm</option>
+<option value="100">100 mm</option>
+</select>
+</label>
+</div>
+
+<h2>Tamanho Calculado</h2>
+<ul class="result-list">
+<li><span>Diâmetro Externo da Caixa</span><strong id="sl-outer-diameter">—</strong></li>
+<li><span>Altura Externa da Caixa</span><strong id="sl-outer-height">—</strong></li>
+<li><span>Altura da Tampa</span><strong id="sl-lid-height">—</strong></li>
+</ul>
+
+<p id="sl-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="sl-download-box" class="btn-primary" type="button">Baixar STL da Caixa</button>
+<button id="sl-download-lid" class="btn-primary" type="button">Baixar STL da Tampa de Rosca</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>Visualização</h2>
+<div id="sl-preview" class="preview-area"></div>
+</div>
+</section>
+
+
+
+
+<section class="faq">
+<h2>Perguntas frequentes</h2>
+<h3>Por que os tamanhos são predefinidos?</h3><p>A primeira versão usa incrementos de 10 mm para manter a geometria da rosca dentro de uma faixa controlada.</p>
+<h3>Preciso configurar a rosca?</h3><p>Não. O passo, profundidade, espessura das paredes e folga da rosca são definidos automaticamente.</p>
+<h3>Que tipo de rosca é usada?</h3><p>O gerador usa uma rosca grossa, arredondada e de uma entrada, desenvolvida para impressão 3D FDM.</p>
+<h3>Como devo imprimir as peças?</h3><p>Imprima a caixa em pé sobre o fundo e a tampa com a abertura apoiada na mesa de impressão.</p>
+<h3>Quais tamanhos estão disponíveis?</h3><p>O diâmetro interno vai de 40 a 100 mm e a altura interna de 20 a 100 mm, ambos em incrementos de 10 mm.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE={
+    title:"Gerador de Caixa Redonda com Tampa de Rosca",
+    heading:"Gerador de Caixa Redonda com Tampa de Rosca STL",
+    canonical:"https://vekmaker.com/pt/round-screw-lid-box-generator/",
+    description:"Crie uma caixa redonda para impressão 3D com tampa de rosca grossa. Escolha diâmetro e altura em incrementos controlados de 10 mm.",
+    keywords:"gerador STL caixa com rosca, pote rosqueável, caixa redonda, tampa de rosca, impressão 3D",
+    generator:"round-screw-lid-box-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/round-screw-lid-box/round-screw-lid-box-generator.js"></script>
+</body>
+</html>

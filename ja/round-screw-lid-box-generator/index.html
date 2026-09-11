@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="粗めのねじ式ふたを備えた3Dプリント用の丸型ケースを作成できます。直径と高さは10 mm刻みの定型サイズから選択します。">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/ja/round-screw-lid-box-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/round-screw-lid-box-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/round-screw-lid-box-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/round-screw-lid-box-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/round-screw-lid-box-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>ねじ式丸型ケースジェネレーター | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#sl-preview{width:100%;min-width:0;overflow:hidden}
+#sl-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.option-card{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.option-card h2{margin-top:0;color:#1d4ed8}
+.option-card select{font-weight:700}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+@media(max-width:480px){.option-card{padding:16px}.result-list li{align-items:flex-start}.result-list strong{text-align:right}}
+
+.product-photo-section{margin:10px 0 24px}
+.product-photo-card{max-width:720px;margin:0 auto;padding:16px;border:1px solid #e5e7eb;border-radius:14px;background:#fff}
+.product-photo-card img{display:block;width:100%;height:auto;border-radius:10px;object-fit:cover}
+.product-photo-card p{margin:12px 0 0;color:#4b5563;text-align:center}
+
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="言語選択"><a href="/en/round-screw-lid-box-generator/" hreflang="en">EN</a><a href="/pt/round-screw-lid-box-generator/" hreflang="pt">PT</a><a href="/ja/round-screw-lid-box-generator/" hreflang="ja" aria-current="page">日本語</a></nav>
+
+<section class="product-photo-section">
+<h2>印刷例</h2>
+<div class="product-photo-card">
+<img
+    src="/assets/images/generators/round-screw-lid-box-generator.jpg"
+    alt="VEKMakerで生成し、実際に3Dプリントしたねじ式丸型ケースの例です。"
+    loading="lazy"
+    width="1200"
+    height="900">
+<p>VEKMakerで生成し、実際に3Dプリントしたねじ式丸型ケースの例です。</p>
+</div>
+</section>
+
+<section class="generator-intro">
+<h1>ねじ式丸型ケース STL ジェネレーター</h1>
+<p>3Dプリント用のシンプルな丸型ケースとねじ式ふたを作成します。ねじ形状を安定した範囲に保つため、直径と高さは10 mm刻みの定型サイズから選択します。</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<div class="option-card">
+<h2>ケースサイズ</h2>
+
+<label>内径
+<select id="sl-diameter">
+<option value="40">40 mm</option>
+<option value="50">50 mm</option>
+<option value="60" selected>60 mm</option>
+<option value="70">70 mm</option>
+<option value="80">80 mm</option>
+<option value="90">90 mm</option>
+<option value="100">100 mm</option>
+</select>
+</label>
+
+<label>内寸高さ
+<select id="sl-height">
+<option value="20">20 mm</option>
+<option value="30">30 mm</option>
+<option value="40" selected>40 mm</option>
+<option value="50">50 mm</option>
+<option value="60">60 mm</option>
+<option value="70">70 mm</option>
+<option value="80">80 mm</option>
+<option value="90">90 mm</option>
+<option value="100">100 mm</option>
+</select>
+</label>
+</div>
+
+<h2>計算されたサイズ</h2>
+<ul class="result-list">
+<li><span>ケース外径</span><strong id="sl-outer-diameter">—</strong></li>
+<li><span>ケース外寸高さ</span><strong id="sl-outer-height">—</strong></li>
+<li><span>ふた高さ</span><strong id="sl-lid-height">—</strong></li>
+</ul>
+
+<p id="sl-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="sl-download-box" class="btn-primary" type="button">ケース本体STLをダウンロード</button>
+<button id="sl-download-lid" class="btn-primary" type="button">ねじ式ふたSTLをダウンロード</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>プレビュー</h2>
+<div id="sl-preview" class="preview-area"></div>
+</div>
+</section>
+
+
+
+
+<section class="faq">
+<h2>よくある質問</h2>
+<h3>なぜサイズは定型になっていますか？</h3><p>最初のバージョンでは、印刷可能なねじ形状を安定した範囲に保つため10 mm刻みにしています。</p>
+<h3>ねじ設定を変更する必要がありますか？</h3><p>いいえ。ピッチ、深さ、壁厚、クリアランスは自動的に固定設定されます。</p>
+<h3>どのようなねじを使用しますか？</h3><p>FDM 3Dプリント向けの粗く丸みのある一条ねじを使用します。</p>
+<h3>どの向きで印刷しますか？</h3><p>ケース本体は底面を下にし、ふたは開口部をビルドプレート側にして印刷します。</p>
+<h3>どのサイズを選べますか？</h3><p>内径は40〜100 mm、内寸高さは20〜100 mmで、どちらも10 mm刻みです。</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE={
+    title:"ねじ式丸型ケースジェネレーター",
+    heading:"ねじ式丸型ケース STL ジェネレーター",
+    canonical:"https://vekmaker.com/ja/round-screw-lid-box-generator/",
+    description:"粗めのねじ式ふたを備えた3Dプリント用の丸型ケースを作成できます。直径と高さは10 mm刻みの定型サイズから選択します。",
+    keywords:"ねじ式ケース STL ジェネレーター, 丸型ケース, ねじふた, 3Dプリント",
+    generator:"round-screw-lid-box-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/round-screw-lid-box/round-screw-lid-box-generator.js"></script>
+</body>
+</html>
