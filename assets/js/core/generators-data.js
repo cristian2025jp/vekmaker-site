@@ -1,6 +1,22 @@
 const GENERATORS = [
 
     {
+        id: "petal-organizer-generator",
+        slug: "petal-organizer-generator",
+        name: 'Petal Organizer Generator',
+        icon: "cylinder",
+        image: "/assets/images/generators/petal-organizer-generator.jpg",
+        description: 'Create decorative petal-style containers, including a lidded jar, short holder and tall holder.',
+        url: "/en/petal-organizer-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Organizador em Pétalas', description: 'Crie recipientes decorativos em estilo pétala, incluindo pote com tampa e porta-objetos de diferentes alturas.' },
+            ja: { name: '花びら風オーガナイザージェネレーター', description: 'ふた付きケースや高さの異なる花びら風デザインの収納容器を作成できます。' }
+        }
+    },
+
+
+    {
         id: "round-screw-lid-box-generator",
         slug: "round-screw-lid-box-generator",
         name: 'Round Screw-Lid Box Generator',
