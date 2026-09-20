@@ -1,6 +1,22 @@
 const GENERATORS = [
 
     {
+        id: "heart-box-generator",
+        slug: "heart-box-generator",
+        name: 'Heart Box Generator',
+        icon: "box",
+        image: "/assets/images/generators/heart-box-generator.jpg",
+        description: 'Create simple heart-shaped storage boxes with a smooth matching lid using only width and height.',
+        url: "/en/heart-box-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Caixa em Formato de Coração', description: 'Crie caixas em formato de coração com tampa lisa escolhendo apenas largura e altura.' },
+            ja: { name: 'ハート型ボックスジェネレーター', description: '幅と高さだけを選んで、滑らかなふた付きのハート型ボックスを作成できます。' }
+        }
+    },
+
+
+    {
         id: "petal-organizer-generator",
         slug: "petal-organizer-generator",
         name: 'Petal Organizer Generator',

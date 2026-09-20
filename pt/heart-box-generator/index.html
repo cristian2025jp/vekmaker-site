@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Crie uma caixa em formato de coração para impressão 3D com tampa lisa, escolhendo apenas largura e altura.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vekmaker.com/pt/heart-box-generator/">
+<link rel="alternate" hreflang="en" href="https://vekmaker.com/en/heart-box-generator/">
+<link rel="alternate" hreflang="pt" href="https://vekmaker.com/pt/heart-box-generator/">
+<link rel="alternate" hreflang="ja" href="https://vekmaker.com/ja/heart-box-generator/">
+<link rel="alternate" hreflang="x-default" href="https://vekmaker.com/en/heart-box-generator/">
+<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<title>Gerador de Caixa em Formato de Coração | VEKMaker</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+.generator-preview{min-width:0}
+#hb-preview{width:100%;min-width:0;overflow:hidden}
+#hb-preview canvas{display:block;width:100%!important;max-width:100%}
+.result-list{margin:1rem 0;padding:0;list-style:none}
+.result-list li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #e5e7eb}
+.language-switcher{display:flex;justify-content:flex-end;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:6px 10px;border:1px solid #d1d5db;border-radius:999px;background:#fff;color:#374151;font-size:13px;font-weight:700;text-decoration:none}
+.language-switcher a[aria-current="page"]{border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.option-card{margin:20px 0;padding:18px;border:2px solid #3b82f6;border-radius:14px;background:#eff6ff}
+.option-card h2{margin-top:0;color:#1d4ed8}
+.option-card select{font-weight:700}
+.button-stack{display:grid;gap:10px;margin-top:12px}
+.product-photo-section{margin:10px 0 24px}
+.product-photo-card{max-width:720px;margin:0 auto;padding:16px;border:1px solid #e5e7eb;border-radius:14px;background:#fff}
+.product-photo-card img{display:block;width:100%;height:auto;border-radius:10px;object-fit:cover}
+.product-photo-card p{margin:12px 0 0;color:#4b5563;text-align:center}
+@media(max-width:480px){
+  .option-card{padding:16px}
+  .result-list li{align-items:flex-start}
+  .result-list strong{text-align:right}
+  .product-photo-card{padding:10px;border-radius:12px}
+  .product-photo-card p{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="site-menu"></div>
+
+<main class="container generator-page">
+<nav class="language-switcher" aria-label="Seleção de idioma"><a href="/en/heart-box-generator/" hreflang="en">EN</a><a href="/pt/heart-box-generator/" hreflang="pt" aria-current="page">PT</a><a href="/ja/heart-box-generator/" hreflang="ja">日本語</a></nav>
+
+<section id="hb-photo-section" class="product-photo-section" hidden>
+<h2>Exemplo Impresso</h2>
+<div class="product-photo-card">
+<img
+    id="hb-product-photo"
+    src="/assets/images/generators/heart-box-generator.jpg"
+    alt="Exemplo real de uma Caixa em Formato de Coração impressa em 3D e gerada no VEKMaker."
+    loading="eager"
+    width="1200"
+    height="900">
+<p>Exemplo real de uma Caixa em Formato de Coração impressa em 3D e gerada no VEKMaker.</p>
+</div>
+</section>
+
+<script>
+(() => {
+    const section = document.getElementById('hb-photo-section');
+    const img = document.getElementById('hb-product-photo');
+    if (!section || !img) return;
+    img.addEventListener('load', () => section.hidden = false);
+    img.addEventListener('error', () => section.hidden = true);
+    if (img.complete && img.naturalWidth > 0) section.hidden = false;
+})();
+</script>
+
+<section class="generator-intro">
+<h1>Gerador STL de Caixa em Formato de Coração</h1>
+<p>Crie uma caixa simples em formato de coração com tampa lisa e correspondente. Escolha apenas a largura e a altura; a espessura das paredes e a folga da tampa são calculadas automaticamente.</p>
+</section>
+
+<section class="generator-layout">
+<div class="generator-panel">
+
+<div class="option-card">
+<h2>Tamanho da Caixa</h2>
+
+<label>Largura Interna
+<select id="hb-width">
+<option value="60">60 mm</option>
+<option value="70">70 mm</option>
+<option value="80" selected>80 mm</option>
+<option value="90">90 mm</option>
+<option value="100">100 mm</option>
+<option value="110">110 mm</option>
+<option value="120">120 mm</option>
+</select>
+</label>
+
+<label>Altura Interna
+<select id="hb-height">
+<option value="30">30 mm</option>
+<option value="40">40 mm</option>
+<option value="50" selected>50 mm</option>
+<option value="60">60 mm</option>
+<option value="70">70 mm</option>
+<option value="80">80 mm</option>
+<option value="90">90 mm</option>
+<option value="100">100 mm</option>
+</select>
+</label>
+</div>
+
+<h2>Tamanho Calculado</h2>
+<ul class="result-list">
+<li><span>Largura Externa</span><strong id="hb-outer-width">—</strong></li>
+<li><span>Profundidade Externa</span><strong id="hb-outer-depth">—</strong></li>
+<li><span>Altura Externa</span><strong id="hb-outer-height">—</strong></li>
+</ul>
+
+<p id="hb-message" class="validation-message" role="status" aria-live="polite"></p>
+
+<div class="button-stack">
+<button id="hb-download-box" class="btn-primary" type="button">Baixar STL da Caixa Coração</button>
+<button id="hb-download-lid" class="btn-primary" type="button">Baixar STL da Tampa Coração</button>
+</div>
+</div>
+
+<div class="generator-preview">
+<h2>Visualização</h2>
+<div id="hb-preview" class="preview-area"></div>
+</div>
+</section>
+
+<section class="faq">
+<h2>Perguntas frequentes</h2>
+<h3>O que posso personalizar?</h3><p>Apenas a largura interna e a altura interna. O restante da construção é calculado automaticamente.</p>
+<h3>Como funciona o encaixe da tampa?</h3><p>A tampa acompanha o mesmo contorno de coração e utiliza uma folga fixa para um encaixe simples e removível.</p>
+<h3>A parte superior da tampa possui decoração?</h3><p>Não. A parte superior é lisa para que o próprio formato de coração seja o destaque.</p>
+<h3>Para que posso usar a caixa?</h3><p>Ela pode ser usada para joias, pequenos presentes, doces, lembranças e armazenamento decorativo.</p>
+<h3>Como devo imprimir?</h3><p>Imprima a caixa em pé sobre o fundo e a tampa com a abertura apoiada na mesa de impressão.</p>
+</section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+const PAGE={
+    title:"Gerador de Caixa em Formato de Coração",
+    heading:"Gerador STL de Caixa em Formato de Coração",
+    canonical:"https://vekmaker.com/pt/heart-box-generator/",
+    description:"Crie uma caixa em formato de coração para impressão 3D com tampa lisa, escolhendo apenas largura e altura.",
+    keywords:"gerador STL caixa coração, caixa joias, caixa presente, coração impressão 3D",
+    generator:"heart-box-generator"
+};
+</script>
+<script src="/assets/js/core/config.js"></script>
+<script src="/assets/js/core/layout.js"></script>
+<script src="/assets/js/core/page.js"></script>
+<script type="module" src="/assets/generators/heart-box/heart-box-generator.js"></script>
+</body>
+</html>

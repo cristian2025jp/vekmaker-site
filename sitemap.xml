@@ -413,4 +413,20 @@
   <url><loc>https://vekmaker.com/en/petal-organizer-generator/</loc><lastmod>2026-09-12</lastmod><priority>0.8</priority></url>
   <url><loc>https://vekmaker.com/pt/petal-organizer-generator/</loc><lastmod>2026-09-12</lastmod><priority>0.8</priority></url>
   <url><loc>https://vekmaker.com/ja/petal-organizer-generator/</loc><lastmod>2026-09-12</lastmod><priority>0.8</priority></url>
+
+  <url>
+    <loc>https://vekmaker.com/en/heart-box-generator/</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vekmaker.com/pt/heart-box-generator/</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vekmaker.com/ja/heart-box-generator/</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>
