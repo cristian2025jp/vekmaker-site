@@ -1,6 +1,22 @@
 const GENERATORS = [
 
     {
+        id: "potion-bottle-generator",
+        slug: "potion-bottle-generator",
+        name: 'Potion Bottle Generator',
+        icon: "cylinder",
+        image: "/assets/images/generators/potion-bottle-generator.jpg",
+        description: 'Create decorative flattened potion or perfume bottles with a separate cap and optional front label styles.',
+        url: "/en/potion-bottle-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Frasco de Poção', description: 'Crie frascos decorativos achatados de poção ou perfume com tampa separada e estilos opcionais de etiqueta frontal.' },
+            ja: { name: 'ポーションボトルジェネレーター', description: '平たい丸みのある装飾用ポーション／香水ボトルを、別パーツのキャップと前面ラベルスタイル付きで作成できます。' }
+        }
+    },
+
+
+    {
         id: "heart-box-generator",
         slug: "heart-box-generator",
         name: 'Heart Box Generator',
