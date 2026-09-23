@@ -1,17 +1,18 @@
 const GENERATORS = [
 
+
     {
-        id: "potion-bottle-generator",
-        slug: "potion-bottle-generator",
-        name: 'Potion Bottle Generator',
-        icon: "cylinder",
-        image: "/assets/images/generators/potion-bottle-generator.jpg",
-        description: 'Create decorative flattened potion or perfume bottles with a separate cap and optional front label styles.',
-        url: "/en/potion-bottle-generator/",
+        id: "mini-house-generator",
+        slug: "mini-house-generator",
+        name: 'Mini House Generator',
+        icon: "box",
+        image: "/assets/images/generators/mini-house-generator.jpg",
+        description: 'Create a modular decorative mini house with separate base, one-piece walls, one-piece roof, door and window STL files.',
+        url: "/en/mini-house-generator/",
         status: "available",
         translations: {
-            pt: { name: 'Gerador de Frasco de Poção', description: 'Crie frascos decorativos achatados de poção ou perfume com tampa separada e estilos opcionais de etiqueta frontal.' },
-            ja: { name: 'ポーションボトルジェネレーター', description: '平たい丸みのある装飾用ポーション／香水ボトルを、別パーツのキャップと前面ラベルスタイル付きで作成できます。' }
+            pt: { name: 'Gerador de Casinha', description: 'Crie uma casinha decorativa modular com base, paredes em peça única, telhado em peça única, porta e janela em arquivos STL separados.' },
+            ja: { name: 'ミニハウスジェネレーター', description: 'ベース、一体型の壁、一体型の屋根、ドア、窓を別々のSTLとして生成できる組み立て式ミニハウスを作成できます。' }
         }
     },
 
