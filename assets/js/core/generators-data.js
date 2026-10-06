@@ -1,5 +1,38 @@
 const GENERATORS = [
 
+    {
+        id: "open-storage-box-generator",
+        slug: "open-storage-box-generator",
+        name: 'Open Storage Box Generator',
+        icon: "organizer",
+        image: "/assets/images/generators/open-storage-box-generator.jpg",
+        description: 'Create one-piece open storage boxes with side handle openings and optional subtle recessed decoration.',
+        url: "/en/open-storage-box-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Caixa Organizadora Aberta', description: 'Crie caixas organizadoras abertas em peça única, com puxadores laterais e opções de detalhe discreto em baixo relevo.' },
+            ja: { name: 'オープン収納ボックスジェネレーター', description: '持ち手穴と控えめな浅い装飾オプションを備えた一体型オープン収納ボックスを作成できます。' }
+        }
+    },
+
+
+    {
+        id: "potion-bottle-generator",
+        slug: "potion-bottle-generator",
+        name: 'Potion Bottle Generator',
+        icon: "cylinder",
+        image: "/assets/images/generators/potion-bottle-generator.jpg",
+        description: 'Create decorative flattened potion or perfume bottles with a separate cap and optional front label styles.',
+        url: "/en/potion-bottle-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Frasco de Poção', description: 'Crie frascos decorativos achatados de poção ou perfume com tampa separada e estilos opcionais de etiqueta frontal.' },
+            ja: { name: 'ポーションボトルジェネレーター', description: '平たい丸みのある装飾用ポーション／香水ボトルを、別パーツのキャップと前面ラベルスタイル付きで作成できます。' }
+        }
+    },
+
+
+
 
     {
         id: "mini-house-generator",
