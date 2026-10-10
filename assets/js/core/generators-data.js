@@ -1,5 +1,22 @@
 const GENERATORS = [
 
+
+    {
+        id: "name-keychain-generator",
+        slug: "name-keychain-generator",
+        name: 'Name Keychain Generator',
+        icon: "nameplate",
+        image: "/assets/images/generators/name-keychain-generator.jpg",
+        description: 'Create personalized name keychains with Latin, hiragana or katakana text, decorative symbols and an integrated ring hole.',
+        url: "/en/name-keychain-generator/",
+        status: "available",
+        translations: {
+            pt: { name: 'Gerador de Chaveiro com Nome', description: 'Crie chaveiros personalizados com texto em caracteres latinos, hiragana ou katakana, símbolos decorativos e furo integrado para argola.' },
+            ja: { name: 'ネームキーホルダージェネレーター', description: 'ラテン文字、ひらがな、カタカナの名前、装飾シンボル、リング穴付きのオリジナルキーホルダーを作成できます。' }
+        }
+    },
+
+
     {
         id: "open-storage-box-generator",
         slug: "open-storage-box-generator",
